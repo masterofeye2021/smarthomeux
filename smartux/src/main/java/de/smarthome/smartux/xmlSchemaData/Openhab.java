@@ -27,6 +27,7 @@ import jakarta.xml.bind.annotation.XmlType;
  *         <element name="devices" type="{}devices"/>
  *         <element name="groups" type="{}groups"/>
  *         <element ref="{}knx.configuration"/>
+ *         <element ref="{}ical.configuration"/>
  *       </all>
  *     </restriction>
  *   </complexContent>
@@ -48,6 +49,8 @@ public class Openhab {
     protected Groups groups;
     @XmlElement(name = "knx.configuration", required = true)
     protected KnxConfiguration knxConfiguration;
+    @XmlElement(name = "ical.configuration", required = true)
+    protected IcalConfiguration icalConfiguration;
 
     /**
      * Ruft den Wert der devices-Eigenschaft ab.
@@ -119,6 +122,30 @@ public class Openhab {
      */
     public void setKnxConfiguration(KnxConfiguration value) {
         this.knxConfiguration = value;
+    }
+
+    /**
+     * Ruft den Wert der icalConfiguration-Eigenschaft ab.
+     * 
+     * @return
+     *     possible object is
+     *     {@link IcalConfiguration }
+     *     
+     */
+    public IcalConfiguration getIcalConfiguration() {
+        return icalConfiguration;
+    }
+
+    /**
+     * Legt den Wert der icalConfiguration-Eigenschaft fest.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link IcalConfiguration }
+     *     
+     */
+    public void setIcalConfiguration(IcalConfiguration value) {
+        this.icalConfiguration = value;
     }
 
 }

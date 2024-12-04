@@ -38,6 +38,7 @@ import jakarta.xml.bind.annotation.XmlType;
  *                   <element name="knx" type="{}knx"/>
  *                   <element name="ping" type="{}ping"/>
  *                   <element name="modbus" type="{}modbus"/>
+ *                   <element ref="{}ical"/>
  *                 </choice>
  *               </restriction>
  *             </complexContent>
@@ -78,7 +79,8 @@ import jakarta.xml.bind.annotation.XmlType;
  *       <attribute name="label" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       <attribute ref="{}type use="required""/>
  *       <attribute name="name" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       <attribute name="extention" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *       <attribute name="extention" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *       <attribute name="channel.id" use="required" type="{http://www.w3.org/2001/XMLSchema}int" />
  *     </restriction>
  *   </complexContent>
  * </complexType>
@@ -120,8 +122,10 @@ public class Channel {
     protected String type;
     @XmlAttribute(name = "name", required = true)
     protected String name;
-    @XmlAttribute(name = "extention", required = true)
+    @XmlAttribute(name = "extention")
     protected String extention;
+    @XmlAttribute(name = "channel.id", required = true)
+    protected int channelId;
 
     /**
      * Ruft den Wert der link-Eigenschaft ab.
@@ -443,6 +447,22 @@ public class Channel {
         this.extention = value;
     }
 
+    /**
+     * Ruft den Wert der channelId-Eigenschaft ab.
+     * 
+     */
+    public int getChannelId() {
+        return channelId;
+    }
+
+    /**
+     * Legt den Wert der channelId-Eigenschaft fest.
+     * 
+     */
+    public void setChannelId(int value) {
+        this.channelId = value;
+    }
+
 
     /**
      * <p>Java-Klasse für anonymous complex type.</p>
@@ -457,6 +477,7 @@ public class Channel {
      *         <element name="knx" type="{}knx"/>
      *         <element name="ping" type="{}ping"/>
      *         <element name="modbus" type="{}modbus"/>
+     *         <element ref="{}ical"/>
      *       </choice>
      *     </restriction>
      *   </complexContent>
@@ -469,13 +490,15 @@ public class Channel {
     @XmlType(name = "", propOrder = {
         "knx",
         "ping",
-        "modbus"
+        "modbus",
+        "ical"
     })
     public static class Connection {
 
         protected Knx knx;
         protected Ping ping;
         protected Modbus modbus;
+        protected Ical ical;
 
         /**
          * Ruft den Wert der knx-Eigenschaft ab.
@@ -547,6 +570,30 @@ public class Channel {
          */
         public void setModbus(Modbus value) {
             this.modbus = value;
+        }
+
+        /**
+         * Ruft den Wert der ical-Eigenschaft ab.
+         * 
+         * @return
+         *     possible object is
+         *     {@link Ical }
+         *     
+         */
+        public Ical getIcal() {
+            return ical;
+        }
+
+        /**
+         * Legt den Wert der ical-Eigenschaft fest.
+         * 
+         * @param value
+         *     allowed object is
+         *     {@link Ical }
+         *     
+         */
+        public void setIcal(Ical value) {
+            this.ical = value;
         }
 
     }

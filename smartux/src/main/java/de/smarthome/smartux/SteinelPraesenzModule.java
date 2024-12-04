@@ -17,10 +17,10 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Data
-public class SteinelPräsenzModule extends ModuleTemplate implements ApplicationListener<ItemStateUpdatedEvent> {
+public class SteinelPraesenzModule extends ModuleTemplate implements ApplicationListener<ItemStateUpdatedEvent> {
 
 
-    public SteinelPräsenzModule(OpenhabRestService openhabRestService,OpenhabItemRegister openhabItemRegister)
+    public SteinelPraesenzModule(OpenhabRestService openhabRestService,OpenhabItemRegister openhabItemRegister)
     {
         super(openhabRestService,openhabItemRegister);
     }

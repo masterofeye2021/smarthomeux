@@ -13,7 +13,7 @@ import jakarta.xml.bind.annotation.XmlRegistry;
 /**
  * This object contains factory methods for each 
  * Java content interface and Java element interface 
- * generated in the de.smarthome.smartux.data package. 
+ * generated in the de.smarthome.smartux.xmlSchemaData package. 
  * <p>An ObjectFactory allows you to programmatically 
  * construct new instances of the Java representation 
  * for XML content. The Java representation of XML 
@@ -29,7 +29,7 @@ public class ObjectFactory {
 
 
     /**
-     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: de.smarthome.smartux.data
+     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: de.smarthome.smartux.xmlSchemaData
      * 
      */
     public ObjectFactory() {
@@ -43,6 +43,16 @@ public class ObjectFactory {
      */
     public KnxConfiguration createKnxConfiguration() {
         return new KnxConfiguration();
+    }
+
+    /**
+     * Create an instance of {@link IcalConfiguration }
+     * 
+     * @return
+     *     the new instance of {@link IcalConfiguration }
+     */
+    public IcalConfiguration createIcalConfiguration() {
+        return new IcalConfiguration();
     }
 
     /**
@@ -153,6 +163,26 @@ public class ObjectFactory {
      */
     public KnxConfiguration.Tunnel createKnxConfigurationTunnel() {
         return new KnxConfiguration.Tunnel();
+    }
+
+    /**
+     * Create an instance of {@link IcalConfiguration.Bridge }
+     * 
+     * @return
+     *     the new instance of {@link IcalConfiguration.Bridge }
+     */
+    public IcalConfiguration.Bridge createIcalConfigurationBridge() {
+        return new IcalConfiguration.Bridge();
+    }
+
+    /**
+     * Create an instance of {@link Ical }
+     * 
+     * @return
+     *     the new instance of {@link Ical }
+     */
+    public Ical createIcal() {
+        return new Ical();
     }
 
     /**

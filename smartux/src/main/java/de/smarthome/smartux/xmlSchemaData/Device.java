@@ -36,7 +36,7 @@ import jakarta.xml.bind.annotation.XmlType;
  *           </complexType>
  *         </element>
  *       </sequence>
- *       <attribute name="device.area" type="{}area" />
+ *       <attribute name="device.area" use="required" type="{}area" />
  *       <attribute name="device.function">
  *         <simpleType>
  *           <restriction base="{}function">
@@ -44,8 +44,17 @@ import jakarta.xml.bind.annotation.XmlType;
  *         </simpleType>
  *       </attribute>
  *       <attribute name="device.comm.type" type="{}comm" default="KNX" />
- *       <attribute name="device.label" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       <attribute name="device.name" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *       <attribute name="device.label" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *       <attribute name="device.name" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *       <attribute name="device.specification" use="required">
+ *         <simpleType>
+ *           <restriction base="{}device.specification">
+ *             <enumeration value="SteinelTruePräsenz"/>
+ *             <enumeration value="RolladenMDTKNX"/>
+ *             <enumeration value="ICALBinding"/>
+ *           </restriction>
+ *         </simpleType>
+ *       </attribute>
  *     </restriction>
  *   </complexContent>
  * </complexType>
@@ -64,16 +73,18 @@ public class Device {
 
     @XmlElement(required = true)
     protected List<Device.Channel> channel;
-    @XmlAttribute(name = "device.area")
+    @XmlAttribute(name = "device.area", required = true)
     protected String deviceArea;
     @XmlAttribute(name = "device.function")
     protected String deviceFunction;
     @XmlAttribute(name = "device.comm.type")
     protected String deviceCommType;
-    @XmlAttribute(name = "device.label")
+    @XmlAttribute(name = "device.label", required = true)
     protected String deviceLabel;
-    @XmlAttribute(name = "device.name")
+    @XmlAttribute(name = "device.name", required = true)
     protected String deviceName;
+    @XmlAttribute(name = "device.specification", required = true)
+    protected DeviceSpecification deviceSpecification;
 
     /**
      * Gets the value of the channel property.
@@ -229,6 +240,30 @@ public class Device {
      */
     public void setDeviceName(String value) {
         this.deviceName = value;
+    }
+
+    /**
+     * Ruft den Wert der deviceSpecification-Eigenschaft ab.
+     * 
+     * @return
+     *     possible object is
+     *     {@link DeviceSpecification }
+     *     
+     */
+    public DeviceSpecification getDeviceSpecification() {
+        return deviceSpecification;
+    }
+
+    /**
+     * Legt den Wert der deviceSpecification-Eigenschaft fest.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link DeviceSpecification }
+     *     
+     */
+    public void setDeviceSpecification(DeviceSpecification value) {
+        this.deviceSpecification = value;
     }
 
 

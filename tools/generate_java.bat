@@ -1,1 +1,1 @@
-bin/xjc.bat -p de.smarthome.smartux.data -d ..\smartux\src\main\java SmartHomeDefinitionV2.xsd
+bin/xjc.bat -p de.smarthome.smartux.xmlSchemaData -d ..\smartux\src\main\java -b binding.xml SmartHomeDefinitionV2.xsd 
