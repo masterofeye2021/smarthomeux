@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>3.4.0-RC1</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath/>
+		<!-- lookup parent from repository -->
 	</parent>
 	<groupId>de.smarthome</groupId>
 	<artifactId>smartux</artifactId>
@@ -34,12 +35,21 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
-  <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-devtools</artifactId>
-        <scope>runtime</scope>
-        <optional>true</optional>
-    </dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>nz.net.ultraq.thymeleaf</groupId>
+			<artifactId>thymeleaf-layout-dialect</artifactId>
+			<version>3.3.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+			<optional>true</optional>
+		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
@@ -49,17 +59,17 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-websocket</artifactId>
 		</dependency>
-		    <!-- Spring Boot Web für REST-API-Interaktion -->
-    <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-web</artifactId>
-    </dependency>
-    
-    <!-- Spring Boot WebClient für die reaktive HTTP-Kommunikation -->
-    <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-webflux</artifactId>
-    </dependency>
+		<!-- Spring Boot Web für REST-API-Interaktion -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<!-- Spring Boot WebClient für die reaktive HTTP-Kommunikation -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-webflux</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>jakarta.websocket</groupId>
 			<artifactId>jakarta.websocket-api</artifactId>
@@ -70,7 +80,7 @@
 			<artifactId>gson</artifactId>
 			<version>2.11.0</version>
 		</dependency>
-		<dependency>
+		<!--<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-websocket</artifactId>
 			<version>6.0.13</version>
@@ -80,7 +90,7 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-messaging</artifactId>
 			<version>6.0.13</version>
-		</dependency>
+		</dependency>-->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-core</artifactId>
@@ -89,27 +99,28 @@
 
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-databind</artifactId> 
+			<artifactId>jackson-databind</artifactId>
 			<version>2.17.2</version>
 		</dependency>
-            <dependency>
-                <groupId>jakarta.xml.bind</groupId>
-                <artifactId>jakarta.xml.bind-api</artifactId>
-                <version>4.0.2</version>
-            </dependency>
-		
-	  <dependency>
-    <groupId>com.sun.xml.bind</groupId>
-    <artifactId>jaxb-impl</artifactId>
-    <version>4.0.3</version>
-    <scope>runtime</scope>
-  </dependency>
-   <dependency>
-     <groupId>org.apache.servicemix.bundles</groupId>
-     <artifactId>org.apache.servicemix.bundles.spring-websocket</artifactId>
-     <version>4.3.30.RELEASE_1</version>
-   </dependency>
- </dependencies>
+		<dependency>
+			<groupId>jakarta.xml.bind</groupId>
+			<artifactId>jakarta.xml.bind-api</artifactId>
+			<version>4.0.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.sun.xml.bind</groupId>
+			<artifactId>jaxb-impl</artifactId>
+			<version>4.0.3</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.servicemix.bundles</groupId>
+			<artifactId>org.apache.servicemix.bundles.spring-websocket</artifactId>
+			<version>4.3.30.RELEASE_1</version>
+		</dependency>
+
+	</dependencies>
 
 	<build>
 		<plugins>

@@ -1,11 +1,12 @@
-package de.smarthome.smartux;
+package de.smarthome.smartux.Module;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 
+import de.smarthome.smartux.OpenhabItemRegister;
+import de.smarthome.smartux.OpenhabRestService;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -14,6 +15,16 @@ public abstract class ModuleTemplate {
     protected OpenhabRestService openhabRestService;
 
     protected OpenhabItemRegister openhabItemRegister;
+
+    protected String name;
+
+    public void setName(String name){
+        this.name = name;
+    }
+
+    public String getName(){
+        return this.name;
+    }
 
     public ModuleTemplate(OpenhabRestService openhabRestService,OpenhabItemRegister openhabItemRegister)
     {
@@ -27,12 +38,14 @@ public abstract class ModuleTemplate {
 
     protected void addItem(String item)
     {
-        openhabItemList.add(item);
+        if(!this.openhabItemList.contains(item))
+            openhabItemList.add(item);
     }
 
     protected void removeItem(String item)
     {
-        openhabItemList.remove(item);
+        if(this.openhabItemList.contains(item))
+            openhabItemList.remove(item);
     }
 
     public abstract void init(Model model);

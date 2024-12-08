@@ -10,6 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Component;
 
+import de.smarthome.smartux.Module.DynamicBeanRegistrar;
+import de.smarthome.smartux.Module.ModuleManager;
+import de.smarthome.smartux.Module.ShutterModule;
+import de.smarthome.smartux.Module.SteinelPraesenzModule;
 import de.smarthome.smartux.mainDataModel.OpenhabItem;
 import de.smarthome.smartux.xmlSchemaData.DeviceSpecification;
 import de.smarthome.smartux.xmlSchemaData.Openhab;
@@ -34,6 +38,9 @@ public class DataLoader {
     @Autowired
     ModuleManager moduleManager;
 
+    @Autowired
+    DynamicBeanRegistrar beanRegistrar;
+
     @PostConstruct
     private void loader() {
         File xmlFile = new File("C:\\Projekte\\xml2OH\\SmartHomeConfiguration.xml");
@@ -47,10 +54,29 @@ public class DataLoader {
 
             for (Device device : openhab.getDevices().getDevice()) {
 
+                String name = (device.getDeviceArea() + "_" + device.getDeviceFunction() + "_" + device.getDeviceName()).replace(" ", "_").trim();
+                ByteBuffer byteBuffer = StandardCharsets.UTF_8.encode(name);
+                name = new String(byteBuffer.array(), StandardCharsets.UTF_8).trim();
+
                 switch (device.getDeviceSpecification()) {
                     case DeviceSpecification.ICAL_BINDING:
                         break;
                     case DeviceSpecification.ROLLADEN_MDTKNX:
+                        ShutterModule sm = new ShutterModule(openhabRestService, openhabItemRegister);
+                        sm.setToggleTag(device.getChannel().stream().filter(s -> s.getChannelId() == 1).findFirst().get().getLink());
+                        sm.setStopTag(device.getChannel().stream().filter(s -> s.getChannelId() == 2).findFirst().get().getLink());
+                        sm.setCurrentDirectionTag(device.getChannel().stream().filter(s -> s.getChannelId() == 3).findFirst().get().getLink());
+                        sm.setAbsPositionTag(device.getChannel().stream().filter(s -> s.getChannelId() == 4).findFirst().get().getLink());
+                        sm.setCurrentPositionTag(device.getChannel().stream().filter(s -> s.getChannelId() == 5).findFirst().get().getLink());
+                        sm.setStatusTopTag(device.getChannel().stream().filter(s -> s.getChannelId() == 5).findFirst().get().getLink());
+                        sm.setStatusBottomTag(device.getChannel().stream().filter(s -> s.getChannelId() == 5).findFirst().get().getLink());
+                        sm.setLockMovementTag(device.getChannel().stream().filter(s -> s.getChannelId() == 5).findFirst().get().getLink());
+                        sm.setDiagnosisTag(device.getChannel().stream().filter(s -> s.getChannelId() == 5).findFirst().get().getLink());
+
+                        sm.setName(name);
+                        beanRegistrar.registerBean(name, sm);
+                        log.info("ShutterModule with name [" + name+  "] was registered");
+
                         break;
                     case DeviceSpecification.STEINEL_TRUE_PRÄSENZ:
                         SteinelPraesenzModule sp = new SteinelPraesenzModule(openhabRestService, openhabItemRegister);
@@ -62,24 +88,15 @@ public class DataLoader {
                         sp.setAbsoluterLuftdruckTag(device.getChannel().stream().filter(s -> s.getChannelId() == 6).findFirst().get().getLink());
                         sp.setCo2Tag(device.getChannel().stream().filter(s -> s.getChannelId() == 7).findFirst().get().getLink());
                         sp.setVocTag(device.getChannel().stream().filter(s -> s.getChannelId() == 8).findFirst().get().getLink());
-
-                        String name = (device.getDeviceArea() + "_" + device.getDeviceFunction() + "_" + device.getDeviceName()).replace(" ", "_").trim();
-                        ByteBuffer byteBuffer = StandardCharsets.UTF_8.encode(name);
-                        name = new String(byteBuffer.array(), StandardCharsets.UTF_8);
-                        moduleManager.add(name.trim(), sp);
-                        log.info("Steinel Präsenz Module with name [" + name+  "] was registered");
+                       
+                        sp.setName(name);
+                        beanRegistrar.registerBean(name, sp);
+                        log.info("SteinelPräsenzModule with name [" + name+  "] was registered");
                         
                         break;
                     default:
                         break;
                 }
-
-                for (Channel channel : device.getChannel()) {
-                    OpenhabItem i = openhabRestService.getItemDetails(channel.getLink()).block();
-                    i.toString();
-
-                }
-
             }
 
         } catch (JAXBException e) {

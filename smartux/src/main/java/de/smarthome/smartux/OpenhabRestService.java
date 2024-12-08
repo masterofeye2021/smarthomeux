@@ -2,6 +2,7 @@ package de.smarthome.smartux;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -29,6 +30,7 @@ public class OpenhabRestService {
         return webClient
             .get()
             .uri("/items/{itemName}", itemName) // Platzhalter für Item-Namen
+            .accept(MediaType.APPLICATION_JSON)
             .retrieve()
             .bodyToMono(OpenhabItem.class); // Antwort als String zurückgeben
     }

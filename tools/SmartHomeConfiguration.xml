@@ -3379,7 +3379,7 @@
 				</groups>
 			</channel>
 		</device>
-		<device device.area="KUE" device.function="SHUTTER" device.specification="RolladenMDTKNX" device.comm.type="KNX" device.label="Rollladen Küche" device.name="Rollladen Küche">
+		<device device.area="KUE" device.function="SHUTTER" device.specification="RolladenMDTKNX" device.comm.type="KNX" device.label="Rollladen Küche" device.name="Rollladen Kueche">
 			<channel format="ND" unit="ND" access="RW" icon="fa-arrows-up-down" enable="true" persistence="false" label="Toggle Rollladen KUE" type="Rollershutter" name="Auf/Ab" extention="Südfenster" channel.id="1">
 				<link>KUE_RW_SHUTTER_Suedfenster_Auf_Ab</link>
 				<connection>
@@ -3783,7 +3783,7 @@
 					<group.ref refid="WOZ"/>
 				</groups>
 			</channel>
-			<channel format="%.1f" unit="%" access="R" icon="fa-droplet-percent" enable="true" persistence="true" label="Luftfeuchtigkeit Couch" type="Number" name="Luftfeuchtigkeit" extention="Couch" channel.id="4">
+			<channel format="%.1f" unit="%%" access="R" icon="fa-droplet-percent" enable="true" persistence="true" label="Luftfeuchtigkeit Couch" type="Number" name="Luftfeuchtigkeit" extention="Couch" channel.id="4">
 				<link>WOZ_R_SENSOR_Couch_Luftfeuchtigkeit</link>
 				<connection>
 					<knx>
@@ -3944,7 +3944,7 @@
 				</groups>
 			</channel>
 		</device>
-		<device device.area="TKR" device.function="CALENDAR" device.specification="ICALBinding" device.comm.type="ICAL" device.label="Müll" device.name="Termine für Müllabfuhr">
+		<device device.area="TKR" device.function="CALENDAR" device.specification="ICALBinding" device.comm.type="ICAL" device.label="Müll" device.name="Termine für Muellabfuhr">
 			<channel format="ND" unit="ND" access="R" icon="fa-calendar-day" enable="true" persistence="false" label="Biomülltonne" type="DateTime" name="Biomüll" extention="Tonne" channel.id="1">
 				<link>TKR_R_CALENDAR_Tonne_Biomuell</link>
 				<connection>
@@ -3982,7 +3982,7 @@
 				</groups>
 			</channel>
 		</device>
-		<device device.area="KUE" device.function="SENSOR" device.specification="SteinelTruePräsenz" device.comm.type="KNX" device.label="Präsenzmelder Kue" device.name="Praesenzmelder Küche">
+		<device device.area="KUE" device.function="SENSOR" device.specification="SteinelTruePräsenz" device.comm.type="KNX" device.label="Präsenzmelder Kue" device.name="Praesenzmelder Kueche">
 			<channel format="ND" unit="ND" access="R" icon="fa-location-dot" enable="true" persistence="false" label="Präsenz Küche" type="Contact" name="Präzenz" channel.id="1">
 				<link>KUE_R_SENSOR_Praezenz</link>
 				<connection>
@@ -4079,7 +4079,7 @@
 					<group.ref refid="KUE"/>
 				</groups>
 			</channel>
-			<channel format="%.1f" unit="%" access="R" icon="fa-droplet-percent" enable="true" persistence="true" label="Luftfeuchtigkeit Küche" type="Number" name="Luftfeuchtigkeit" channel.id="4">
+			<channel format="%.1f" unit="%%" access="R" icon="fa-droplet-percent" enable="true" persistence="true" label="Luftfeuchtigkeit Küche" type="Number" name="Luftfeuchtigkeit" channel.id="4">
 				<link>KUE_R_SENSOR_Luftfeuchtigkeit</link>
 				<connection>
 					<knx>
@@ -4337,7 +4337,7 @@
 					<group.ref refid="FLUEG"/>
 				</groups>
 			</channel>
-			<channel format="%.1f" unit="%" access="R" icon="fa-droplet-percent" enable="true" persistence="true" label="Luftfeuchtigkeit FlueEG" type="Number" name="Luftfeuchtigkeit" channel.id="4">
+			<channel format="%.1f" unit="%%" access="R" icon="fa-droplet-percent" enable="true" persistence="true" label="Luftfeuchtigkeit FlueEG" type="Number" name="Luftfeuchtigkeit" channel.id="4">
 				<link>FLUEG_R_SENSOR_Luftfeuchtigkeit</link>
 				<connection>
 					<knx>
@@ -4595,7 +4595,7 @@
 					<group.ref refid="HWR"/>
 				</groups>
 			</channel>
-			<channel format="%.1f" unit="%" access="R" icon="fa-droplet-percent" enable="true" persistence="true" label="Luftfeuchtigkeit HWR" type="Number" name="Luftfeuchtigkeit" channel.id="4">
+			<channel format="%.1f" unit="%%" access="R" icon="fa-droplet-percent" enable="true" persistence="true" label="Luftfeuchtigkeit HWR" type="Number" name="Luftfeuchtigkeit" channel.id="4">
 				<link>HWR_R_SENSOR_Luftfeuchtigkeit</link>
 				<connection>
 					<knx>

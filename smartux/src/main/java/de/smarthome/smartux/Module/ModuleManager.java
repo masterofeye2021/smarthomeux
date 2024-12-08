@@ -1,4 +1,4 @@
-package de.smarthome.smartux;
+package de.smarthome.smartux.Module;
 
 import java.util.HashMap;
 

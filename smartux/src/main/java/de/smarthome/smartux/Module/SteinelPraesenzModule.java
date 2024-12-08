@@ -1,15 +1,11 @@
-package de.smarthome.smartux;
+package de.smarthome.smartux.Module;
 
-import java.time.Duration;
-import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationListener;
-import org.springframework.scheduling.annotation.Async;
+import org.springframework.context.event.EventListener;
 import org.springframework.ui.Model;
 
+import de.smarthome.smartux.OpenhabItemRegister;
+import de.smarthome.smartux.OpenhabRestService;
+import de.smarthome.smartux.eventsystem.ItemStateChangedEvent;
 import de.smarthome.smartux.eventsystem.ItemStateUpdatedEvent;
 import de.smarthome.smartux.mainDataModel.OpenhabItem;
 import lombok.Data;
@@ -17,8 +13,8 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Data
-public class SteinelPraesenzModule extends ModuleTemplate implements ApplicationListener<ItemStateUpdatedEvent> {
-
+public class SteinelPraesenzModule extends ModuleTemplate {
+    
 
     public SteinelPraesenzModule(OpenhabRestService openhabRestService,OpenhabItemRegister openhabItemRegister)
     {
@@ -34,6 +30,8 @@ public class SteinelPraesenzModule extends ModuleTemplate implements Application
     private String absoluterLuftdruckTag = "";
     private String co2Tag = "";
     private String vocTag = "";
+
+
 
 
     @Override
@@ -83,6 +81,7 @@ public class SteinelPraesenzModule extends ModuleTemplate implements Application
         model.addAttribute(co2Tag, co2Item);
         model.addAttribute(vocTag, vocItem);
 
+        String.format(luftfeuchtigkeitItem.getStateDescription().getPattern(), Float.parseFloat(luftfeuchtigkeitItem.getState()));
         /*
          * Sind alle Items hinzugefügt kann die Registry aufgerufen werden
          */
@@ -98,32 +97,20 @@ public class SteinelPraesenzModule extends ModuleTemplate implements Application
         
     }
 
-
     @Override
     public void deinit() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'deinit'");
     }
 
-    private Long _initItemValues(String item)
-    {
-        //Folgendes Format bekommen wir von Openhab geliefert
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
-        
-        // Parsen in LocalDateTime
-        ZonedDateTime zonedDateTime = ZonedDateTime.parse(openhabRestService.getItemDetails(item).block().getState(), formatter);
-        LocalDateTime localDateTime = zonedDateTime.toLocalDateTime();
-        Duration duration = Duration.between(LocalDateTime.now(), localDateTime);
-        
-        // Werte extrahieren
-        return duration.toDays();
+    @EventListener
+    public void handleCustomEvent(ItemStateUpdatedEvent event) {
+        log.info("ItemStateUpdatedEvent wurde von ["+this.name+"] mit dem Wert ["+event.getValue()+"] empfangen");
     }
 
-    @Async
-    @Override
-    public void onApplicationEvent(ItemStateUpdatedEvent event) {
-        
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'onApplicationEvent'");
+    @EventListener
+    public void handleCustomEvent(ItemStateChangedEvent event) {
+        log.info("ItemStateChangedEvent wurde von ["+this.name+"] mit dem Wert ["+event.getValue()+"] empfangen");
     }
+
 }

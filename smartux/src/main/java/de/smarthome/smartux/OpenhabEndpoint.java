@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import de.Message;
 import de.Ping;
+import de.smarthome.smartux.eventsystem.ItemStateChangedEvent;
 import de.smarthome.smartux.eventsystem.ItemStateUpdatedEvent;
 import jakarta.websocket.ClientEndpoint;
 import jakarta.websocket.CloseReason;
@@ -116,14 +117,12 @@ public class OpenhabEndpoint extends Endpoint {
      */
     public void onItemStateUpdatedEvent(Session session, Message message)
     {
-        log.debug("[ItemStateUpdatedEvent] topic:" + message.getTopic() + " Data: "+ message.getPayload());
-        
         //Extract the item name from the topic
         String topic = message.getTopic().split("/")[2];
 
         if(ohItemRegister.isItemRegistered(topic))
         {
-
+            log.debug("[ItemStateUpdatedEvent] topic:" + message.getTopic() + " Data: "+ message.getPayload());
             eventPublisher.publishEvent(new ItemStateUpdatedEvent(this, topic,message.getPayload()));
         }
         else
@@ -171,6 +170,18 @@ public class OpenhabEndpoint extends Endpoint {
     public void onItemStateChangedEvent(Session session, Message message)
     {
         log.debug("[ItemStateChangedEvent] topic:" + message.getTopic() + " Data: "+ message.getPayload());
+        String topic = message.getTopic().split("/")[2];
+
+        if(ohItemRegister.isItemRegistered(topic))
+        {
+
+            eventPublisher.publishEvent(new ItemStateChangedEvent(this, topic,message.getPayload()));
+        }
+        else
+        {
+            /* Item is not registered, so we will ignore it */
+            return;
+        }
     }
 
     /**

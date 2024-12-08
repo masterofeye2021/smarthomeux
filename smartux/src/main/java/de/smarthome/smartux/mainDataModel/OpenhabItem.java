@@ -26,6 +26,7 @@ public class OpenhabItem {
 
     // Getter und Setter für alle Felder
 
+    @Data
     public static class StateDescription {
         private int minimum;
         private int maximum;
@@ -44,6 +45,7 @@ public class OpenhabItem {
         }
     }
 
+    @Data
     public static class CommandDescription {
         private List<CommandOption> commandOptions;
 
@@ -57,6 +59,7 @@ public class OpenhabItem {
         }
     }
 
+    @Data
     public static class Metadata {
         @JsonProperty("additionalProp1")
         private Map<String, Object> additionalProp1;

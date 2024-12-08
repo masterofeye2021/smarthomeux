@@ -90,7 +90,7 @@
 			<xs:enumeration value="K"/>
 			<xs:enumeration value="U"/>
 			<xs:enumeration value="I"/>
-			<xs:enumeration value="%"/>
+			<xs:enumeration value="%%"/>
 			<xs:enumeration value="ppm"/>
 			<xs:enumeration value="hPa"/>
 		</xs:restriction>
