@@ -1,4 +1,4 @@
-package de.smarthome.smartux;
+package de.smarthome.smartux.eventsystem;
 
 import java.io.IOException;
 
@@ -8,8 +8,7 @@ import org.springframework.stereotype.Component;
 
 import de.Message;
 import de.Ping;
-import de.smarthome.smartux.eventsystem.ItemStateChangedEvent;
-import de.smarthome.smartux.eventsystem.ItemStateUpdatedEvent;
+import de.smarthome.smartux.OpenhabItemRegister;
 import jakarta.websocket.ClientEndpoint;
 import jakarta.websocket.CloseReason;
 import jakarta.websocket.DecodeException;

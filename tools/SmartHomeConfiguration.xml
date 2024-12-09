@@ -3944,7 +3944,7 @@
 				</groups>
 			</channel>
 		</device>
-		<device device.area="TKR" device.function="CALENDAR" device.specification="ICALBinding" device.comm.type="ICAL" device.label="Müll" device.name="Termine für Muellabfuhr">
+		<device device.area="TKR" device.function="CALENDAR" device.specification="ICALBinding" device.comm.type="ICAL" device.label="Müll" device.name="Termine Muellabfuhr">
 			<channel format="ND" unit="ND" access="R" icon="fa-calendar-day" enable="true" persistence="false" label="Biomülltonne" type="DateTime" name="Biomüll" extention="Tonne" channel.id="1">
 				<link>TKR_R_CALENDAR_Tonne_Biomuell</link>
 				<connection>

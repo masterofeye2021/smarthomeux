@@ -1,4 +1,4 @@
-package de.smarthome.smartux;
+package de.smarthome.smartux.configuration;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

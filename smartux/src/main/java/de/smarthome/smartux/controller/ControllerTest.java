@@ -1,5 +1,8 @@
 package de.smarthome.smartux.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
@@ -34,15 +37,19 @@ public class ControllerTest {
     
     @GetMapping("/garbage")
     public String getHome(Model model) {
-        GarbageModule gb = new GarbageModule(openhabRestService, openhabItemRegister);
+
+        List<String> toSubcribe = new ArrayList<>();
+        model.addAttribute("toSubscribe", toSubcribe);
+        GarbageModule gb = (GarbageModule) applicationContext.getBean("TKR_CALENDAR_Termine_Muellabfuhr");
         gb.init(model);
 
-        
         SteinelPraesenzModule sp =  (SteinelPraesenzModule) applicationContext.getBean("WOZ_SENSOR_Praesenzmelder_Couch");
         sp.init(model);
         SteinelPraesenzModule sp2 =  (SteinelPraesenzModule) applicationContext.getBean( "KUE_SENSOR_Praesenzmelder_Kueche");
         sp2.init(model);
        
+
+        
         return "garbage.html";
     }
 }

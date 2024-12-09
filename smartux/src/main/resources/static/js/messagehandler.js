@@ -1,25 +1,40 @@
-function connect(event) {
-  var socket = new SockJS("/ws");
+function connect() {
+  var socket = new SockJS("/smartux");
   stompClient = Stomp.over(socket);
-
+  stompClient.reconnect_delay = 5000;
   stompClient.connect({}, onConnected, onError);
 
-  event.preventDefault();
+
 }
 
 function onConnected() {
-  // Subscribe to the Public Topic
-  stompClient.subscribe("/topic/public", onMessageReceived);
 
+
+  console.log(stringArray)
+
+
+  // Subscribe to the Public Topic
+
+  stringArray.forEach(value => {
+    console.log("/ItemStateChangedEvent/"+ value)
+    stompClient.subscribe("/ItemStateChangedEvent/"+ value, (message) => {
+      console.log("message.body");
+});});
   // Tell your username to the server
-  stompClient.send(
+  /*stompClient.send(
     "/app/addUser",
     {},
     JSON.stringify({ sender: username, type: "JOIN" })
-  );
+  );*/
 
-  connectingElement.classList.add("hidden");
+  
 }
+
+function onMessageReceived(event)
+{
+  console.log(event)
+}
+
 
 function onError(error) {
   connectingElement.textContent =
@@ -40,3 +55,5 @@ function sendMessage(event) {
   }
   event.preventDefault();
 }
+
+connect();

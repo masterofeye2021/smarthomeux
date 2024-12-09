@@ -4,8 +4,11 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 
 import org.springframework.context.event.EventListener;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.ui.Model;
 
 import de.smarthome.smartux.OpenhabItemRegister;
@@ -19,9 +22,9 @@ import lombok.extern.slf4j.Slf4j;
 public class GarbageModule extends ModuleTemplate{
 
 
-    public GarbageModule(OpenhabRestService openhabRestService,OpenhabItemRegister openhabItemRegister)
+    public GarbageModule(OpenhabRestService openhabRestService,OpenhabItemRegister openhabItemRegister,SimpMessagingTemplate template)
     {
-        super(openhabRestService,openhabItemRegister);
+        super(openhabRestService,openhabItemRegister,template);
     }
 
     private long bioTonneRemainingDays = 0;
@@ -29,67 +32,36 @@ public class GarbageModule extends ModuleTemplate{
     private long restmuellTonneRemainingDays = 0;
     private long altpapierTonneRemainingDays = 0;
 
-    private String bioTonneTag = "TKR_R_CALENDAR_Tonne_Biomuell";
-    private String restmuellTonneTag = "TKR_R_CALENDAR_Tonne_Restmuell";
-    private String gelbeTonneTag = "TKR_R_CALENDAR_Tonne_Plastikmuell";
-    private String altpapierTonneTag = "TKR_R_CALENDAR_Tonne_Papiermuell";
+
 
     @Override
     public void init(Model model) {
-        /*
-         * Füge alle benötigten Items hinzu
-         */
-
-        this.addItem(bioTonneTag);
-        this.addItem(gelbeTonneTag);
-        this.addItem(restmuellTonneTag);
-        this.addItem(altpapierTonneTag);
-
-
 
         /*
          * Items mit Init Values versorgen
          */
+        for (String tag : this.openhabItemList) {
+            /*
+            * Items mit Init Values versorgen
+            */
+            Long remainingDays = this._initItemValues(tag);
 
-        bioTonneRemainingDays = this._initItemValues(bioTonneTag);
-        gelbeTonneRemainingDays = this._initItemValues(gelbeTonneTag);
-        restmuellTonneRemainingDays = this._initItemValues(restmuellTonneTag);
-        altpapierTonneRemainingDays = this._initItemValues(altpapierTonneTag);
+            OpenhabItem item = this.openhabRestService.getItemDetails(tag).block();
+            item.setState(String.valueOf(remainingDays));
 
-        OpenhabItem bioTonneItem = this.openhabRestService.getItemDetails(bioTonneTag).block();
-        OpenhabItem gelbeTonneItem = this.openhabRestService.getItemDetails(gelbeTonneTag).block();
-        OpenhabItem restmuellTonneItem = this.openhabRestService.getItemDetails(restmuellTonneTag).block();
-        OpenhabItem altpapierTonneItem = this.openhabRestService.getItemDetails(altpapierTonneTag).block();
+            /**
+             * Alle Attribute dem Model hinzufügen
+             */
 
-        bioTonneItem.setState(String.valueOf(bioTonneRemainingDays));
-        gelbeTonneItem.setState(String.valueOf(gelbeTonneRemainingDays));
-        restmuellTonneItem.setState(String.valueOf(restmuellTonneRemainingDays));
-        altpapierTonneItem.setState(String.valueOf(altpapierTonneRemainingDays));
-
-        /**
-         * Alle Attribute dem Model hinzufügen
-         */
-
-        model.addAttribute(bioTonneTag, bioTonneItem);
-        model.addAttribute(gelbeTonneTag, gelbeTonneItem);
-        model.addAttribute(restmuellTonneTag, restmuellTonneItem);
-        model.addAttribute(altpapierTonneTag, altpapierTonneItem);
-
+            model.addAttribute(tag, item);
+        }
+        
         /*
          * Sind alle Items hinzugefügt kann die Registry aufgerufen werden
          */
 
         this.register();
     }
-
-
-    @Override
-    public void update() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
-        
-    }
-
 
     @Override
     public void deinit() {
@@ -99,6 +71,7 @@ public class GarbageModule extends ModuleTemplate{
 
     private Long _initItemValues(String item)
     {
+        try{
         //Folgendes Format bekommen wir von Openhab geliefert
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
         
@@ -109,15 +82,27 @@ public class GarbageModule extends ModuleTemplate{
         
         // Werte extrahieren
         return duration.toDays();
+        }
+        catch (DateTimeParseException e) 
+        {
+            log.error(item + "coudn't be parsed correctely" , e);
+            return (long) 365;
+        }
     }
 
     @EventListener
     public void handleCustomEvent(ItemStateUpdatedEvent event) {
-        log.info("ItemStateUpdatedEvent wurde von [GargabeModule] mit dem Wert ["+event.getValue()+"] empfangen");
+        if (openhabItemList.contains(event.getItem()))
+        {
+            log.trace("ItemStateUpdatedEvent wurde von [GargabeModule] mit dem Wert ["+event.getValue()+"] empfangen");
+        }
     }
 
     @EventListener
     public void handleCustomEvent(ItemStateChangedEvent event) {
-        log.info("ItemStateChangedEvent wurde von [GargabeModule] mit dem Wert ["+event.getValue()+"] empfangen");
+        if (openhabItemList.contains(event.getItem()))
+        {
+            log.trace("ItemStateChangedEvent wurde von [GargabeModule] mit dem Wert ["+event.getValue()+"] empfangen");
+        }
     }
 }

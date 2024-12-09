@@ -8,6 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import de.smarthome.smartux.eventsystem.MessageDecoder;
+import de.smarthome.smartux.eventsystem.MessageEncoder;
+import de.smarthome.smartux.eventsystem.OpenhabEndpoint;
+import de.smarthome.smartux.eventsystem.PingEncoder;
 import jakarta.annotation.PostConstruct;
 import jakarta.websocket.ClientEndpointConfig;
 import jakarta.websocket.ContainerProvider;
