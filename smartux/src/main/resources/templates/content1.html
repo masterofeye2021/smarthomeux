@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layout}"
+>
+  <head>
+    <title>Content page 1</title>
+  </head>
+  <body> 
+    <section layout:fragment="content">
+      <div class="container-lg d-flex flex-column min-vh-100">
+        <!-- Top Row -->
+        <div class="row border border-black" style="height: 150px;">
+          <div class="col-4 border border-black text-center">UHRZEIT</div>
+          <div class="col-6 border border-black text-right">ALARM</div>
+          <div class="col-2 border border-black">TEMPERATUR</div>
+        </div>
+
+        <!-- Middle Row -->
+        <div class="row border border-black flex-grow-1">
+          <div class="col-8 border border-black text-center d-flex flex-column">
+            <!-- ROOM and ENERGY spanning full height -->
+            <div class="row flex-grow-1 align-items-center justify-content-center border">
+              <div class="col">ROOM</div>
+            </div>
+            <div class="row flex-grow-2 align-items-center justify-content-center border" style="height:100px;">
+              <div class="col">ENERGY</div>
+            </div>
+          </div>
+          <div class="col-4 border border-black text-right d-flex align-items-center justify-content-center">
+            EVENTLOOP
+          </div>
+        </div>
+
+        <!-- Bottom Row -->
+        <div class="row border border-black mb-4">
+          <div class="col-lg-1">&nbsp;</div>
+          <div class="col-10">
+            <div th:insert="~{fragments/garbageview :: garbage}"></div>
+          </div>
+          <div class="col-lg-1">&nbsp;</div>
+        </div>
+      </div>
+    </section>
+    <div th:insert="~{fragments/footer :: copy}"></div>
+</body>>
+</html>

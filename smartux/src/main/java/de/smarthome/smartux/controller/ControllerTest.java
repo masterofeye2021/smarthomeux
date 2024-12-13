@@ -14,6 +14,7 @@ import de.smarthome.smartux.OpenhabRestService;
 import de.smarthome.smartux.Module.GarbageModule;
 import de.smarthome.smartux.Module.ModuleManager;
 import de.smarthome.smartux.Module.SteinelPraesenzModule;
+import nz.net.ultraq.thymeleaf.layoutdialect.LayoutDialect;
 
 @Controller
 public class ControllerTest {
@@ -26,6 +27,10 @@ public class ControllerTest {
 
     @Autowired 
     ModuleManager moduleManager;
+
+    
+    @Autowired
+    LayoutDialect layoutDialect;
 
     private final ApplicationContext applicationContext;
 
@@ -45,11 +50,22 @@ public class ControllerTest {
 
         SteinelPraesenzModule sp =  (SteinelPraesenzModule) applicationContext.getBean("WOZ_SENSOR_Praesenzmelder_Couch");
         sp.init(model);
-        SteinelPraesenzModule sp2 =  (SteinelPraesenzModule) applicationContext.getBean( "KUE_SENSOR_Praesenzmelder_Kueche");
+        SteinelPraesenzModule sp2 =  (SteinelPraesenzModule) applicationContext.getBean("KUE_SENSOR_Praesenzmelder_Kueche");
         sp2.init(model);
        
 
         
         return "garbage.html";
+    }
+
+    @GetMapping("/layout")
+    public String getLayout(Model model) {
+        List<String> toSubcribe = new ArrayList<>();
+        model.addAttribute("toSubscribe", toSubcribe);
+        GarbageModule gb = (GarbageModule) applicationContext.getBean("TKR_CALENDAR_Termine_Muellabfuhr");
+        gb.init(model);
+
+        
+        return "content1.html";
     }
 }

@@ -1,0 +1,21 @@
+layout.html
+
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+  <head th:insert="~{fragments/header.html :: header}"></head>
+
+  <!-- Tag List, gibt dem JS Websocket sich für die richtigen Events zu registrieren-->
+  <script th:inline="javascript">
+    let stringArray = /*[[${toSubscribe}]]*/ [];
+  </script>
+
+  <body>
+  
+      <section layout:fragment="content">
+        <p>Page content goes here</p>
+      </section>
+   
+
+    <footer th:replace="~{fragments/footer.html :: footer}"></footer>
+  </body>
+</html>

@@ -11,7 +11,15 @@ import nz.net.ultraq.thymeleaf.layoutdialect.*;
 
 @Configuration
 public class SpringTemplateEngineConfiguration {
+
     @Bean
+    public LayoutDialect layoutDialect() {
+      return new LayoutDialect();
+    }
+
+
+
+   /* @Bean
     public SpringTemplateEngine templateEngine(ITemplateResolver templateResolver) {
         SpringTemplateEngine templateEngine = new SpringTemplateEngine();
         templateEngine.setTemplateResolver(templateResolver);
@@ -25,5 +33,5 @@ public class SpringTemplateEngineConfiguration {
         viewResolver.setTemplateEngine(templateEngine);
         viewResolver.setCharacterEncoding("UTF-8");
         return viewResolver;
-    }
+    }*/
 }

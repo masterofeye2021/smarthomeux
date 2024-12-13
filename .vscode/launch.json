@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-SmartuxApplication<smartux>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "de.smarthome.smartux.SmartuxApplication",
+            "projectName": "smartux",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
