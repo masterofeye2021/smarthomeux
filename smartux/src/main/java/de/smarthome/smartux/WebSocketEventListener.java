@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.socket.messaging.SessionConnectedEvent;
 import org.springframework.web.socket.messaging.SessionDisconnectEvent;
 
-import de.smarthome.smartux.mainDataModel.ChatMessage;
+import de.smarthome.smartux.mainDataModel.StompMessage;
 import de.smarthome.smartux.mainDataModel.MessageType;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -32,9 +32,8 @@ public class WebSocketEventListener {
         if (username != null) {
             log.info("user disconnected: {}", username);
             
-            var chatMessage = ChatMessage.builder()
-                    .type(MessageType.LEAVE)
-                    .sender(username)
+            var chatMessage = StompMessage.builder()
+                    .type("")
                     .build();
             
             messagingTemplate.convertAndSend("/topic/public", chatMessage);

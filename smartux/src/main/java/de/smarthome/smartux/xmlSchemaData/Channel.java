@@ -39,6 +39,14 @@ import jakarta.xml.bind.annotation.XmlType;
  *                   <element name="ping" type="{}ping"/>
  *                   <element name="modbus" type="{}modbus"/>
  *                   <element ref="{}ical"/>
+ *                   <element name="ntp">
+ *                     <complexType>
+ *                       <complexContent>
+ *                         <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *                         </restriction>
+ *                       </complexContent>
+ *                     </complexType>
+ *                   </element>
  *                 </choice>
  *               </restriction>
  *             </complexContent>
@@ -478,6 +486,14 @@ public class Channel {
      *         <element name="ping" type="{}ping"/>
      *         <element name="modbus" type="{}modbus"/>
      *         <element ref="{}ical"/>
+     *         <element name="ntp">
+     *           <complexType>
+     *             <complexContent>
+     *               <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+     *               </restriction>
+     *             </complexContent>
+     *           </complexType>
+     *         </element>
      *       </choice>
      *     </restriction>
      *   </complexContent>
@@ -491,7 +507,8 @@ public class Channel {
         "knx",
         "ping",
         "modbus",
-        "ical"
+        "ical",
+        "ntp"
     })
     public static class Connection {
 
@@ -499,6 +516,7 @@ public class Channel {
         protected Ping ping;
         protected Modbus modbus;
         protected Ical ical;
+        protected Channel.Connection.Ntp ntp;
 
         /**
          * Ruft den Wert der knx-Eigenschaft ab.
@@ -594,6 +612,54 @@ public class Channel {
          */
         public void setIcal(Ical value) {
             this.ical = value;
+        }
+
+        /**
+         * Ruft den Wert der ntp-Eigenschaft ab.
+         * 
+         * @return
+         *     possible object is
+         *     {@link Channel.Connection.Ntp }
+         *     
+         */
+        public Channel.Connection.Ntp getNtp() {
+            return ntp;
+        }
+
+        /**
+         * Legt den Wert der ntp-Eigenschaft fest.
+         * 
+         * @param value
+         *     allowed object is
+         *     {@link Channel.Connection.Ntp }
+         *     
+         */
+        public void setNtp(Channel.Connection.Ntp value) {
+            this.ntp = value;
+        }
+
+
+        /**
+         * <p>Java-Klasse für anonymous complex type.</p>
+         * 
+         * <p>Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.</p>
+         * 
+         * <pre>{@code
+         * <complexType>
+         *   <complexContent>
+         *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+         *     </restriction>
+         *   </complexContent>
+         * </complexType>
+         * }</pre>
+         * 
+         * 
+         */
+        @XmlAccessorType(XmlAccessType.FIELD)
+        @XmlType(name = "")
+        public static class Ntp {
+
+
         }
 
     }

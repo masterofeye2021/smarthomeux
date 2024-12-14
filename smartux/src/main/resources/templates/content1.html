@@ -6,12 +6,16 @@
   <head>
     <title>Content page 1</title>
   </head>
-  <body> 
+  <body>
     <section layout:fragment="content">
       <div class="container-lg d-flex flex-column min-vh-100">
         <!-- Top Row -->
-        <div class="row border border-black" style="height: 150px;">
-          <div class="col-4 border border-black text-center">UHRZEIT</div>
+        <div class="row border border-black" style="height: 150px">
+          <div class="col-4 border border-black text-center">
+            <div
+              th:replace="~{fragments/landingpage/timedateview.html :: timedate}"
+            ></div>
+          </div>
           <div class="col-6 border border-black text-right">ALARM</div>
           <div class="col-2 border border-black">TEMPERATUR</div>
         </div>
@@ -20,14 +24,21 @@
         <div class="row border border-black flex-grow-1">
           <div class="col-8 border border-black text-center d-flex flex-column">
             <!-- ROOM and ENERGY spanning full height -->
-            <div class="row flex-grow-1 align-items-center justify-content-center border">
+            <div
+              class="row flex-grow-1 align-items-center justify-content-center border"
+            >
               <div class="col">ROOM</div>
             </div>
-            <div class="row flex-grow-2 align-items-center justify-content-center border" style="height:100px;">
+            <div
+              class="row flex-grow-2 align-items-center justify-content-center border"
+              style="height: 100px"
+            >
               <div class="col">ENERGY</div>
             </div>
           </div>
-          <div class="col-4 border border-black text-right d-flex align-items-center justify-content-center">
+          <div
+            class="col-4 border border-black text-right d-flex align-items-center justify-content-center"
+          >
             EVENTLOOP
           </div>
         </div>
@@ -42,6 +53,39 @@
         </div>
       </div>
     </section>
-    <div th:insert="~{fragments/footer :: copy}"></div>
-</body>>
+    <footer>
+      <div layout:fragment="pre-footer">
+        <script th:replace="~{fragments/landingpage/timedateview.html :: pre-footer}"></script>
+        <script>
+          function getLastPartOfString(input) {
+            if (typeof input !== "string") {
+              throw new Error("Eingabe muss ein String sein");
+            }
+
+            // String nach '/' splitten und letztes Element zurückgeben
+            const parts = input.split("/");
+            return parts[parts.length - 1];
+          }
+
+          callback = function (message) {
+            // called when the client receives a STOMP message from the server
+
+            var topic = message.headers.destination;
+            const payload = JSON.parse(message.body);
+            var value = payload.value;
+
+            console.log(getLastPartOfString(topic))
+
+            switch (getLastPartOfString(topic)) {
+              case "TKR_R_NTP_Datetime":
+                window["TKR_R_NTP_Datetime_Handle"](value);
+                break;
+            }
+          };
+        </script>
+      </div>
+      <div layout:fragment="post-footer">
+      </div>
+    </footer>
+  </body>
 </html>

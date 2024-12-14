@@ -11,6 +11,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Component;
 
+import de.smarthome.smartux.Module.DateTimeModule;
 import de.smarthome.smartux.Module.DynamicBeanRegistrar;
 import de.smarthome.smartux.Module.GarbageModule;
 import de.smarthome.smartux.Module.ModuleManager;
@@ -64,6 +65,13 @@ public class DataLoader {
                 name = new String(byteBuffer.array(), StandardCharsets.UTF_8).trim();
 
                 switch (device.getDeviceSpecification()) {
+                    case DeviceSpecification.NTP_BINDING:
+                        DateTimeModule tm = new DateTimeModule(openhabRestService, openhabItemRegister, template);
+                        tm.addItem("TKR_R_NTP_Datetime");
+                        tm.setName(name);
+                        beanRegistrar.registerBean(name, tm);
+                        log.info("NTP Module with name [" + name + "] was registered");
+                        break;
                     case DeviceSpecification.ICAL_BINDING:
                         GarbageModule gb = new GarbageModule(openhabRestService, openhabItemRegister, template);
 

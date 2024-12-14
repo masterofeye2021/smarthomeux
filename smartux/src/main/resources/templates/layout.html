@@ -6,16 +6,21 @@ layout.html
 
   <!-- Tag List, gibt dem JS Websocket sich für die richtigen Events zu registrieren-->
   <script th:inline="javascript">
-    let stringArray = /*[[${toSubscribe}]]*/ [];
+    let listOfTagsToSubscribe = /*[[${toSubscribe}]]*/ [];
   </script>
 
   <body>
-  
-      <section layout:fragment="content">
-        <p>Page content goes here</p>
-      </section>
-   
-
-    <footer th:replace="~{fragments/footer.html :: footer}"></footer>
+    <section layout:fragment="content">
+      <p>Page content goes here</p>
+    </section>
+    <footer>
+      <!-- Alle Änderungen die vor dem Includer der *.js Bibliotheken erfolgen müssen gehören auf der Content Seite in dieses Bereich. -->
+      <!-- Das ist zum Beispiel der Callback für Verarbeitung der Openhab Updateevents-->
+      <div id="pre-footer" layout:fragment="pre-footer"></div>
+      <!-- Hier werden alle *.js Bibliotheken eingefügt sie dazu footer.html -->
+      <div id="footer" th:insert="~{fragments/footer.html :: footer}"></div>
+      <!-- Wird eine Verarbeitung nach der Includieren der *.js Bibliotheken benötigt gehört diese auf der Content Seite in deisen Abschnitt. -->
+      <div id="post-footer" layout:fragment="post-footer"></div>
+    </footer>
   </body>
 </html>

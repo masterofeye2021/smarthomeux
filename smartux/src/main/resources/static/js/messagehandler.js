@@ -1,40 +1,29 @@
+
+/**
+ * @brief Connect ot the SMARTUX websocket to retrieve updates from Openhab. 
+ * */
 function connect() {
   var socket = new SockJS("/smartux");
   stompClient = Stomp.over(socket);
   stompClient.reconnect_delay = 5000;
   stompClient.connect({}, onConnected, onError);
-
-
 }
 
+/**
+ * @brief Sofern wir uns mit dem Websocket verbinden konnten, werden die Subscribens durchführt.
+ *        Dafür besitzt die View eine Liste aber Openhab Item Tags die für die jeweilige View von Interesse sind. 
+ */
 function onConnected() {
 
+  listOfTagsToSubscribe.forEach((value) => {
+    stompClient.subscribe("/ItemStateChangedEvent/" + value, callback);
 
-  console.log(stringArray)
-
-
-  // Subscribe to the Public Topic
-
-  stringArray.forEach(value => {
-    console.log("/ItemStateChangedEvent/"+ value)
-    stompClient.subscribe("/ItemStateChangedEvent/"+ value, (message) => {
-      console.log("message.body");
-});});
-  // Tell your username to the server
-  /*stompClient.send(
-    "/app/addUser",
-    {},
-    JSON.stringify({ sender: username, type: "JOIN" })
-  );*/
-
-  
+  });
 }
 
-function onMessageReceived(event)
-{
-  console.log(event)
+function onMessageReceived(event) {
+  console.log(event);
 }
-
 
 function onError(error) {
   connectingElement.textContent =

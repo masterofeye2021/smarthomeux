@@ -49,9 +49,6 @@ import jakarta.xml.bind.annotation.XmlType;
  *       <attribute name="device.specification" use="required">
  *         <simpleType>
  *           <restriction base="{}device.specification">
- *             <enumeration value="SteinelTruePräsenz"/>
- *             <enumeration value="RolladenMDTKNX"/>
- *             <enumeration value="ICALBinding"/>
  *           </restriction>
  *         </simpleType>
  *       </attribute>

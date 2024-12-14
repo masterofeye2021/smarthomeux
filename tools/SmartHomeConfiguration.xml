@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- edited with XMLSpy v2024 rel. 2 sp1 (x64) (https://www.altova.com) by  () -->
-<openhab xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="SmartHomeDefinitionV2.xsd">
+<openhab>
 	<devices>
-		<device device.area="WOZ" device.function="SHUTTER" device.specification="RolladenMDTKNX" device.comm.type="KNX" device.label="Rollladen Nordfenster" device.name="Rollladen Nordfenster">
+		<device device.area="WOZ" device.function="SHUTTER" device.comm.type="KNX" device.label="Rollladen Nordfenster" device.name="Rollladen Nordfenster" device.specification="RolladenMDTKNX">
 			<channel format="ND" unit="ND" access="RW" icon="fa-arrows-up-down" enable="true" persistence="false" label="Toggle Rollladen Nordfenster" type="Rollershutter" name="Auf/Ab" extention="Nordfenster" channel.id="1">
 				<link>WOZ_RW_SHUTTER_Nordfenster_Auf_Ab</link>
 				<connection>
@@ -309,7 +309,7 @@
 				</groups>
 			</channel>
 		</device>
-		<device device.area="WOZ" device.function="SHUTTER" device.specification="RolladenMDTKNX" device.comm.type="KNX" device.label="Rollladen Westfenster star" device.name="Rollladen Westfenster star">
+		<device device.area="WOZ" device.function="SHUTTER" device.comm.type="KNX" device.label="Rollladen Westfenster star" device.name="Rollladen Westfenster star" device.specification="RolladenMDTKNX">
 			<channel format="ND" unit="ND" access="RW" icon="fa-arrows-up-down" enable="true" persistence="false" label="Toggle Rollladen Westfenster star" type="Rollershutter" name="Auf/Ab" extention="Westfenster star" channel.id="1">
 				<link>WOZ_RW_SHUTTER_Westfenster_star_Auf_Ab</link>
 				<connection>
@@ -616,7 +616,7 @@
 				</groups>
 			</channel>
 		</device>
-		<device device.area="WOZ" device.function="SHUTTER" device.specification="RolladenMDTKNX" device.comm.type="KNX" device.label="Rollladen Westfenster kipp" device.name="Rollladen Westfenster kipp">
+		<device device.area="WOZ" device.function="SHUTTER" device.comm.type="KNX" device.label="Rollladen Westfenster kipp" device.name="Rollladen Westfenster kipp" device.specification="RolladenMDTKNX">
 			<channel format="ND" unit="ND" access="RW" icon="fa-arrows-up-down" enable="true" persistence="false" label="Toggle Rollladen Westfenster kippbar" type="Rollershutter" name="Auf/Ab" extention="Westfenster kippbar" channel.id="1">
 				<link>WOZ_RW_SHUTTER_Westfenster_kippbar_Auf_Ab</link>
 				<connection>
@@ -923,7 +923,7 @@
 				</groups>
 			</channel>
 		</device>
-		<device device.area="WOZ" device.function="SHUTTER" device.specification="RolladenMDTKNX" device.comm.type="KNX" device.label="Rollladen Südfenster" device.name="Rollladen Südfenster">
+		<device device.area="WOZ" device.function="SHUTTER" device.comm.type="KNX" device.label="Rollladen Südfenster" device.name="Rollladen Südfenster" device.specification="RolladenMDTKNX">
 			<channel format="ND" unit="ND" access="RW" icon="fa-arrows-up-down" enable="true" persistence="false" label="Toggle Rollladen Südfenster" type="Rollershutter" name="Auf/Ab" extention="Südfenster" channel.id="1">
 				<link>WOZ_RW_SHUTTER_Suedfenster_Auf_Ab</link>
 				<connection>
@@ -1230,7 +1230,7 @@
 				</groups>
 			</channel>
 		</device>
-		<device device.area="HWR" device.function="SHUTTER" device.specification="RolladenMDTKNX" device.comm.type="KNX" device.label="Rollladen Hauswirtschaftsraum" device.name="Rollladen HWR">
+		<device device.area="HWR" device.function="SHUTTER" device.comm.type="KNX" device.label="Rollladen Hauswirtschaftsraum" device.name="Rollladen HWR" device.specification="RolladenMDTKNX">
 			<channel format="ND" unit="ND" access="RW" icon="fa-arrows-up-down" enable="true" persistence="false" label="Toggle Rollladen HWR" type="Rollershutter" name="Auf/Ab" extention="Nordfenster" channel.id="1">
 				<link>HWR_RW_SHUTTER_Nordfenster_Auf_Ab</link>
 				<connection>
@@ -1537,7 +1537,7 @@
 				</groups>
 			</channel>
 		</device>
-		<device device.area="GWC" device.function="SHUTTER" device.specification="RolladenMDTKNX" device.comm.type="KNX" device.label="Rollladen Gäste-WC" device.name="Rollladen">
+		<device device.area="GWC" device.function="SHUTTER" device.comm.type="KNX" device.label="Rollladen Gäste-WC" device.name="Rollladen" device.specification="RolladenMDTKNX">
 			<channel format="ND" unit="ND" access="RW" icon="fa-arrows-up-down" enable="true" persistence="false" label="Toggle Rollladen GWC" type="Rollershutter" name="Auf/Ab" extention="Fenster" channel.id="1">
 				<link>GWC_RW_SHUTTER_Fenster_Auf_Ab</link>
 				<connection>
@@ -1844,7 +1844,7 @@
 				</groups>
 			</channel>
 		</device>
-		<device device.area="BUR" device.function="SHUTTER" device.specification="RolladenMDTKNX" device.comm.type="KNX" device.label="Rollladen Büro" device.name="Rollladen">
+		<device device.area="BUR" device.function="SHUTTER" device.comm.type="KNX" device.label="Rollladen Büro" device.name="Rollladen" device.specification="RolladenMDTKNX">
 			<channel format="ND" unit="ND" access="RW" icon="fa-arrows-up-down" enable="true" persistence="false" label="Toggle Rollladen BUR" type="Rollershutter" name="Auf/Ab" extention="Fenster" channel.id="1">
 				<link>BUR_RW_SHUTTER_Fenster_Auf_Ab</link>
 				<connection>
@@ -2151,7 +2151,7 @@
 				</groups>
 			</channel>
 		</device>
-		<device device.area="BAD" device.function="SHUTTER" device.specification="RolladenMDTKNX" device.comm.type="KNX" device.label="Rollladen Südfenster" device.name="Rollladen Südfenster">
+		<device device.area="BAD" device.function="SHUTTER" device.comm.type="KNX" device.label="Rollladen Südfenster" device.name="Rollladen Südfenster" device.specification="RolladenMDTKNX">
 			<channel format="ND" unit="ND" access="RW" icon="fa-arrows-up-down" enable="true" persistence="false" label="Toggle Rollladen BAD Südfenster" type="Rollershutter" name="Auf/Ab" extention="Südfenster" channel.id="1">
 				<link>BAD_RW_SHUTTER_Suedfenster_Auf_Ab</link>
 				<connection>
@@ -2458,7 +2458,7 @@
 				</groups>
 			</channel>
 		</device>
-		<device device.area="BAD" device.function="SHUTTER" device.specification="RolladenMDTKNX" device.comm.type="KNX" device.label="Rollladen Ostfenster" device.name="Rollladen Ostfenster">
+		<device device.area="BAD" device.function="SHUTTER" device.comm.type="KNX" device.label="Rollladen Ostfenster" device.name="Rollladen Ostfenster" device.specification="RolladenMDTKNX">
 			<channel format="ND" unit="ND" access="RW" icon="fa-arrows-up-down" enable="true" persistence="false" label="Toggle Rollladen BAD Ostfenster" type="Rollershutter" name="Auf/Ab" extention="Ostfenster" channel.id="1">
 				<link>BAD_RW_SHUTTER_Ostfenster_Auf_Ab</link>
 				<connection>
@@ -2765,7 +2765,7 @@
 				</groups>
 			</channel>
 		</device>
-		<device device.area="KIZ" device.function="SHUTTER" device.specification="RolladenMDTKNX" device.comm.type="KNX" device.label="Rollladen Kinderzimmer" device.name="Rollladen KIZ">
+		<device device.area="KIZ" device.function="SHUTTER" device.comm.type="KNX" device.label="Rollladen Kinderzimmer" device.name="Rollladen KIZ" device.specification="RolladenMDTKNX">
 			<channel format="ND" unit="ND" access="RW" icon="fa-arrows-up-down" enable="true" persistence="false" label="Toggle Rollladen KIZ" type="Rollershutter" name="Auf/Ab" extention="Westfenster" channel.id="1">
 				<link>KIZ_RW_SHUTTER_Westfenster_Auf_Ab</link>
 				<connection>
@@ -3072,7 +3072,7 @@
 				</groups>
 			</channel>
 		</device>
-		<device device.area="SLZ" device.function="SHUTTER" device.specification="RolladenMDTKNX" device.comm.type="KNX" device.label="Rollladen Schlafzimmer" device.name="Rollladen Schlafzimmer">
+		<device device.area="SLZ" device.function="SHUTTER" device.comm.type="KNX" device.label="Rollladen Schlafzimmer" device.name="Rollladen Schlafzimmer" device.specification="RolladenMDTKNX">
 			<channel format="ND" unit="ND" access="RW" icon="fa-arrows-up-down" enable="true" persistence="false" label="Toggle Rollladen SLZ" type="Rollershutter" name="Auf/Ab" extention="Westfenster" channel.id="1">
 				<link>SLZ_RW_SHUTTER_Westfenster_Auf_Ab</link>
 				<connection>
@@ -3379,7 +3379,7 @@
 				</groups>
 			</channel>
 		</device>
-		<device device.area="KUE" device.function="SHUTTER" device.specification="RolladenMDTKNX" device.comm.type="KNX" device.label="Rollladen Küche" device.name="Rollladen Kueche">
+		<device device.area="KUE" device.function="SHUTTER" device.comm.type="KNX" device.label="Rollladen Küche" device.name="Rollladen Kueche" device.specification="RolladenMDTKNX">
 			<channel format="ND" unit="ND" access="RW" icon="fa-arrows-up-down" enable="true" persistence="false" label="Toggle Rollladen KUE" type="Rollershutter" name="Auf/Ab" extention="Südfenster" channel.id="1">
 				<link>KUE_RW_SHUTTER_Suedfenster_Auf_Ab</link>
 				<connection>
@@ -3686,7 +3686,7 @@
 				</groups>
 			</channel>
 		</device>
-		<device device.area="WOZ" device.function="SENSOR" device.specification="SteinelTruePräsenz" device.comm.type="KNX" device.label="Präsenzmelder Couch" device.name="Praesenzmelder Couch">
+		<device device.area="WOZ" device.function="SENSOR" device.comm.type="KNX" device.label="Präsenzmelder Couch" device.name="Praesenzmelder Couch" device.specification="SteinelTruePräsenz">
 			<channel format="ND" unit="ND" access="R" icon="fa-location-dot" enable="true" persistence="false" label="Präsenz Wohnzimmer Couch" type="Contact" name="Präzenz" extention="Couch" channel.id="1">
 				<link>WOZ_R_SENSOR_Couch_Praezenz</link>
 				<connection>
@@ -3944,7 +3944,7 @@
 				</groups>
 			</channel>
 		</device>
-		<device device.area="TKR" device.function="CALENDAR" device.specification="ICALBinding" device.comm.type="ICAL" device.label="Müll" device.name="Termine Muellabfuhr">
+		<device device.area="TKR" device.function="CALENDAR" device.comm.type="ICAL" device.label="Müll" device.name="Termine Muellabfuhr" device.specification="ICALBinding">
 			<channel format="ND" unit="ND" access="R" icon="fa-calendar-day" enable="true" persistence="false" label="Biomülltonne" type="DateTime" name="Biomüll" extention="Tonne" channel.id="1">
 				<link>TKR_R_CALENDAR_Tonne_Biomuell</link>
 				<connection>
@@ -3972,7 +3972,7 @@
 					<group.ref refid="ICAL"/>
 				</groups>
 			</channel>
-			<channel format="ND" unit="ND" access="R" icon="fa-calendar-day" enable="true" persistence="false" label="Papiermülltonne" type="DateTime" name="Pappiermüll" extention="Tonne" channel.id="4">
+			<channel format="ND" unit="ND" access="R" icon="fa-calendar-day" enable="true" persistence="false" label="Papiermülltonne" type="DateTime" name="Papiermüll" extention="Tonne" channel.id="4">
 				<link>TKR_R_CALENDAR_Tonne_Pappiermuell</link>
 				<connection>
 					<ical maxEvents="1" refreshTime="30" datetimeUnit="DAY" datetimeStart="1" datetimeEnd="14" textEventField="SUMMARY" textEventValue="Altpapier" textValueType="TEXT"/>
@@ -3982,7 +3982,7 @@
 				</groups>
 			</channel>
 		</device>
-		<device device.area="KUE" device.function="SENSOR" device.specification="SteinelTruePräsenz" device.comm.type="KNX" device.label="Präsenzmelder Kue" device.name="Praesenzmelder Kueche">
+		<device device.area="KUE" device.function="SENSOR" device.comm.type="KNX" device.label="Präsenzmelder Kue" device.name="Praesenzmelder Kueche" device.specification="SteinelTruePräsenz">
 			<channel format="ND" unit="ND" access="R" icon="fa-location-dot" enable="true" persistence="false" label="Präsenz Küche" type="Contact" name="Präzenz" channel.id="1">
 				<link>KUE_R_SENSOR_Praezenz</link>
 				<connection>
@@ -4240,7 +4240,7 @@
 				</groups>
 			</channel>
 		</device>
-		<device device.area="FLUEG" device.function="SENSOR" device.specification="SteinelTruePräsenz" device.comm.type="KNX" device.label="Präsenzmelder Flur Erdgeschoss" device.name="Praesenzmelder Flur Erdgeschoss">
+		<device device.area="FLUEG" device.function="SENSOR" device.comm.type="KNX" device.label="Präsenzmelder Flur Erdgeschoss" device.name="Praesenzmelder Flur Erdgeschoss" device.specification="SteinelTruePräsenz">
 			<channel format="ND" unit="ND" access="R" icon="fa-location-dot" enable="true" persistence="false" label="Präsenz FlueEG" type="Contact" name="Präzenz" channel.id="1">
 				<link>FLUEG_R_SENSOR_Praezenz</link>
 				<connection>
@@ -4498,7 +4498,7 @@
 				</groups>
 			</channel>
 		</device>
-		<device device.area="HWR" device.function="SENSOR" device.specification="SteinelTruePräsenz" device.comm.type="KNX" device.label="Präsenzme HWR" device.name="Praesenzmelder HWR">
+		<device device.area="HWR" device.function="SENSOR" device.comm.type="KNX" device.label="Präsenzme HWR" device.name="Praesenzmelder HWR" device.specification="SteinelTruePräsenz">
 			<channel format="ND" unit="ND" access="R" icon="fa-location-dot" enable="true" persistence="false" label="Präsenz HWR" type="Contact" name="Präzenz" channel.id="1">
 				<link>HWR_R_SENSOR_Praezenz</link>
 				<connection>
@@ -4756,6 +4756,17 @@
 				</groups>
 			</channel>
 		</device>
+		<device device.area="TKR" device.function="NTP" device.comm.type="NTP" device.label="Zeitserver" device.name="Zeitserver" device.specification="NTPBinding">
+			<channel format="%1$td.%1$tm.%1$tY %1$tH:%1$tM" unit="ND" access="R" icon="fa-calendar-day" enable="true" persistence="false" label="Aktuelles Datum und Uhrzeit" type="DateTime" name="Datetime" channel.id="1">
+				<link>TKR_R_NTP_Datetime</link>
+				<connection>
+					<ntp/>
+				</connection>
+				<groups>
+					<group.ref refid="NTP"/>
+				</groups>
+			</channel>
+		</device>
 	</devices>
 	<groups>
 		<group label="Präsenzmelder" name="Präsenzmelder" icon="fa-location-dot" id="Präsenzmelder"/>
@@ -4852,6 +4863,7 @@
 		<group label="Schlafzimmer" name="SLZ" icon="fa-blinds" id="SLZ"/>
 		<group label="Flur Dachgeschoss" name="FLUDG" icon="fa-blinds" id="FLUDG"/>
 		<group label="ICAL" name="ICAL" icon="fa-blinds" id="ICAL"/>
+		<group label="NTP" name="NTP" icon="fa-blinds" id="NTP"/>
 	</groups>
 	<knx.configuration>
 		<bridge type="TUNNEL" ip.address="192.168.178.29" port.number="3671" local.ip="192.168.178.232" reading.pause="50" response.timeout="10" read.retries.limit="3" auto.reconnect.period="60"/>
@@ -4860,4 +4872,7 @@
 	<ical.configuration>
 		<bridge url="http://192.168.178.30:5000/caldav/ivo/csbyi" refreshTime="30" username="ivo" password="Wiggles12" maxSize="1"/>
 	</ical.configuration>
+	<ntp.configuration>
+		<thing hostname="ptbtime1.ptb.de" refreshInterval="60" refreshNtp="30"/>
+	</ntp.configuration>
 </openhab>

@@ -85,7 +85,7 @@ public class GarbageModule extends ModuleTemplate{
         }
         catch (DateTimeParseException e) 
         {
-            log.error(item + "coudn't be parsed correctely" , e);
+            log.error(item + " coudn't be parsed correctely");
             return (long) 365;
         }
     }

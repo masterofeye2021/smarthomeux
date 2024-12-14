@@ -6,14 +6,14 @@ import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.stereotype.Controller;
 
-import de.smarthome.smartux.mainDataModel.ChatMessage;
+import de.smarthome.smartux.mainDataModel.StompMessage;
 
 @Controller
 public class MessageController {
     
     @MessageMapping("/sendMessage")
     @SendTo("/topic/public")
-    public ChatMessage sendMessage(@Payload ChatMessage chatMessage) {
+    public StompMessage sendMessage(@Payload StompMessage chatMessage) {
         
         return chatMessage;
         
@@ -21,10 +21,10 @@ public class MessageController {
 
     @MessageMapping("/addUser")
     @SendTo("/topic/public")
-    public ChatMessage addUser(@Payload ChatMessage chatMessage, SimpMessageHeaderAccessor headerAccessor) {
+    public StompMessage addUser(@Payload StompMessage chatMessage, SimpMessageHeaderAccessor headerAccessor) {
         
         // Add username in web socket session
-        headerAccessor.getSessionAttributes().put("username", chatMessage.getSender());
+        headerAccessor.getSessionAttributes().put("username", chatMessage.getType());
         return chatMessage;
         
     }

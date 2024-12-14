@@ -1,0 +1,56 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+<!-- *******************************************************
+     *                                                     *
+     * Module interner HMTL Code für die Formatierung der  *
+     * View.                                               *
+     *                                                     *
+     ******************************************************* -->
+  <div th:fragment="timedate" class="text-center d-flex flex-column" style="height: 100%">
+    <div id="timemodule_date" class="row fs-3 flex-grow-1 align-items-center justify-content-center text-secondary"
+      th:text="${T(de.smarthome.smartux.Module.DateTimeModule).extractDate(TKR_R_NTP_Datetime.getState())}"></div>
+    <div id="timemodule_time" class="row fs-1 flex-grow-1 align-items-center justify-content-center fw-bold"
+      th:text="${T(de.smarthome.smartux.Module.DateTimeModule).extractTime(TKR_R_NTP_Datetime.getState())}"></div>
+  </div>
+</body>
+<!-- *******************************************************
+     *                                                     *
+     * Javascript Code für die Manipulierung der Daten     *
+     *                                                     *
+     ******************************************************* -->
+<script th:fragment="pre-footer">
+
+  /**
+   * @brief Formatierung des ISO Datetime Zeitstempels (2024-12-14T22:10:27.742+0100) in zwei seperate Variablen. 
+   *        Die Ergebnisse werden dann in die Views über die ID's [timemodule_date] & [timemodule_time] übertragen.
+   * @param value ISO formatierter Datetime Wert von Openhab.
+   */
+  function TKR_R_NTP_Datetime_Handle(value) {
+    
+    const dateObject = new Date(value);
+
+    const optionsDate = {
+      weekday: "long", // Wochentag ausgeschrieben
+      day: "2-digit", // Tag zweistellig
+      month: "2-digit", // Monat zweistellig
+      year: "numeric", // Jahr vierstellig
+    };
+    //
+    const europeanDate = new Intl.DateTimeFormat("de-DE", optionsDate).format(
+      dateObject
+    );
+    const optionsTime = {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
+    };
+    const europeanTime = new Intl.DateTimeFormat("de-DE", optionsTime).format(
+      dateObject
+    );
+    $("#timemodule_date").html(europeanDate);
+    $("#timemodule_time").html(europeanTime);
+  }
+</script>
+
+</html>

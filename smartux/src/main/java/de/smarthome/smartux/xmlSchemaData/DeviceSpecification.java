@@ -22,6 +22,7 @@ import jakarta.xml.bind.annotation.XmlType;
  *     <enumeration value="SteinelTruePräsenz"/>
  *     <enumeration value="RolladenMDTKNX"/>
  *     <enumeration value="ICALBinding"/>
+ *     <enumeration value="NTPBinding"/>
  *   </restriction>
  * </simpleType>
  * }</pre>
@@ -36,7 +37,9 @@ public enum DeviceSpecification {
     @XmlEnumValue("RolladenMDTKNX")
     ROLLADEN_MDTKNX("RolladenMDTKNX"),
     @XmlEnumValue("ICALBinding")
-    ICAL_BINDING("ICALBinding");
+    ICAL_BINDING("ICALBinding"),
+    @XmlEnumValue("NTPBinding")
+    NTP_BINDING("NTPBinding");
     private final String value;
 
     DeviceSpecification(String v) {

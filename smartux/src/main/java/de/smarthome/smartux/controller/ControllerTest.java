@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import de.smarthome.smartux.OpenhabItemRegister;
 import de.smarthome.smartux.OpenhabRestService;
+import de.smarthome.smartux.Module.DateTimeModule;
 import de.smarthome.smartux.Module.GarbageModule;
 import de.smarthome.smartux.Module.ModuleManager;
 import de.smarthome.smartux.Module.SteinelPraesenzModule;
@@ -65,6 +66,8 @@ public class ControllerTest {
         GarbageModule gb = (GarbageModule) applicationContext.getBean("TKR_CALENDAR_Termine_Muellabfuhr");
         gb.init(model);
 
+        DateTimeModule tm = (DateTimeModule) applicationContext.getBean("TKR_NTP_Zeitserver");
+        tm.init(model);
         
         return "content1.html";
     }

@@ -28,6 +28,7 @@ import jakarta.xml.bind.annotation.XmlType;
  *         <element name="groups" type="{}groups"/>
  *         <element ref="{}knx.configuration"/>
  *         <element ref="{}ical.configuration"/>
+ *         <element ref="{}ntp.configuration"/>
  *       </all>
  *     </restriction>
  *   </complexContent>
@@ -51,6 +52,8 @@ public class Openhab {
     protected KnxConfiguration knxConfiguration;
     @XmlElement(name = "ical.configuration", required = true)
     protected IcalConfiguration icalConfiguration;
+    @XmlElement(name = "ntp.configuration", required = true)
+    protected NtpConfiguration ntpConfiguration;
 
     /**
      * Ruft den Wert der devices-Eigenschaft ab.
@@ -146,6 +149,30 @@ public class Openhab {
      */
     public void setIcalConfiguration(IcalConfiguration value) {
         this.icalConfiguration = value;
+    }
+
+    /**
+     * Ruft den Wert der ntpConfiguration-Eigenschaft ab.
+     * 
+     * @return
+     *     possible object is
+     *     {@link NtpConfiguration }
+     *     
+     */
+    public NtpConfiguration getNtpConfiguration() {
+        return ntpConfiguration;
+    }
+
+    /**
+     * Legt den Wert der ntpConfiguration-Eigenschaft fest.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link NtpConfiguration }
+     *     
+     */
+    public void setNtpConfiguration(NtpConfiguration value) {
+        this.ntpConfiguration = value;
     }
 
 }

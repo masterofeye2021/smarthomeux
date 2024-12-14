@@ -56,6 +56,16 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link NtpConfiguration }
+     * 
+     * @return
+     *     the new instance of {@link NtpConfiguration }
+     */
+    public NtpConfiguration createNtpConfiguration() {
+        return new NtpConfiguration();
+    }
+
+    /**
      * Create an instance of {@link de.smarthome.smartux.xmlSchemaData.Group }
      * 
      * @return
@@ -103,6 +113,16 @@ public class ObjectFactory {
      */
     public de.smarthome.smartux.xmlSchemaData.Channel.Groups createChannelGroups() {
         return new de.smarthome.smartux.xmlSchemaData.Channel.Groups();
+    }
+
+    /**
+     * Create an instance of {@link de.smarthome.smartux.xmlSchemaData.Channel.Connection }
+     * 
+     * @return
+     *     the new instance of {@link de.smarthome.smartux.xmlSchemaData.Channel.Connection }
+     */
+    public de.smarthome.smartux.xmlSchemaData.Channel.Connection createChannelConnection() {
+        return new de.smarthome.smartux.xmlSchemaData.Channel.Connection();
     }
 
     /**
@@ -173,6 +193,16 @@ public class ObjectFactory {
      */
     public IcalConfiguration.Bridge createIcalConfigurationBridge() {
         return new IcalConfiguration.Bridge();
+    }
+
+    /**
+     * Create an instance of {@link NtpConfiguration.Thing }
+     * 
+     * @return
+     *     the new instance of {@link NtpConfiguration.Thing }
+     */
+    public NtpConfiguration.Thing createNtpConfigurationThing() {
+        return new NtpConfiguration.Thing();
     }
 
     /**
@@ -256,16 +286,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link de.smarthome.smartux.xmlSchemaData.Channel.Connection }
-     * 
-     * @return
-     *     the new instance of {@link de.smarthome.smartux.xmlSchemaData.Channel.Connection }
-     */
-    public de.smarthome.smartux.xmlSchemaData.Channel.Connection createChannelConnection() {
-        return new de.smarthome.smartux.xmlSchemaData.Channel.Connection();
-    }
-
-    /**
      * Create an instance of {@link de.smarthome.smartux.xmlSchemaData.Channel.Groups.GroupRef }
      * 
      * @return
@@ -273,6 +293,16 @@ public class ObjectFactory {
      */
     public de.smarthome.smartux.xmlSchemaData.Channel.Groups.GroupRef createChannelGroupsGroupRef() {
         return new de.smarthome.smartux.xmlSchemaData.Channel.Groups.GroupRef();
+    }
+
+    /**
+     * Create an instance of {@link de.smarthome.smartux.xmlSchemaData.Channel.Connection.Ntp }
+     * 
+     * @return
+     *     the new instance of {@link de.smarthome.smartux.xmlSchemaData.Channel.Connection.Ntp }
+     */
+    public de.smarthome.smartux.xmlSchemaData.Channel.Connection.Ntp createChannelConnectionNtp() {
+        return new de.smarthome.smartux.xmlSchemaData.Channel.Connection.Ntp();
     }
 
     /**

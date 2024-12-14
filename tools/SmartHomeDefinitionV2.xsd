@@ -24,6 +24,7 @@
 				<xs:element name="groups" type="groups"/>
 				<xs:element ref="knx.configuration"/>
 				<xs:element ref="ical.configuration"/>
+				<xs:element ref="ntp.configuration"/>
 			</xs:all>
 		</xs:complexType>
 	</xs:element>
@@ -66,16 +67,13 @@
 		<xs:attribute name="device.name" type="xs:string" use="required"/>
 		<xs:attribute name="device.specification" use="required">
 			<xs:simpleType>
-				<xs:restriction base="device.specification">
-					<xs:enumeration value="SteinelTruePräsenz"/>
-					<xs:enumeration value="RolladenMDTKNX"/>
-					<xs:enumeration value="ICALBinding"/>
-				</xs:restriction>
+				<xs:restriction base="device.specification"/>
 			</xs:simpleType>
 		</xs:attribute>
 	</xs:complexType>
 	<xs:simpleType name="function">
 		<xs:restriction base="xs:anyURI">
+			<xs:enumeration value="NTP"/>
 			<xs:enumeration value="LIGHT"/>
 			<xs:enumeration value="SHUTTER"/>
 			<xs:enumeration value="SENSOR"/>
@@ -105,6 +103,9 @@
 						<xs:element name="ping" type="ping"/>
 						<xs:element name="modbus" type="modbus"/>
 						<xs:element ref="ical"/>
+						<xs:element name="ntp">
+							<xs:complexType/>
+						</xs:element>
 					</xs:choice>
 				</xs:complexType>
 			</xs:element>
@@ -195,6 +196,7 @@
 			<xs:enumeration value="MODBUS"/>
 			<xs:enumeration value="PING"/>
 			<xs:enumeration value="ICAL"/>
+			<xs:enumeration value="NTP"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:complexType name="knx">
@@ -240,6 +242,7 @@
 			<xs:enumeration value="%.1f"/>
 			<xs:enumeration value="%.2f"/>
 			<xs:enumeration value="ND"/>
+			<xs:enumeration value="%1$td.%1$tm.%1$tY %1$tH:%1$tM"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:complexType name="modbus">
@@ -414,6 +417,22 @@
 			<xs:enumeration value="SteinelTruePräsenz"/>
 			<xs:enumeration value="RolladenMDTKNX"/>
 			<xs:enumeration value="ICALBinding"/>
+			<xs:enumeration value="NTPBinding"/>
 		</xs:restriction>
 	</xs:simpleType>
+	<xs:element name="ntp.configuration">
+		<xs:complexType>
+			<xs:all>
+				<xs:element name="thing">
+					<xs:complexType>
+						<xs:attribute name="hostname" type="xs:string" use="required"/>
+						<xs:attribute name="refreshInterval" type="xs:short" use="required"/>
+						<xs:attribute name="refreshNtp" type="xs:short" use="required"/>
+						<xs:attribute name="serverPort" type="xs:short" use="optional"/>
+						<xs:attribute name="timeZone" type="xs:string" use="optional"/>
+					</xs:complexType>
+				</xs:element>
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
 </xs:schema>
