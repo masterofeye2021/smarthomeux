@@ -1,16 +1,21 @@
 package de.smarthome.smartux.Module;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.javatuples.Pair;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.ui.Model;
 
 import de.smarthome.smartux.OpenhabItemRegister;
 import de.smarthome.smartux.OpenhabRestService;
 import de.smarthome.smartux.mainDataModel.OpenhabItem;
+import de.smarthome.smartux.mainDataModel.OpenhabItemContainer;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -24,72 +29,84 @@ public abstract class ModuleTemplate {
 
     protected String name;
 
-    protected ArrayList<String> toSubcribeFromThisModule = new ArrayList<>();
-
-    public void setName(String name){
+    public void setName(String name) {
         this.name = name;
     }
 
-    public String getName(){
+    public String getName() {
         return this.name;
     }
 
-    public ModuleTemplate(OpenhabRestService openhabRestService,OpenhabItemRegister openhabItemRegister,SimpMessagingTemplate template)
-    {
+    public ModuleTemplate(OpenhabRestService openhabRestService, OpenhabItemRegister openhabItemRegister,
+            SimpMessagingTemplate template) {
         this.openhabItemRegister = openhabItemRegister;
         this.openhabRestService = openhabRestService;
         this.sender = template;
     }
 
-    protected Set<String> openhabItemList = new HashSet<String>();
+    protected ArrayList<Pair<String,Integer>> openhabItemList = new ArrayList<Pair<String,Integer>>();
 
-    protected int getAmountOfRegisteredItems(){  return this.openhabItemList.size();}
-
-    public void addItem(String item)
-    {
-        if(!this.openhabItemList.contains(item))
-            openhabItemList.add(item);
+    protected int getAmountOfRegisteredItems() {
+        return this.openhabItemList.size();
     }
 
-    protected void removeItem(String item)
-    {
-        if(this.openhabItemList.contains(item))
-            openhabItemList.remove(item);
+    public void addItem(String item, Integer deviceID, Integer channelID) {
+        if (this.openhabItemList.stream().noneMatch(e -> e.getValue0().equals(item)))
+            openhabItemList.add(Pair.with(item, channelID.hashCode() * deviceID.hashCode()));
     }
 
-    
-    public void init(Model model) {
+    protected void removeItem(String item) {
+        if (!this.openhabItemList.stream().noneMatch(e -> e.getValue0().equals(item)))
+            openhabItemList.removeIf(e -> e.getValue0().equals(item));
+    }
 
-        for (String tag : this.openhabItemList) {
+    public OpenhabItemContainer init(Model model,String modelAttributeName, boolean registerItemsInModel) {
+
+        OpenhabItemContainer container = new OpenhabItemContainer();
+        container.setName(modelAttributeName);
+
+        for (Pair<String,Integer> tag : this.openhabItemList) {
             /*
-            * Items mit Init Values versorgen
-            */
-            OpenhabItem item = this.openhabRestService.getItemDetails(tag).block();
-
-            /**
-             * Alle Attribute dem Model hinzufügen
+             * Items mit Init Values versorgen
              */
+            OpenhabItem item = this.openhabRestService.getItemDetails(tag.getValue0()).block();
+            container.addItems(item);
 
-            model.addAttribute(tag, item);
+            ((HashMap<Integer,String>)model.getAttribute("toSubscribe")).put(tag.getValue1(), tag.getValue0());
+            
         }
-        
-        ((ArrayList<String>) model.getAttribute("toSubscribe")).addAll(new ArrayList<>(this.openhabItemList));
+
+        /**
+         * Alle Attribute dem Model hinzufügen
+         */
+
+        if(registerItemsInModel)
+            model.addAttribute(container.getName(), container.getItems());
+
         /*
          * Sind alle Items hinzugefügt kann die Registry aufgerufen werden
          */
 
-        this.register();
+        //this.register();
 
         int end = this.getAmountOfRegisteredItems();
         log.debug(end + " new Items registered.");
+
+        return container;
+
     }
+
+    public OpenhabItemContainer init(Model model,String modelAttributeName) {
+        return init(model,modelAttributeName,true);
+    }
+
+
 
     public abstract void deinit();
 
-    protected void register()
-    {
-        for (String item : openhabItemList) {
-            openhabItemRegister.register(item);
+    protected void register() {
+        for (Pair<String,Integer> tag : openhabItemList) {
+            openhabItemRegister.register(tag.getValue0());
         }
     }
 

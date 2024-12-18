@@ -1,0 +1,70 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+  <!--GARBAGE MODULE-->
+  <div class="row row-cols-1 row-cols-md-4 g-2" th:fragment="garbage">
+    <div class="col-sm">
+      <div class="card">
+        <div class="card-body">
+          <h1>
+            <i class="fa-duotone fa-light fa-trash-clock fa-xl" style="
+                  --fa-primary-color: #212121;
+                  --fa-secondary-color: #2ed822;
+                  --fa-secondary-opacity: 1;
+                "></i>&nbsp;
+                
+            <span th:text="${T(de.smarthome.smartux.controller.PortalController).getItem(ModelMap,14,1).getState()}">Hello, world!</span>
+            Tage
+          </h1>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm">
+      <div class="card">
+        <div class="card-body">
+          <h1>
+            <i class="fa-duotone fa-light fa-trash-clock fa-xl" style="
+                  --fa-primary-color: #212121;
+                  --fa-secondary-color: #ffee38;
+                  --fa-secondary-opacity: 1;
+                "></i>&nbsp;
+            <span th:text="${T(de.smarthome.smartux.controller.PortalController).getItem(ModelMap,14,3).getState()}">Hello, world!</span>
+            Tage
+          </h1>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm">
+      <div class="card">
+        <div class="card-body">
+          <h1>
+            <i class="fa-duotone fa-light fa-trash-clock fa-xl" style="
+                  --fa-primary-color: #212121;
+                  --fa-secondary-color: #000000;
+                  --fa-secondary-opacity: 1;
+                "></i>&nbsp;
+            <span th:text="${T(de.smarthome.smartux.controller.PortalController).getItem(ModelMap,14,2).getState()}">Hello, world!</span>
+            Tage
+          </h1>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm">
+      <div class="card">
+        <div class="card-body">
+          <h1>
+            <i class="fa-duotone fa-light fa-trash-clock fa-xl" style="
+                  --fa-primary-color: #212121;
+                  --fa-secondary-color: #0614d0;
+                  --fa-secondary-opacity: 1;
+                "></i>&nbsp;
+            <span th:text="${T(de.smarthome.smartux.controller.PortalController).getItem(ModelMap,14,4).getState()}">Hello, world!</span>
+            Tage
+          </h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

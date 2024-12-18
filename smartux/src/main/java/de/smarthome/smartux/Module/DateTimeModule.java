@@ -8,15 +8,10 @@ import java.util.Locale;
 import org.springframework.context.event.EventListener;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import de.smarthome.smartux.OpenhabItemRegister;
 import de.smarthome.smartux.OpenhabRestService;
 import de.smarthome.smartux.eventsystem.ItemStateChangedEvent;
 import de.smarthome.smartux.eventsystem.ItemStateUpdatedEvent;
-import de.smarthome.smartux.mainDataModel.StompMessage;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 

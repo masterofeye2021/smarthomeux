@@ -67,21 +67,33 @@ public class DataLoader {
                 switch (device.getDeviceSpecification()) {
                     case DeviceSpecification.NTP_BINDING:
                         DateTimeModule tm = new DateTimeModule(openhabRestService, openhabItemRegister, template);
-                        tm.addItem("TKR_R_NTP_Datetime");
+
+                        for (int i = 0; i <= 9; i++) {
+                            final int currentIndex = i;
+                            device.getChannel()
+                                    .stream()
+                                    .filter(s -> s.getChannelId() == currentIndex)
+                                    .findFirst()
+                                    .ifPresent(channel -> tm.addItem(channel.getLink(), device.getDeviceId(), channel.getChannelId()));
+                        }
                         tm.setName(name);
-                        beanRegistrar.registerBean(name, tm);
+                        beanRegistrar.registerBean( Integer.toString(device.getDeviceId()), tm);
                         log.info("NTP Module with name [" + name + "] was registered");
                         break;
                     case DeviceSpecification.ICAL_BINDING:
                         GarbageModule gb = new GarbageModule(openhabRestService, openhabItemRegister, template);
 
-                        gb.addItem("TKR_R_CALENDAR_Tonne_Biomuell");
-                        gb.addItem("TKR_R_CALENDAR_Tonne_Restmuell");
-                        gb.addItem("TKR_R_CALENDAR_Tonne_Plastikmuell");
-                        gb.addItem("TKR_R_CALENDAR_Tonne_Papiermuell");
+                        for (int i = 0; i <= 9; i++) {
+                            final int currentIndex = i;
+                            device.getChannel()
+                                    .stream()
+                                    .filter(s -> s.getChannelId() == currentIndex)
+                                    .findFirst()
+                                    .ifPresent(channel -> gb.addItem(channel.getLink(), device.getDeviceId(), channel.getChannelId()));
+                        }
 
                         gb.setName(name);
-                        beanRegistrar.registerBean(name, gb);
+                        beanRegistrar.registerBean(Integer.toString(device.getDeviceId()), gb);
                         log.info("GarbageModule with name [" + name + "] was registered");
                         break;
 
@@ -93,28 +105,28 @@ public class DataLoader {
                                     .stream()
                                     .filter(s -> s.getChannelId() == currentIndex)
                                     .findFirst()
-                                    .ifPresent(channel -> sm.addItem(channel.getLink())); 
+                                    .ifPresent(channel -> sm.addItem(channel.getLink(), device.getDeviceId(), channel.getChannelId()));
                         }
 
                         sm.setName(name);
-                        beanRegistrar.registerBean(name, sm);
+                        beanRegistrar.registerBean(Integer.toString(device.getDeviceId()), sm);
                         log.info("ShutterModule with name [" + name + "] was registered");
 
                         break;
                     case DeviceSpecification.STEINEL_TRUE_PRÄSENZ:
                         SteinelPraesenzModule sp = new SteinelPraesenzModule(openhabRestService, openhabItemRegister,
                                 template);
-                                for (int i = 0; i <= 9; i++) {
-                                    final int currentIndex = i;
-                                    device.getChannel()
-                                            .stream()
-                                            .filter(s -> s.getChannelId() == currentIndex)
-                                            .findFirst()
-                                            .ifPresent(channel -> sp.addItem(channel.getLink())); 
-                                }
+                        for (int i = 0; i <= 9; i++) {
+                            final int currentIndex = i;
+                            device.getChannel()
+                                    .stream()
+                                    .filter(s -> s.getChannelId() == currentIndex)
+                                    .findFirst()
+                                    .ifPresent(channel -> sp.addItem(channel.getLink(), device.getDeviceId(), channel.getChannelId() ));
+                        }
 
                         sp.setName(name);
-                        beanRegistrar.registerBean(name, sp);
+                        beanRegistrar.registerBean(Integer.toString(device.getDeviceId()), sp);
                         log.info("SteinelPraesenzModule with name [" + name + "] was registered");
 
                         break;

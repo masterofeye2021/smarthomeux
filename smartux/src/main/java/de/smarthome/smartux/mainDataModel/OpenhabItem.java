@@ -70,8 +70,12 @@ public class OpenhabItem {
     }
 
     @Override
-    public String toString()
-    {
-       return "Name:" + this.name + "[type: "+this.type+","+this.link+ "]";
+    public String toString() {
+        return "Name:" + this.name + "[type: " + this.type + "," + this.link + "]";
+    }
+
+    @Override
+    public int hashCode() {
+        return (int) name.hashCode() * label.hashCode();
     }
 }

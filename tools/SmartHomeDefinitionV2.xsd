@@ -70,6 +70,7 @@
 				<xs:restriction base="device.specification"/>
 			</xs:simpleType>
 		</xs:attribute>
+		<xs:attribute name="device.id" type="xs:int" use="required"/>
 	</xs:complexType>
 	<xs:simpleType name="function">
 		<xs:restriction base="xs:anyURI">

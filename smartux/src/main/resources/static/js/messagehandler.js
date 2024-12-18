@@ -14,10 +14,8 @@ function connect() {
  *        Dafür besitzt die View eine Liste aber Openhab Item Tags die für die jeweilige View von Interesse sind. 
  */
 function onConnected() {
-
-  listOfTagsToSubscribe.forEach((value) => {
+  Object.entries(listOfTagsToSubscribe).forEach(([key, value]) => {
     stompClient.subscribe("/ItemStateChangedEvent/" + value, callback);
-
   });
 }
 

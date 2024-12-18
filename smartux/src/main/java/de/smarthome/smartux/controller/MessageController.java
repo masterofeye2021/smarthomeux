@@ -19,6 +19,7 @@ public class MessageController {
         
     }
 
+    @SuppressWarnings("null")
     @MessageMapping("/addUser")
     @SendTo("/topic/public")
     public StompMessage addUser(@Payload StompMessage chatMessage, SimpMessageHeaderAccessor headerAccessor) {

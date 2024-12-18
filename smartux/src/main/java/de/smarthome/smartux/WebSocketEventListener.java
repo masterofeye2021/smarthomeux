@@ -8,7 +8,6 @@ import org.springframework.web.socket.messaging.SessionConnectedEvent;
 import org.springframework.web.socket.messaging.SessionDisconnectEvent;
 
 import de.smarthome.smartux.mainDataModel.StompMessage;
-import de.smarthome.smartux.mainDataModel.MessageType;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 

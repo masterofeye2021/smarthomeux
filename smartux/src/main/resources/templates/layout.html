@@ -7,6 +7,13 @@ layout.html
   <!-- Tag List, gibt dem JS Websocket sich für die richtigen Events zu registrieren-->
   <script th:inline="javascript">
     let listOfTagsToSubscribe = /*[[${toSubscribe}]]*/ [];
+
+    let listOfTagsToSubscribe2 = /*[[${SteinelPraesenzModuleData}]]*/ [];
+    console.log(listOfTagsToSubscribe2);
+    
+
+    var name = Object.entries(listOfTagsToSubscribe).find(([key, value]) => value === 1);
+    console.log(name);
   </script>
 
   <body>

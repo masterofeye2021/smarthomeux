@@ -2,13 +2,11 @@ package de.smarthome.smartux.Module;
 
 import org.springframework.context.event.EventListener;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
-import org.springframework.ui.Model;
 
 import de.smarthome.smartux.OpenhabItemRegister;
 import de.smarthome.smartux.OpenhabRestService;
 import de.smarthome.smartux.eventsystem.ItemStateChangedEvent;
 import de.smarthome.smartux.eventsystem.ItemStateUpdatedEvent;
-import de.smarthome.smartux.mainDataModel.OpenhabItem;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 

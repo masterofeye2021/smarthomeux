@@ -10,12 +10,14 @@ import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerCo
 @EnableWebSocketMessageBroker 
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer { 
  
- @Override 
+ @SuppressWarnings("null")
+@Override 
  public void registerStompEndpoints(StompEndpointRegistry registry) { 
    registry.addEndpoint("/smartux").withSockJS(); 
  } 
  
- @Override 
+ @SuppressWarnings("null")
+@Override 
  public void configureMessageBroker(MessageBrokerRegistry registry) { 
    registry.setApplicationDestinationPrefixes("/internal"); 
    registry.enableSimpleBroker("/ItemStateChangedEvent", "/ItemStateUpdatedEvent"); 

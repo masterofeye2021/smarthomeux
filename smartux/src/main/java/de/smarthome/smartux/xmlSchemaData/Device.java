@@ -52,6 +52,7 @@ import jakarta.xml.bind.annotation.XmlType;
  *           </restriction>
  *         </simpleType>
  *       </attribute>
+ *       <attribute name="device.id" use="required" type="{http://www.w3.org/2001/XMLSchema}int" />
  *     </restriction>
  *   </complexContent>
  * </complexType>
@@ -82,6 +83,8 @@ public class Device {
     protected String deviceName;
     @XmlAttribute(name = "device.specification", required = true)
     protected DeviceSpecification deviceSpecification;
+    @XmlAttribute(name = "device.id", required = true)
+    protected int deviceId;
 
     /**
      * Gets the value of the channel property.
@@ -261,6 +264,22 @@ public class Device {
      */
     public void setDeviceSpecification(DeviceSpecification value) {
         this.deviceSpecification = value;
+    }
+
+    /**
+     * Ruft den Wert der deviceId-Eigenschaft ab.
+     * 
+     */
+    public int getDeviceId() {
+        return deviceId;
+    }
+
+    /**
+     * Legt den Wert der deviceId-Eigenschaft fest.
+     * 
+     */
+    public void setDeviceId(int value) {
+        this.deviceId = value;
     }
 
 
