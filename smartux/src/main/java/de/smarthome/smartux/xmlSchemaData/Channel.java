@@ -47,6 +47,7 @@ import jakarta.xml.bind.annotation.XmlType;
  *                       </complexContent>
  *                     </complexType>
  *                   </element>
+ *                   <element name="ekey" type="{http://www.w3.org/2001/XMLSchema}anyType"/>
  *                 </choice>
  *               </restriction>
  *             </complexContent>
@@ -494,6 +495,7 @@ public class Channel {
      *             </complexContent>
      *           </complexType>
      *         </element>
+     *         <element name="ekey" type="{http://www.w3.org/2001/XMLSchema}anyType"/>
      *       </choice>
      *     </restriction>
      *   </complexContent>
@@ -508,7 +510,8 @@ public class Channel {
         "ping",
         "modbus",
         "ical",
-        "ntp"
+        "ntp",
+        "ekey"
     })
     public static class Connection {
 
@@ -517,6 +520,7 @@ public class Channel {
         protected Modbus modbus;
         protected Ical ical;
         protected Channel.Connection.Ntp ntp;
+        protected Object ekey;
 
         /**
          * Ruft den Wert der knx-Eigenschaft ab.
@@ -636,6 +640,30 @@ public class Channel {
          */
         public void setNtp(Channel.Connection.Ntp value) {
             this.ntp = value;
+        }
+
+        /**
+         * Ruft den Wert der ekey-Eigenschaft ab.
+         * 
+         * @return
+         *     possible object is
+         *     {@link Object }
+         *     
+         */
+        public Object getEkey() {
+            return ekey;
+        }
+
+        /**
+         * Legt den Wert der ekey-Eigenschaft fest.
+         * 
+         * @param value
+         *     allowed object is
+         *     {@link Object }
+         *     
+         */
+        public void setEkey(Object value) {
+            this.ekey = value;
         }
 
 

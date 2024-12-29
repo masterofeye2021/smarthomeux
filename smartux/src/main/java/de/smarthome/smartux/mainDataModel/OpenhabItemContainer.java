@@ -14,6 +14,8 @@ public class OpenhabItemContainer {
     @Setter(AccessLevel.NONE)
     List <OpenhabItem> items=  new ArrayList<>();
 
+    String area;
+
     public void addItems(OpenhabItem item)
     {
         if(item != null)

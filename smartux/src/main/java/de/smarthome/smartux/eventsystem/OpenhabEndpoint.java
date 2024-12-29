@@ -52,7 +52,7 @@ public class OpenhabEndpoint extends Endpoint {
                         return;
 
                     Message m =decoder.decode(message);
-                    log.info("Message Type: " + m.getType() + " topic: " + m.getTopic() + " payload: " + m.getPayload());
+                    log.trace("Message Type: " + m.getType() + " topic: " + m.getTopic() + " payload: " + m.getPayload());
                     switch (m.getType()) {
                         case "ItemAddedEvent":
                             onItemAddedEvent(session,m);
@@ -101,12 +101,12 @@ public class OpenhabEndpoint extends Endpoint {
 
     public void onItemAddedEvent(Session session, Message message)
     {
-        log.debug("[ItemAddedEvent] topic:" + message.getTopic() + " Data: "+ message.getPayload());
+        log.trace("[ItemAddedEvent] topic:" + message.getTopic() + " Data: "+ message.getPayload());
     }
 
     public void onItemRemovedEvent(Session session, Message message)
     {
-        log.debug("[ItemRemovedEvent] topic:" + message.getTopic() + " Data: "+ message.getPayload());
+        log.trace("[ItemRemovedEvent] topic:" + message.getTopic() + " Data: "+ message.getPayload());
     }
 
     /**
@@ -116,13 +116,13 @@ public class OpenhabEndpoint extends Endpoint {
      */
     public void onItemStateUpdatedEvent(Session session, Message message)
     {
-        //Extract the item name from the topic
+        log.trace("[ItemStateUpdatedEvent] topic:" + message.getTopic() + " Data: "+ message.getPayload());
         String topic = message.getTopic().split("/")[2];
 
         if(ohItemRegister.isItemRegistered(topic))
         {
-            log.debug("[ItemStateUpdatedEvent] topic:" + message.getTopic() + " Data: "+ message.getPayload());
-            eventPublisher.publishEvent(new ItemStateUpdatedEvent(this, topic,message.getPayload()));
+
+            eventPublisher.publishEvent(new ItemStateChangedEvent(this, topic,message.getPayload()));
         }
         else
         {
@@ -138,7 +138,7 @@ public class OpenhabEndpoint extends Endpoint {
      */
     public void onItemCommandEvent(Session session, Message message)
     {
-        log.debug("[ItemCommandEvent] topic:" + message.getTopic() + " Data: "+ message.getPayload());
+        log.trace("[ItemCommandEvent] topic:" + message.getTopic() + " Data: "+ message.getPayload());
     }
 
     /**
@@ -148,7 +148,7 @@ public class OpenhabEndpoint extends Endpoint {
      */
     public void onItemStateEvent(Session session, Message message)
     {
-        log.debug("[ItemStateEvent] topic:" + message.getTopic() + " Data: "+ message.getPayload());
+        log.trace("[ItemStateEvent] topic:" + message.getTopic() + " Data: "+ message.getPayload());
     }
 
     /**
@@ -158,7 +158,7 @@ public class OpenhabEndpoint extends Endpoint {
      */
     public void onItemStatePredictedEvent(Session session, Message message)
     {
-        log.debug("[ItemStatePredictedEvent] topic:" + message.getTopic() + " Data: "+ message.getPayload());
+        log.trace("[ItemStatePredictedEvent] topic:" + message.getTopic() + " Data: "+ message.getPayload());
     }
   
     /**
@@ -168,7 +168,7 @@ public class OpenhabEndpoint extends Endpoint {
      */
     public void onItemStateChangedEvent(Session session, Message message)
     {
-        log.debug("[ItemStateChangedEvent] topic:" + message.getTopic() + " Data: "+ message.getPayload());
+        log.trace("[ItemStateChangedEvent] topic:" + message.getTopic() + " Data: "+ message.getPayload());
         String topic = message.getTopic().split("/")[2];
 
         if(ohItemRegister.isItemRegistered(topic))
@@ -190,7 +190,7 @@ public class OpenhabEndpoint extends Endpoint {
      */
     public void onGroupItemStateChangedEvent(Session session, Message message)
     {
-        log.debug("[GroupItemStateChangedEvent] topic:" + message.getTopic() + " Data: "+ message.getPayload());
+        log.trace("[GroupItemStateChangedEvent] topic:" + message.getTopic() + " Data: "+ message.getPayload());
     }
 
     @Override

@@ -36,7 +36,12 @@ import jakarta.xml.bind.annotation.XmlType;
  *           </complexType>
  *         </element>
  *       </sequence>
- *       <attribute name="device.area" use="required" type="{}area" />
+ *       <attribute name="device.area" use="required">
+ *         <simpleType>
+ *           <restriction base="{}area">
+ *           </restriction>
+ *         </simpleType>
+ *       </attribute>
  *       <attribute name="device.function">
  *         <simpleType>
  *           <restriction base="{}function">
@@ -46,12 +51,7 @@ import jakarta.xml.bind.annotation.XmlType;
  *       <attribute name="device.comm.type" type="{}comm" default="KNX" />
  *       <attribute name="device.label" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       <attribute name="device.name" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       <attribute name="device.specification" use="required">
- *         <simpleType>
- *           <restriction base="{}device.specification">
- *           </restriction>
- *         </simpleType>
- *       </attribute>
+ *       <attribute name="device.specification" type="{}device.specification" />
  *       <attribute name="device.id" use="required" type="{http://www.w3.org/2001/XMLSchema}int" />
  *     </restriction>
  *   </complexContent>
@@ -81,7 +81,7 @@ public class Device {
     protected String deviceLabel;
     @XmlAttribute(name = "device.name", required = true)
     protected String deviceName;
-    @XmlAttribute(name = "device.specification", required = true)
+    @XmlAttribute(name = "device.specification")
     protected DeviceSpecification deviceSpecification;
     @XmlAttribute(name = "device.id", required = true)
     protected int deviceId;

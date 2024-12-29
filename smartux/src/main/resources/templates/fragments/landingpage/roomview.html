@@ -8,8 +8,8 @@
             <div th:each="module: ${SteinelPraesenzModuleData}">
                 <div class="col">
                     <div class="card text-center mt-2" style="width: 20rem">
-                        <div class="card-header">Küche</div>
-                        <img th:src="@{/img/kueche.jpg}" alt="Mein Foto" />
+                        <div class="card-header" th:text="${module.getArea()}">Küche</div>
+                        <!--<img th:src="@{/img/kueche.jpg}" alt="Mein Foto" />-->
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">
                                 <i th:class="${'fa-sharp-duotone fa-light ' + module.items[2].getCategory() + ' fa-xl'}"

@@ -2,7 +2,6 @@ package de.smarthome.smartux.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +14,6 @@ import de.smarthome.smartux.OpenhabItemRegister;
 import de.smarthome.smartux.OpenhabRestService;
 import de.smarthome.smartux.Module.DateTimeModule;
 import de.smarthome.smartux.Module.GarbageModule;
-import de.smarthome.smartux.Module.ModuleManager;
 import de.smarthome.smartux.Module.SteinelPraesenzModule;
 import de.smarthome.smartux.mainDataModel.OpenhabItem;
 import de.smarthome.smartux.mainDataModel.OpenhabItemContainer;
@@ -29,9 +27,6 @@ public class PortalController {
     
     @Autowired
     OpenhabRestService openhabRestService;
-
-    @Autowired 
-    ModuleManager moduleManager;
 
     
     @Autowired

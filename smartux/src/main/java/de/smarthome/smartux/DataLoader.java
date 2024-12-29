@@ -1,27 +1,25 @@
 package de.smarthome.smartux;
 
 import java.io.File;
-import java.nio.ByteBuffer;
-import java.nio.charset.StandardCharsets;
-import java.util.function.Supplier;
+import java.util.List;
+import java.util.Optional;
 
-import org.apache.catalina.core.ApplicationContext;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Component;
 
 import de.smarthome.smartux.Module.DateTimeModule;
 import de.smarthome.smartux.Module.DynamicBeanRegistrar;
+import de.smarthome.smartux.Module.EkeyModule;
 import de.smarthome.smartux.Module.GarbageModule;
-import de.smarthome.smartux.Module.ModuleManager;
+import de.smarthome.smartux.Module.LightFullModule;
+import de.smarthome.smartux.Module.ModuleTemplate;
+import de.smarthome.smartux.Module.PowerModule;
 import de.smarthome.smartux.Module.ShutterModule;
 import de.smarthome.smartux.Module.SteinelPraesenzModule;
-import de.smarthome.smartux.mainDataModel.OpenhabItem;
 import de.smarthome.smartux.xmlSchemaData.DeviceSpecification;
-import de.smarthome.smartux.xmlSchemaData.Openhab;
-import de.smarthome.smartux.xmlSchemaData.Device.Channel;
 import de.smarthome.smartux.xmlSchemaData.Devices.Device;
+import de.smarthome.smartux.xmlSchemaData.Openhab;
 import jakarta.annotation.PostConstruct;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
@@ -33,16 +31,13 @@ import lombok.extern.slf4j.Slf4j;
 public class DataLoader {
 
     @Autowired
-    OpenhabRestService openhabRestService;
+    private OpenhabRestService openhabRestService;
 
     @Autowired
-    OpenhabItemRegister openhabItemRegister;
+    private OpenhabItemRegister openhabItemRegister;
 
     @Autowired
-    ModuleManager moduleManager;
-
-    @Autowired
-    DynamicBeanRegistrar beanRegistrar;
+    private DynamicBeanRegistrar beanRegistrar;
 
     @Autowired
     private SimpMessagingTemplate template;
@@ -50,93 +45,57 @@ public class DataLoader {
     @PostConstruct
     private void loader() {
         File xmlFile = new File("C:\\Projekte\\xml2OH\\SmartHomeConfiguration.xml");
-        JAXBContext jaxbContext;
 
         try {
-            jaxbContext = JAXBContext.newInstance(Openhab.class);
+            JAXBContext jaxbContext = JAXBContext.newInstance(Openhab.class);
             Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
             Openhab openhab = (Openhab) jaxbUnmarshaller.unmarshal(xmlFile);
 
-            for (Device device : openhab.getDevices().getDevice()) {
-
-                String name = (device.getDeviceArea() + "_" + device.getDeviceFunction() + "_" + device.getDeviceName())
-                        .replace(" ", "_").trim();
-                ByteBuffer byteBuffer = StandardCharsets.UTF_8.encode(name);
-                name = new String(byteBuffer.array(), StandardCharsets.UTF_8).trim();
-
-                switch (device.getDeviceSpecification()) {
-                    case DeviceSpecification.NTP_BINDING:
-                        DateTimeModule tm = new DateTimeModule(openhabRestService, openhabItemRegister, template);
-
-                        for (int i = 0; i <= 9; i++) {
-                            final int currentIndex = i;
-                            device.getChannel()
-                                    .stream()
-                                    .filter(s -> s.getChannelId() == currentIndex)
-                                    .findFirst()
-                                    .ifPresent(channel -> tm.addItem(channel.getLink(), device.getDeviceId(), channel.getChannelId()));
-                        }
-                        tm.setName(name);
-                        beanRegistrar.registerBean( Integer.toString(device.getDeviceId()), tm);
-                        log.info("NTP Module with name [" + name + "] was registered");
-                        break;
-                    case DeviceSpecification.ICAL_BINDING:
-                        GarbageModule gb = new GarbageModule(openhabRestService, openhabItemRegister, template);
-
-                        for (int i = 0; i <= 9; i++) {
-                            final int currentIndex = i;
-                            device.getChannel()
-                                    .stream()
-                                    .filter(s -> s.getChannelId() == currentIndex)
-                                    .findFirst()
-                                    .ifPresent(channel -> gb.addItem(channel.getLink(), device.getDeviceId(), channel.getChannelId()));
-                        }
-
-                        gb.setName(name);
-                        beanRegistrar.registerBean(Integer.toString(device.getDeviceId()), gb);
-                        log.info("GarbageModule with name [" + name + "] was registered");
-                        break;
-
-                    case DeviceSpecification.ROLLADEN_MDTKNX:
-                        ShutterModule sm = new ShutterModule(openhabRestService, openhabItemRegister, template);
-                        for (int i = 0; i <= 9; i++) {
-                            final int currentIndex = i;
-                            device.getChannel()
-                                    .stream()
-                                    .filter(s -> s.getChannelId() == currentIndex)
-                                    .findFirst()
-                                    .ifPresent(channel -> sm.addItem(channel.getLink(), device.getDeviceId(), channel.getChannelId()));
-                        }
-
-                        sm.setName(name);
-                        beanRegistrar.registerBean(Integer.toString(device.getDeviceId()), sm);
-                        log.info("ShutterModule with name [" + name + "] was registered");
-
-                        break;
-                    case DeviceSpecification.STEINEL_TRUE_PRÄSENZ:
-                        SteinelPraesenzModule sp = new SteinelPraesenzModule(openhabRestService, openhabItemRegister,
-                                template);
-                        for (int i = 0; i <= 9; i++) {
-                            final int currentIndex = i;
-                            device.getChannel()
-                                    .stream()
-                                    .filter(s -> s.getChannelId() == currentIndex)
-                                    .findFirst()
-                                    .ifPresent(channel -> sp.addItem(channel.getLink(), device.getDeviceId(), channel.getChannelId() ));
-                        }
-
-                        sp.setName(name);
-                        beanRegistrar.registerBean(Integer.toString(device.getDeviceId()), sp);
-                        log.info("SteinelPraesenzModule with name [" + name + "] was registered");
-
-                        break;
-                    default:
-                        break;
-                }
-            }
+            openhab.getDevices().getDevice().forEach(this::processDevice);
 
         } catch (JAXBException e) {
-            e.printStackTrace();
+            log.error("Error while loading XML file", e);
+        }
+    }
+
+    private void processDevice(Device device) {
+        String name = formatDeviceName(device);
+        ModuleTemplate module = createModule(device, name);
+        if (module != null) {
+            registerChannels(device, module);
+            module.setName(name);
+            module.setArea(device.getDeviceArea());
+            beanRegistrar.registerBean(Integer.toString(device.getDeviceId()), module);
+            log.info("{} with name [{}] was registered", module.getClass().getSimpleName(), name);
+        }
+    }
+
+    private String formatDeviceName(Device device) {
+        return (device.getDeviceArea() + "_" + device.getDeviceFunction() + "_" + device.getDeviceName())
+                .replace(" ", "_").trim();
+    }
+
+    private ModuleTemplate createModule(Device device, String name) {
+        return switch (device.getDeviceSpecification()) {
+            case DeviceSpecification.NTP_BINDING -> new DateTimeModule(openhabRestService, openhabItemRegister, template);
+            case DeviceSpecification.ICAL_BINDING -> new GarbageModule(openhabRestService, openhabItemRegister, template);
+            case DeviceSpecification.ROLLADEN_MDTKNX -> new ShutterModule(openhabRestService, openhabItemRegister, template);
+            case DeviceSpecification.STEINEL_TRUE_PRÄSENZ -> new SteinelPraesenzModule(openhabRestService, openhabItemRegister, template);
+            case DeviceSpecification.LIGHT_KN_XFULL -> new LightFullModule(openhabRestService, openhabItemRegister, template);
+            case DeviceSpecification.POWER_KNX -> new PowerModule(openhabRestService, openhabItemRegister, template);
+            case DeviceSpecification.EKEY_DOOR -> new EkeyModule(openhabRestService, openhabItemRegister, template);
+            default -> null;
+        };
+    }
+
+    private void registerChannels(Device device, ModuleTemplate module) {
+        List<Device.Channel> channels = device.getChannel();
+        for (int i = 0; i <= 9; i++) {
+            final int currentIndex = i;
+            Optional<Device.Channel> channelOpt = channels.stream()
+                    .filter(channel -> channel.getChannelId() == currentIndex)
+                    .findFirst();
+            channelOpt.ifPresent(channel -> module.addItem(channel.getLink(), device.getDeviceId(), channel.getChannelId()));
         }
     }
 }

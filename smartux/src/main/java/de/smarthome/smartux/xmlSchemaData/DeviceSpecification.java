@@ -19,10 +19,17 @@ import jakarta.xml.bind.annotation.XmlType;
  * <pre>{@code
  * <simpleType name="device.specification">
  *   <restriction base="{http://www.w3.org/2001/XMLSchema}anyURI">
+ *     <enumeration value="PowerKNX"/>
  *     <enumeration value="SteinelTruePräsenz"/>
  *     <enumeration value="RolladenMDTKNX"/>
  *     <enumeration value="ICALBinding"/>
  *     <enumeration value="NTPBinding"/>
+ *     <enumeration value="LightKNXlight"/>
+ *     <enumeration value="LightKNXMiddle"/>
+ *     <enumeration value="LightKNXfull"/>
+ *     <enumeration value="GlastasterKNX"/>
+ *     <enumeration value="TuerContactKNX"/>
+ *     <enumeration value="EKEYDoor"/>
  *   </restriction>
  * </simpleType>
  * }</pre>
@@ -32,6 +39,8 @@ import jakarta.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum DeviceSpecification {
 
+    @XmlEnumValue("PowerKNX")
+    POWER_KNX("PowerKNX"),
     @XmlEnumValue("SteinelTruePr\u00e4senz")
     STEINEL_TRUE_PRÄSENZ("SteinelTruePr\u00e4senz"),
     @XmlEnumValue("RolladenMDTKNX")
@@ -39,7 +48,19 @@ public enum DeviceSpecification {
     @XmlEnumValue("ICALBinding")
     ICAL_BINDING("ICALBinding"),
     @XmlEnumValue("NTPBinding")
-    NTP_BINDING("NTPBinding");
+    NTP_BINDING("NTPBinding"),
+    @XmlEnumValue("LightKNXlight")
+    LIGHT_KN_XLIGHT("LightKNXlight"),
+    @XmlEnumValue("LightKNXMiddle")
+    LIGHT_KNX_MIDDLE("LightKNXMiddle"),
+    @XmlEnumValue("LightKNXfull")
+    LIGHT_KN_XFULL("LightKNXfull"),
+    @XmlEnumValue("GlastasterKNX")
+    GLASTASTER_KNX("GlastasterKNX"),
+    @XmlEnumValue("TuerContactKNX")
+    TUER_CONTACT_KNX("TuerContactKNX"),
+    @XmlEnumValue("EKEYDoor")
+    EKEY_DOOR("EKEYDoor");
     private final String value;
 
     DeviceSpecification(String v) {

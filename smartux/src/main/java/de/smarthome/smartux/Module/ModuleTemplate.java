@@ -28,6 +28,7 @@ public abstract class ModuleTemplate {
     protected SimpMessagingTemplate sender;
 
     protected String name;
+    protected String area;
 
     public void setName(String name) {
         this.name = name;
@@ -35,6 +36,14 @@ public abstract class ModuleTemplate {
 
     public String getName() {
         return this.name;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
+    }
+
+    public String getArea() {
+        return this.area;
     }
 
     public ModuleTemplate(OpenhabRestService openhabRestService, OpenhabItemRegister openhabItemRegister,
@@ -71,6 +80,7 @@ public abstract class ModuleTemplate {
              */
             OpenhabItem item = this.openhabRestService.getItemDetails(tag.getValue0()).block();
             container.addItems(item);
+            container.setArea(this.area);
 
             ((HashMap<Integer,String>)model.getAttribute("toSubscribe")).put(tag.getValue1(), tag.getValue0());
             
@@ -87,7 +97,7 @@ public abstract class ModuleTemplate {
          * Sind alle Items hinzugefügt kann die Registry aufgerufen werden
          */
 
-        //this.register();
+        this.register();
 
         int end = this.getAmountOfRegisteredItems();
         log.debug(end + " new Items registered.");

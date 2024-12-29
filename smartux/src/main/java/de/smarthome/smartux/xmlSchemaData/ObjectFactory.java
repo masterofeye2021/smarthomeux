@@ -66,6 +66,16 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link EkeyConfiguration }
+     * 
+     * @return
+     *     the new instance of {@link EkeyConfiguration }
+     */
+    public EkeyConfiguration createEkeyConfiguration() {
+        return new EkeyConfiguration();
+    }
+
+    /**
      * Create an instance of {@link de.smarthome.smartux.xmlSchemaData.Group }
      * 
      * @return
@@ -203,6 +213,16 @@ public class ObjectFactory {
      */
     public NtpConfiguration.Thing createNtpConfigurationThing() {
         return new NtpConfiguration.Thing();
+    }
+
+    /**
+     * Create an instance of {@link EkeyConfiguration.Thing }
+     * 
+     * @return
+     *     the new instance of {@link EkeyConfiguration.Thing }
+     */
+    public EkeyConfiguration.Thing createEkeyConfigurationThing() {
+        return new EkeyConfiguration.Thing();
     }
 
     /**

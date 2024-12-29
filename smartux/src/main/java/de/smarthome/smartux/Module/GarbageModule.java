@@ -19,7 +19,6 @@ import de.smarthome.smartux.eventsystem.ItemStateChangedEvent;
 import de.smarthome.smartux.eventsystem.ItemStateUpdatedEvent;
 import de.smarthome.smartux.mainDataModel.OpenhabItem;
 import de.smarthome.smartux.mainDataModel.OpenhabItemContainer;
-import de.smarthome.smartux.mainDataModel.OpenhabItem.Metadata;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
