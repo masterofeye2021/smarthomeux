@@ -1,6 +1,7 @@
 package de.smarthome.smartux.eventsystem;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
@@ -52,6 +53,7 @@ public class OpenhabEndpoint extends Endpoint {
                         return;
 
                     Message m =decoder.decode(message);
+                    m.setTimestamp(LocalDateTime.now());
                     log.trace("Message Type: " + m.getType() + " topic: " + m.getTopic() + " payload: " + m.getPayload());
                     switch (m.getType()) {
                         case "ItemAddedEvent":
@@ -78,6 +80,8 @@ public class OpenhabEndpoint extends Endpoint {
                             break;
                         case "WebSocketEvent":   
                             break; 
+                        case "ThingStatusInfoEvent":
+                            break;
                         default:
                             log.error("THe following event is not part of the Event Handling: " + m.getType(), new IllegalArgumentException());
                             break;
@@ -122,7 +126,7 @@ public class OpenhabEndpoint extends Endpoint {
         if(ohItemRegister.isItemRegistered(topic))
         {
 
-            eventPublisher.publishEvent(new ItemStateChangedEvent(this, topic,message.getPayload()));
+            eventPublisher.publishEvent(new ItemStateChangedEvent(this, topic,message.getPayload(),message.getTimestamp()));
         }
         else
         {
@@ -149,6 +153,18 @@ public class OpenhabEndpoint extends Endpoint {
     public void onItemStateEvent(Session session, Message message)
     {
         log.trace("[ItemStateEvent] topic:" + message.getTopic() + " Data: "+ message.getPayload());
+        String topic = message.getTopic().split("/")[2];
+
+        if(ohItemRegister.isItemRegistered(topic))
+        {
+
+            eventPublisher.publishEvent(new ItemStateEvent(this, topic,message.getPayload(), message.getTimestamp()));
+        }
+        else
+        {
+            /* Item is not registered, so we will ignore it */
+            return;
+        }
     }
 
     /**
@@ -174,7 +190,7 @@ public class OpenhabEndpoint extends Endpoint {
         if(ohItemRegister.isItemRegistered(topic))
         {
 
-            eventPublisher.publishEvent(new ItemStateChangedEvent(this, topic,message.getPayload()));
+            eventPublisher.publishEvent(new ItemStateChangedEvent(this, topic,message.getPayload(),message.getTimestamp()));
         }
         else
         {

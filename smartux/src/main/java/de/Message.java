@@ -1,7 +1,13 @@
 package de;
 
+import java.time.LocalDateTime;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.gson.annotations.SerializedName;
 
+import lombok.Data;
+
+@Data
 public class Message {
 
 
@@ -11,32 +17,7 @@ public class Message {
     private String topic;
     @SerializedName("payload")
     private String payload;
-
-    public String getTopic() {
-        return topic;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-
-
-    public String getPayload() {
-        return payload;
-    }
-
-
-    public void setTopic(String topic) {
-        this.topic = topic;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public void setPayload(String payload) {
-        this.payload = payload;
-    }
+    @JsonIgnore
+    private transient LocalDateTime timestamp;
 
 }

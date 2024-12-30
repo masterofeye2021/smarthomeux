@@ -1,15 +1,19 @@
 package de.smarthome.smartux.eventsystem;
 
+import java.time.LocalDateTime;
+
 import org.springframework.context.ApplicationEvent;
 
 public class ItemStateUpdatedEvent extends ApplicationEvent {
     private String value;
     private String item;
+    private LocalDateTime timestamp;
 
-    public ItemStateUpdatedEvent(Object source, String item, String value) {
+    public ItemStateUpdatedEvent(Object source, String item, String value, LocalDateTime timestamp) {
         super(source);
         this.item = item;
         this.value = value;
+        this.timestamp = timestamp;
     }
 
     public String getValue() {
@@ -18,6 +22,10 @@ public class ItemStateUpdatedEvent extends ApplicationEvent {
 
     public String getItem() {
         return item;
+    }
+
+    public LocalDateTime getEvtTimestamp() {
+        return timestamp;
     }
 }   
 
