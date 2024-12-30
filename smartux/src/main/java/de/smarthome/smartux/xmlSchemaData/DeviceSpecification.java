@@ -30,6 +30,7 @@ import jakarta.xml.bind.annotation.XmlType;
  *     <enumeration value="GlastasterKNX"/>
  *     <enumeration value="TuerContactKNX"/>
  *     <enumeration value="EKEYDoor"/>
+ *     <enumeration value="HTTP"/>
  *   </restriction>
  * </simpleType>
  * }</pre>
@@ -60,7 +61,8 @@ public enum DeviceSpecification {
     @XmlEnumValue("TuerContactKNX")
     TUER_CONTACT_KNX("TuerContactKNX"),
     @XmlEnumValue("EKEYDoor")
-    EKEY_DOOR("EKEYDoor");
+    EKEY_DOOR("EKEYDoor"),
+    HTTP("HTTP");
     private final String value;
 
     DeviceSpecification(String v) {

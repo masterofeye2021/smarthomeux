@@ -76,6 +76,16 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link DoorConfiguration }
+     * 
+     * @return
+     *     the new instance of {@link DoorConfiguration }
+     */
+    public DoorConfiguration createDoorConfiguration() {
+        return new DoorConfiguration();
+    }
+
+    /**
      * Create an instance of {@link de.smarthome.smartux.xmlSchemaData.Group }
      * 
      * @return
@@ -223,6 +233,16 @@ public class ObjectFactory {
      */
     public EkeyConfiguration.Thing createEkeyConfigurationThing() {
         return new EkeyConfiguration.Thing();
+    }
+
+    /**
+     * Create an instance of {@link DoorConfiguration.Thing }
+     * 
+     * @return
+     *     the new instance of {@link DoorConfiguration.Thing }
+     */
+    public DoorConfiguration.Thing createDoorConfigurationThing() {
+        return new DoorConfiguration.Thing();
     }
 
     /**

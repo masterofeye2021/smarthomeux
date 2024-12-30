@@ -48,6 +48,7 @@ import jakarta.xml.bind.annotation.XmlType;
  *                     </complexType>
  *                   </element>
  *                   <element name="ekey" type="{http://www.w3.org/2001/XMLSchema}anyType"/>
+ *                   <element name="http" type="{http://www.w3.org/2001/XMLSchema}anyType"/>
  *                 </choice>
  *               </restriction>
  *             </complexContent>
@@ -496,6 +497,7 @@ public class Channel {
      *           </complexType>
      *         </element>
      *         <element name="ekey" type="{http://www.w3.org/2001/XMLSchema}anyType"/>
+     *         <element name="http" type="{http://www.w3.org/2001/XMLSchema}anyType"/>
      *       </choice>
      *     </restriction>
      *   </complexContent>
@@ -511,7 +513,8 @@ public class Channel {
         "modbus",
         "ical",
         "ntp",
-        "ekey"
+        "ekey",
+        "http"
     })
     public static class Connection {
 
@@ -521,6 +524,7 @@ public class Channel {
         protected Ical ical;
         protected Channel.Connection.Ntp ntp;
         protected Object ekey;
+        protected Object http;
 
         /**
          * Ruft den Wert der knx-Eigenschaft ab.
@@ -664,6 +668,30 @@ public class Channel {
          */
         public void setEkey(Object value) {
             this.ekey = value;
+        }
+
+        /**
+         * Ruft den Wert der http-Eigenschaft ab.
+         * 
+         * @return
+         *     possible object is
+         *     {@link Object }
+         *     
+         */
+        public Object getHttp() {
+            return http;
+        }
+
+        /**
+         * Legt den Wert der http-Eigenschaft fest.
+         * 
+         * @param value
+         *     allowed object is
+         *     {@link Object }
+         *     
+         */
+        public void setHttp(Object value) {
+            this.http = value;
         }
 
 

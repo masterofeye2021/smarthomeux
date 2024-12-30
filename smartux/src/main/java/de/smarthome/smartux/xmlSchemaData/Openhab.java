@@ -30,6 +30,7 @@ import jakarta.xml.bind.annotation.XmlType;
  *         <element ref="{}ical.configuration"/>
  *         <element ref="{}ntp.configuration"/>
  *         <element ref="{}ekey.configuration"/>
+ *         <element ref="{}door.configuration"/>
  *       </all>
  *     </restriction>
  *   </complexContent>
@@ -57,6 +58,8 @@ public class Openhab {
     protected NtpConfiguration ntpConfiguration;
     @XmlElement(name = "ekey.configuration", required = true)
     protected EkeyConfiguration ekeyConfiguration;
+    @XmlElement(name = "door.configuration", required = true)
+    protected DoorConfiguration doorConfiguration;
 
     /**
      * Ruft den Wert der devices-Eigenschaft ab.
@@ -200,6 +203,30 @@ public class Openhab {
      */
     public void setEkeyConfiguration(EkeyConfiguration value) {
         this.ekeyConfiguration = value;
+    }
+
+    /**
+     * Ruft den Wert der doorConfiguration-Eigenschaft ab.
+     * 
+     * @return
+     *     possible object is
+     *     {@link DoorConfiguration }
+     *     
+     */
+    public DoorConfiguration getDoorConfiguration() {
+        return doorConfiguration;
+    }
+
+    /**
+     * Legt den Wert der doorConfiguration-Eigenschaft fest.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link DoorConfiguration }
+     *     
+     */
+    public void setDoorConfiguration(DoorConfiguration value) {
+        this.doorConfiguration = value;
     }
 
 }
