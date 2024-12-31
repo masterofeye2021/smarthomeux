@@ -9,6 +9,7 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Component;
 
 import de.smarthome.smartux.Module.DateTimeModule;
+import de.smarthome.smartux.Module.DoorBellModule;
 import de.smarthome.smartux.Module.DynamicBeanRegistrar;
 import de.smarthome.smartux.Module.EkeyModule;
 import de.smarthome.smartux.Module.GarbageModule;
@@ -84,6 +85,7 @@ public class DataLoader {
             case DeviceSpecification.LIGHT_KN_XFULL -> new LightFullModule(openhabRestService, openhabItemRegister, template);
             case DeviceSpecification.POWER_KNX -> new PowerModule(openhabRestService, openhabItemRegister, template);
             case DeviceSpecification.EKEY_DOOR -> new EkeyModule(openhabRestService, openhabItemRegister, template);
+            case DeviceSpecification.HTTP -> new DoorBellModule(openhabRestService, openhabItemRegister, template); //@TODO HTTP Ist hier nicht die richtige variante
             default -> null;
         };
     }

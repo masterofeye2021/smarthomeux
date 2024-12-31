@@ -22,7 +22,7 @@
         <div class="col-8 border border-black text-center d-flex flex-column">
           <!-- ROOM and ENERGY spanning full height -->
           <div class="row flex-grow-1 align-items-center justify-content-center border">
-            <div class="col">ROOM</div>
+            <div class="col" stlye="height:50%">ROOM</div>
             <div th:replace="~{fragments/landingpage/roomview.html :: room}"></div>
           </div>
           <div class="row flex-grow-2 align-items-center justify-content-center border" style="height: 100px">
@@ -31,6 +31,7 @@
         </div>
         <div class="col-4 border border-black text-right d-flex align-items-center justify-content-center">
           EVENTLOOP
+          <div th:replace="~{fragments/landingpage/doorview.html :: door}"></div>
         </div>
       </div>
 

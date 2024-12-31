@@ -14,9 +14,9 @@ import lombok.extern.slf4j.Slf4j;
  * @binding Für dieses Module wird das EKEY Binding verwendet https://www.openhab.org/addons/bindings/ekey/
  */
 @Slf4j
-public class EkeyModule extends ModuleTemplate {
+public class DoorBellModule extends ModuleTemplate {
 
-    public EkeyModule(OpenhabRestService openhabRestService, OpenhabItemRegister openhabItemRegister,
+    public DoorBellModule(OpenhabRestService openhabRestService, OpenhabItemRegister openhabItemRegister,
             SimpMessagingTemplate template) {
         super(openhabRestService, openhabItemRegister, template);
     }
