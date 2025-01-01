@@ -14,6 +14,7 @@ import de.smarthome.smartux.OpenhabItemRegister;
 import de.smarthome.smartux.OpenhabRestService;
 import de.smarthome.smartux.Module.DateTimeModule;
 import de.smarthome.smartux.Module.DoorBellModule;
+import de.smarthome.smartux.Module.EkeyModule;
 import de.smarthome.smartux.Module.GarbageModule;
 import de.smarthome.smartux.Module.SteinelPraesenzModule;
 import de.smarthome.smartux.mainDataModel.OpenhabItem;
@@ -52,6 +53,10 @@ public class PortalController {
 
         DoorBellModule doorbell = (DoorBellModule) applicationContext.getBean(DoorBellModule.class);
         doorbell.init(model, "201");
+
+        EkeyModule ekey = (EkeyModule) applicationContext.getBean(EkeyModule.class);
+        ekey.init(model, "200");
+        
 
         ArrayList<OpenhabItemContainer> containerForPraesenzModuls = new ArrayList<>();
         Map<String,SteinelPraesenzModule> listOfPraesenzModule = applicationContext.getBeansOfType(SteinelPraesenzModule.class);

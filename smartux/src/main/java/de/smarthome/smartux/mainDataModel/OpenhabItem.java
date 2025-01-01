@@ -1,5 +1,7 @@
 package de.smarthome.smartux.mainDataModel;
 
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -61,12 +63,7 @@ public class OpenhabItem {
 
     @Data
     public static class Metadata {
-        @JsonProperty("additionalProp1")
-        private Map<String, Object> additionalProp1;
-        @JsonProperty("additionalProp2")
-        private Map<String, Object> additionalProp2;
-        @JsonProperty("additionalProp3")
-        private Map<String, Object> additionalProp3;
+        private Map<String, Object> smartux = new HashMap<>();
     }
 
     @Override

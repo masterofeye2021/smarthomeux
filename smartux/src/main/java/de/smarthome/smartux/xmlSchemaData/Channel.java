@@ -74,6 +74,26 @@ import jakarta.xml.bind.annotation.XmlType;
  *           </complexType>
  *         </element>
  *         <element name="alexa" type="{}alexa" minOccurs="0"/>
+ *         <element name="meta" minOccurs="0">
+ *           <complexType>
+ *             <complexContent>
+ *               <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *                 <sequence maxOccurs="unbounded">
+ *                   <element name="meta.Attribute" maxOccurs="unbounded">
+ *                     <complexType>
+ *                       <complexContent>
+ *                         <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *                           <attribute name="name" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *                           <attribute name="value" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *                         </restriction>
+ *                       </complexContent>
+ *                     </complexType>
+ *                   </element>
+ *                 </sequence>
+ *               </restriction>
+ *             </complexContent>
+ *           </complexType>
+ *         </element>
  *       </all>
  *       <attribute name="format" use="required" type="{}format" />
  *       <attribute name="unit" use="required" type="{}unit" />
@@ -114,6 +134,7 @@ public class Channel {
     @XmlElement(required = true)
     protected Channel.Groups groups;
     protected Alexa alexa;
+    protected Channel.Meta meta;
     @XmlAttribute(name = "format", required = true)
     protected String format;
     @XmlAttribute(name = "unit", required = true)
@@ -231,6 +252,30 @@ public class Channel {
      */
     public void setAlexa(Alexa value) {
         this.alexa = value;
+    }
+
+    /**
+     * Ruft den Wert der meta-Eigenschaft ab.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Channel.Meta }
+     *     
+     */
+    public Channel.Meta getMeta() {
+        return meta;
+    }
+
+    /**
+     * Legt den Wert der meta-Eigenschaft fest.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Channel.Meta }
+     *     
+     */
+    public void setMeta(Channel.Meta value) {
+        this.meta = value;
     }
 
     /**
@@ -838,6 +883,156 @@ public class Channel {
              */
             public void setRefid(Object value) {
                 this.refid = value;
+            }
+
+        }
+
+    }
+
+
+    /**
+     * <p>Java-Klasse für anonymous complex type.</p>
+     * 
+     * <p>Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.</p>
+     * 
+     * <pre>{@code
+     * <complexType>
+     *   <complexContent>
+     *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+     *       <sequence maxOccurs="unbounded">
+     *         <element name="meta.Attribute" maxOccurs="unbounded">
+     *           <complexType>
+     *             <complexContent>
+     *               <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+     *                 <attribute name="name" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
+     *                 <attribute name="value" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
+     *               </restriction>
+     *             </complexContent>
+     *           </complexType>
+     *         </element>
+     *       </sequence>
+     *     </restriction>
+     *   </complexContent>
+     * </complexType>
+     * }</pre>
+     * 
+     * 
+     */
+    @XmlAccessorType(XmlAccessType.FIELD)
+    @XmlType(name = "", propOrder = {
+        "metaAttribute"
+    })
+    public static class Meta {
+
+        @XmlElement(name = "meta.Attribute", required = true)
+        protected List<Channel.Meta.MetaAttribute> metaAttribute;
+
+        /**
+         * Gets the value of the metaAttribute property.
+         * 
+         * <p>This accessor method returns a reference to the live list,
+         * not a snapshot. Therefore any modification you make to the
+         * returned list will be present inside the JAXB object.
+         * This is why there is not a <CODE>set</CODE> method for the metaAttribute property.</p>
+         * 
+         * <p>
+         * For example, to add a new item, do as follows:
+         * </p>
+         * <pre>
+         * getMetaAttribute().add(newItem);
+         * </pre>
+         * 
+         * 
+         * <p>
+         * Objects of the following type(s) are allowed in the list
+         * {@link Channel.Meta.MetaAttribute }
+         * </p>
+         * 
+         * 
+         * @return
+         *     The value of the metaAttribute property.
+         */
+        public List<Channel.Meta.MetaAttribute> getMetaAttribute() {
+            if (metaAttribute == null) {
+                metaAttribute = new ArrayList<>();
+            }
+            return this.metaAttribute;
+        }
+
+
+        /**
+         * <p>Java-Klasse für anonymous complex type.</p>
+         * 
+         * <p>Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.</p>
+         * 
+         * <pre>{@code
+         * <complexType>
+         *   <complexContent>
+         *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+         *       <attribute name="name" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
+         *       <attribute name="value" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
+         *     </restriction>
+         *   </complexContent>
+         * </complexType>
+         * }</pre>
+         * 
+         * 
+         */
+        @XmlAccessorType(XmlAccessType.FIELD)
+        @XmlType(name = "")
+        public static class MetaAttribute {
+
+            @XmlAttribute(name = "name", required = true)
+            protected String name;
+            @XmlAttribute(name = "value", required = true)
+            protected String value;
+
+            /**
+             * Ruft den Wert der name-Eigenschaft ab.
+             * 
+             * @return
+             *     possible object is
+             *     {@link String }
+             *     
+             */
+            public String getName() {
+                return name;
+            }
+
+            /**
+             * Legt den Wert der name-Eigenschaft fest.
+             * 
+             * @param value
+             *     allowed object is
+             *     {@link String }
+             *     
+             */
+            public void setName(String value) {
+                this.name = value;
+            }
+
+            /**
+             * Ruft den Wert der value-Eigenschaft ab.
+             * 
+             * @return
+             *     possible object is
+             *     {@link String }
+             *     
+             */
+            public String getValue() {
+                return value;
+            }
+
+            /**
+             * Legt den Wert der value-Eigenschaft fest.
+             * 
+             * @param value
+             *     allowed object is
+             *     {@link String }
+             *     
+             */
+            public void setValue(String value) {
+                this.value = value;
             }
 
         }

@@ -79,6 +79,7 @@ public abstract class ModuleTemplate {
              * Items mit Init Values versorgen
              */
             OpenhabItem item = this.openhabRestService.getItemDetails(tag.getValue0()).block();
+            
             container.addItems(item);
             container.setArea(this.area);
 
