@@ -12,13 +12,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import de.smarthome.smartux.OpenhabItemRegister;
 import de.smarthome.smartux.OpenhabRestService;
-import de.smarthome.smartux.Module.DateTimeModule;
-import de.smarthome.smartux.Module.DoorBellModule;
-import de.smarthome.smartux.Module.EkeyModule;
-import de.smarthome.smartux.Module.GarbageModule;
-import de.smarthome.smartux.Module.SteinelPraesenzModule;
 import de.smarthome.smartux.mainDataModel.OpenhabItem;
 import de.smarthome.smartux.mainDataModel.OpenhabItemContainer;
+import de.smarthome.smartux.module.DateTimeModule;
+import de.smarthome.smartux.module.DoorAccessModule;
+import de.smarthome.smartux.module.DoorBellModule;
+import de.smarthome.smartux.module.EkeyModule;
+import de.smarthome.smartux.module.GarbageModule;
+import de.smarthome.smartux.module.SteinelPraesenzModule;
 import nz.net.ultraq.thymeleaf.layoutdialect.LayoutDialect;
 
 @Controller
@@ -56,6 +57,9 @@ public class PortalController {
 
         EkeyModule ekey = (EkeyModule) applicationContext.getBean(EkeyModule.class);
         ekey.init(model, "200");
+
+        DoorAccessModule doorAccess = (DoorAccessModule) applicationContext.getBean(DoorAccessModule.class);
+        doorAccess.init(model, "35");
         
 
         ArrayList<OpenhabItemContainer> containerForPraesenzModuls = new ArrayList<>();

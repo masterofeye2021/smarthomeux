@@ -458,9 +458,10 @@
 			<xs:enumeration value="LightKNXMiddle"/>
 			<xs:enumeration value="LightKNXfull"/>
 			<xs:enumeration value="GlastasterKNX"/>
-			<xs:enumeration value="TuerContactKNX"/>
-			<xs:enumeration value="EKEYDoor"/>
+			<xs:enumeration value="DoorEKEY"/>
 			<xs:enumeration value="HTTP"/>
+			<xs:enumeration value="DoorAccessKNX"/>
+			<xs:enumeration value="DoorBellHTTP"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:element name="ntp.configuration">

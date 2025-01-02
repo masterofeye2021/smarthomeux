@@ -1,4 +1,4 @@
-package de.smarthome.smartux.Module;
+package de.smarthome.smartux.module;
 
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.context.ConfigurableApplicationContext;

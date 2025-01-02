@@ -1,4 +1,4 @@
-package de.smarthome.smartux.Module;
+package de.smarthome.smartux.module;
 
 import org.springframework.context.event.EventListener;
 import org.springframework.messaging.simp.SimpMessagingTemplate;

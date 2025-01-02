@@ -8,16 +8,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Component;
 
-import de.smarthome.smartux.Module.DateTimeModule;
-import de.smarthome.smartux.Module.DoorBellModule;
-import de.smarthome.smartux.Module.DynamicBeanRegistrar;
-import de.smarthome.smartux.Module.EkeyModule;
-import de.smarthome.smartux.Module.GarbageModule;
-import de.smarthome.smartux.Module.LightFullModule;
-import de.smarthome.smartux.Module.ModuleTemplate;
-import de.smarthome.smartux.Module.PowerModule;
-import de.smarthome.smartux.Module.ShutterModule;
-import de.smarthome.smartux.Module.SteinelPraesenzModule;
+import de.smarthome.smartux.module.DateTimeModule;
+import de.smarthome.smartux.module.DoorAccessModule;
+import de.smarthome.smartux.module.DoorBellModule;
+import de.smarthome.smartux.module.DynamicBeanRegistrar;
+import de.smarthome.smartux.module.EkeyModule;
+import de.smarthome.smartux.module.GarbageModule;
+import de.smarthome.smartux.module.LightFullModule;
+import de.smarthome.smartux.module.ModuleTemplate;
+import de.smarthome.smartux.module.PowerModule;
+import de.smarthome.smartux.module.ShutterModule;
+import de.smarthome.smartux.module.SteinelPraesenzModule;
 import de.smarthome.smartux.xmlSchemaData.DeviceSpecification;
 import de.smarthome.smartux.xmlSchemaData.Devices.Device;
 import de.smarthome.smartux.xmlSchemaData.Openhab;
@@ -84,8 +85,9 @@ public class DataLoader {
             case DeviceSpecification.STEINEL_TRUE_PRÄSENZ -> new SteinelPraesenzModule(openhabRestService, openhabItemRegister, template);
             case DeviceSpecification.LIGHT_KN_XFULL -> new LightFullModule(openhabRestService, openhabItemRegister, template);
             case DeviceSpecification.POWER_KNX -> new PowerModule(openhabRestService, openhabItemRegister, template);
-            case DeviceSpecification.EKEY_DOOR -> new EkeyModule(openhabRestService, openhabItemRegister, template);
-            case DeviceSpecification.HTTP -> new DoorBellModule(openhabRestService, openhabItemRegister, template); //@TODO HTTP Ist hier nicht die richtige variante
+            case DeviceSpecification.DOOR_EKEY -> new EkeyModule(openhabRestService, openhabItemRegister, template);
+            case DeviceSpecification.DOOR_BELL_HTTP -> new DoorBellModule(openhabRestService, openhabItemRegister, template); //@TODO HTTP Ist hier nicht die richtige variante
+            case DeviceSpecification.DOOR_ACCESS_KNX -> new DoorAccessModule(openhabRestService, openhabItemRegister, template);
             default -> null;
         };
     }
