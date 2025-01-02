@@ -1,4 +1,4 @@
-package de.smarthome.smartux.Module;
+package de.smarthome.smartux.module;
 
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
@@ -44,22 +44,6 @@ public class DateTimeModule extends ModuleTemplate {
         if (openhabItemList.contains(event.getItem())) {
             log.trace("ItemStateChangedEvent wurde von [" + this.name + "] mit dem Wert [" + event.getValue()
                     + "] empfangen");
-
-            /*ObjectMapper objectMapper = new ObjectMapper();
-            try {
-                StompMessage msg = objectMapper.readValue(event.getValue(), StompMessage.class);
-                String date = extractDate(msg.getValue());
-                String time = extractTime(msg.getValue());
-
-                sender.convertAndSend("/ItemStateChangedEvent/" + event.getItem(), event.getValue());
-
-            } catch (JsonMappingException e) {
-                //@TODO STORE INTO ERROR LOG TO GET ACCESS FOR ISSUES ON VIEW 
-                log.error("JSON Mapping issue in DateTimeModule", e);
-            } catch (JsonProcessingException e) {
-                //@TODO STORE INTO ERROR LOG TO GET ACCESS FOR ISSUES ON VIEW 
-                log.error("JSON Processing issue in DateTimeModule", e);
-            }*/ 
             
             sender.convertAndSend("/ItemStateChangedEvent/" + event.getItem(), event.getValue());
         }

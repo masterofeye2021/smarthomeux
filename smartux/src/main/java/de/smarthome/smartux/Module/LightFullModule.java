@@ -1,4 +1,4 @@
-package de.smarthome.smartux.Module;
+package de.smarthome.smartux.module;
 
 
 
@@ -32,6 +32,7 @@ public class LightFullModule extends ModuleTemplate{
         if (openhabItemList.contains(event.getItem()))
         {
             log.trace("ItemStateUpdatedEvent wurde von ["+this.name+"] mit dem Wert ["+event.getValue()+"] empfangen");
+            sender.convertAndSend("/ItemStateUpdatedEvent/" + event.getItem() , event.getValue());
         }
     }
 
@@ -40,6 +41,7 @@ public class LightFullModule extends ModuleTemplate{
         if (openhabItemList.contains(event.getItem()))
         {
             log.trace("ItemStateChangedEvent wurde von ["+this.name+"] mit dem Wert ["+event.getValue()+"] empfangen");
+            sender.convertAndSend("/ItemStateUpdatedEvent/" + event.getItem() , event.getValue());
         }
     }
 }

@@ -28,9 +28,10 @@ import jakarta.xml.bind.annotation.XmlType;
  *     <enumeration value="LightKNXMiddle"/>
  *     <enumeration value="LightKNXfull"/>
  *     <enumeration value="GlastasterKNX"/>
- *     <enumeration value="TuerContactKNX"/>
- *     <enumeration value="EKEYDoor"/>
+ *     <enumeration value="DoorEKEY"/>
  *     <enumeration value="HTTP"/>
+ *     <enumeration value="DoorAccessKNX"/>
+ *     <enumeration value="DoorBellHTTP"/>
  *   </restriction>
  * </simpleType>
  * }</pre>
@@ -58,11 +59,13 @@ public enum DeviceSpecification {
     LIGHT_KN_XFULL("LightKNXfull"),
     @XmlEnumValue("GlastasterKNX")
     GLASTASTER_KNX("GlastasterKNX"),
-    @XmlEnumValue("TuerContactKNX")
-    TUER_CONTACT_KNX("TuerContactKNX"),
-    @XmlEnumValue("EKEYDoor")
-    EKEY_DOOR("EKEYDoor"),
-    HTTP("HTTP");
+    @XmlEnumValue("DoorEKEY")
+    DOOR_EKEY("DoorEKEY"),
+    HTTP("HTTP"),
+    @XmlEnumValue("DoorAccessKNX")
+    DOOR_ACCESS_KNX("DoorAccessKNX"),
+    @XmlEnumValue("DoorBellHTTP")
+    DOOR_BELL_HTTP("DoorBellHTTP");
     private final String value;
 
     DeviceSpecification(String v) {

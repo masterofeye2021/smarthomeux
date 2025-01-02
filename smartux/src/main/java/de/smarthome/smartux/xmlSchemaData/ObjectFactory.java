@@ -126,6 +126,16 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link de.smarthome.smartux.xmlSchemaData.Channel.Meta }
+     * 
+     * @return
+     *     the new instance of {@link de.smarthome.smartux.xmlSchemaData.Channel.Meta }
+     */
+    public de.smarthome.smartux.xmlSchemaData.Channel.Meta createChannelMeta() {
+        return new de.smarthome.smartux.xmlSchemaData.Channel.Meta();
+    }
+
+    /**
      * Create an instance of {@link de.smarthome.smartux.xmlSchemaData.Channel.Groups }
      * 
      * @return
@@ -323,6 +333,16 @@ public class ObjectFactory {
      */
     public KnxAddress.ListeningGa createKnxAddressListeningGa() {
         return new KnxAddress.ListeningGa();
+    }
+
+    /**
+     * Create an instance of {@link de.smarthome.smartux.xmlSchemaData.Channel.Meta.MetaAttribute }
+     * 
+     * @return
+     *     the new instance of {@link de.smarthome.smartux.xmlSchemaData.Channel.Meta.MetaAttribute }
+     */
+    public de.smarthome.smartux.xmlSchemaData.Channel.Meta.MetaAttribute createChannelMetaMetaAttribute() {
+        return new de.smarthome.smartux.xmlSchemaData.Channel.Meta.MetaAttribute();
     }
 
     /**

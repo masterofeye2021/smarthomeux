@@ -1,4 +1,4 @@
-package de.smarthome.smartux.Module;
+package de.smarthome.smartux.module;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -79,6 +79,7 @@ public abstract class ModuleTemplate {
              * Items mit Init Values versorgen
              */
             OpenhabItem item = this.openhabRestService.getItemDetails(tag.getValue0()).block();
+            
             container.addItems(item);
             container.setArea(this.area);
 
