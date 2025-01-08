@@ -34,6 +34,7 @@ import jakarta.xml.bind.annotation.XmlType;
  *                   <element name="sub" type="{http://www.w3.org/2001/XMLSchema}short"/>
  *                 </all>
  *                 <attribute name="is.readable" type="{http://www.w3.org/2001/XMLSchema}boolean" default="false" />
+ *                 <attribute name="dpt" type="{http://www.w3.org/2001/XMLSchema}string" />
  *               </restriction>
  *             </complexContent>
  *           </complexType>
@@ -48,6 +49,7 @@ import jakarta.xml.bind.annotation.XmlType;
  *                   <element name="sub" type="{http://www.w3.org/2001/XMLSchema}short"/>
  *                 </all>
  *                 <attribute name="is.readable" type="{http://www.w3.org/2001/XMLSchema}boolean" default="true" />
+ *                 <attribute name="dpt" type="{http://www.w3.org/2001/XMLSchema}string" />
  *               </restriction>
  *             </complexContent>
  *           </complexType>
@@ -135,6 +137,7 @@ public class KnxAddress {
      *         <element name="sub" type="{http://www.w3.org/2001/XMLSchema}short"/>
      *       </all>
      *       <attribute name="is.readable" type="{http://www.w3.org/2001/XMLSchema}boolean" default="true" />
+     *       <attribute name="dpt" type="{http://www.w3.org/2001/XMLSchema}string" />
      *     </restriction>
      *   </complexContent>
      * </complexType>
@@ -153,6 +156,8 @@ public class KnxAddress {
         protected short sub;
         @XmlAttribute(name = "is.readable")
         protected Boolean isReadable;
+        @XmlAttribute(name = "dpt")
+        protected String dpt;
 
         /**
          * Ruft den Wert der main-Eigenschaft ab.
@@ -230,6 +235,30 @@ public class KnxAddress {
             this.isReadable = value;
         }
 
+        /**
+         * Ruft den Wert der dpt-Eigenschaft ab.
+         * 
+         * @return
+         *     possible object is
+         *     {@link String }
+         *     
+         */
+        public String getDpt() {
+            return dpt;
+        }
+
+        /**
+         * Legt den Wert der dpt-Eigenschaft fest.
+         * 
+         * @param value
+         *     allowed object is
+         *     {@link String }
+         *     
+         */
+        public void setDpt(String value) {
+            this.dpt = value;
+        }
+
     }
 
 
@@ -248,6 +277,7 @@ public class KnxAddress {
      *         <element name="sub" type="{http://www.w3.org/2001/XMLSchema}short"/>
      *       </all>
      *       <attribute name="is.readable" type="{http://www.w3.org/2001/XMLSchema}boolean" default="false" />
+     *       <attribute name="dpt" type="{http://www.w3.org/2001/XMLSchema}string" />
      *     </restriction>
      *   </complexContent>
      * </complexType>
@@ -266,6 +296,8 @@ public class KnxAddress {
         protected short sub;
         @XmlAttribute(name = "is.readable")
         protected Boolean isReadable;
+        @XmlAttribute(name = "dpt")
+        protected String dpt;
 
         /**
          * Ruft den Wert der main-Eigenschaft ab.
@@ -341,6 +373,30 @@ public class KnxAddress {
          */
         public void setIsReadable(Boolean value) {
             this.isReadable = value;
+        }
+
+        /**
+         * Ruft den Wert der dpt-Eigenschaft ab.
+         * 
+         * @return
+         *     possible object is
+         *     {@link String }
+         *     
+         */
+        public String getDpt() {
+            return dpt;
+        }
+
+        /**
+         * Legt den Wert der dpt-Eigenschaft fest.
+         * 
+         * @param value
+         *     allowed object is
+         *     {@link String }
+         *     
+         */
+        public void setDpt(String value) {
+            this.dpt = value;
         }
 
     }

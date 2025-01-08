@@ -7,16 +7,16 @@
      * View.                                               *
      *                                                     *
      ******************************************************* -->
-    <div th:fragment="door" class="text-center d-flex flex-column" style="height: 100%">
+    <div th:fragment="power" class="text-center d-flex flex-column" style="height: 100%">
         <div class="card" style="width: 18rem;">
             <div class="card-header">
-                Haustür
+                Kühlschrank
             </div>
             <img src="..." class="card-img-top" alt="...">
             <ul class="list-group list-group-flush">
 
-                <li class="list-group-item" th:id="${T(de.smarthome.smartux.controller.PortalController).getItem(ModelMap,200,1).getName()}" th:text="${T(de.smarthome.smartux.controller.PortalController).getItem(ModelMap,200,1).getMetadata().getSmartux()['config'][T(de.smarthome.smartux.controller.PortalController).getItem(ModelMap,200,1).getState()]}">An item</li>
-                <li class="list-group-item" th:id="${T(de.smarthome.smartux.controller.PortalController).getItem(ModelMap,201,1).getName()}" th:text="${T(de.smarthome.smartux.controller.PortalController).getItem(ModelMap,201,1).getState()}">A second item</li>
+                <li class="list-group-item" th:text="${T(de.smarthome.smartux.controller.PortalController).getItem(ModelMap,91,7).getState()}">An item</li>
+                <li class="list-group-item" th:text="${T(de.smarthome.smartux.controller.PortalController).getItem(ModelMap,91,4).getState()}">A second item</li>
                 <li class="list-group-item">A third item</li>
             </ul>
         </div>
@@ -28,6 +28,8 @@
      *                                                     *
      ******************************************************* -->
 <script th:fragment="pre-footer"  >
+    
+
 </script>
 
 </html>

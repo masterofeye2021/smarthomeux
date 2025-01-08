@@ -12,17 +12,20 @@
                         <!--<img th:src="@{/img/kueche.jpg}" alt="Mein Foto" />-->
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">
-                                <i th:class="${'fa-sharp-duotone fa-light ' + module.items[2].getCategory() + ' fa-xl'}"
-                                    style="--fa-secondary-color: #387bf0"></i>&nbsp;<span
+                                <i th:class="${'fa-sharp-duotone fa-light ' + module.items[2].getCategory() + ' fa-xl'}" 
+                                    style="--fa-secondary-color: #387bf0"></i>&nbsp;<span th:id="${module.items[2].getName()}" th:attr="data-timestamp=${#dates.format(#dates.createNow(), 'dd.MMM.yyyy, HH:mm:ss')}"
                                     th:text="${module.items[2].getState() != 'NULL' ? T(java.lang.String).format(T(java.util.Locale).US,module.items[2].getStateDescription().getPattern(),T(java.lang.Float).parseFloat(module.items[2].getState())): 0}"></span>
-                                |
-                                <i th:class="${'fa-sharp-duotone fa-light ' + module.items[3].getCategory() + ' fa-xl'}"
-                                    style="--fa-secondary-color: red"></i>&nbsp;<span
+                                    <span th:text="${module.items[2].getMetadata().getSmartux()['config']['unit']}" class="d-none unit"></span>
+                                |   
+                                <i th:class="${'fa-sharp-duotone fa-light ' + module.items[3].getCategory() + ' fa-xl'}" 
+                                    style="--fa-secondary-color: red"></i>&nbsp;<span th:id="${module.items[3].getName()}" th:attr="data-timestamp=${#dates.format(#dates.createNow(), 'dd.MMM.yyyy, HH:mm:ss')}"
                                     th:text="${module.items[3].getState() != 'NULL' ? T(java.lang.String).format(T(java.util.Locale).US,module.items[3].getStateDescription().getPattern(),T(java.lang.Float).parseFloat(module.items[3].getState())): 0}"></span>
+                                    <span th:text="${module.items[3].getMetadata().getSmartux()['config']['unit']}" class="d-none unit"></span>
                                 |
-                                <i th:class="${'fa-sharp-duotone fa-light ' + module.items[6].getCategory() + ' fa-xl'}"
-                                    style="--fa-secondary-color: red"></i>&nbsp;<span
+                                <i th:class="${'fa-sharp-duotone fa-light ' + module.items[6].getCategory() + ' fa-xl'}" 
+                                    style="--fa-secondary-color: red"></i>&nbsp;<span th:id="${module.items[6].getName()}" th:attr="data-timestamp=${#dates.format(#dates.createNow(), 'dd.MMM.yyyy, HH:mm:ss')}"
                                     th:text="${module.items[6].getState() != 'NULL' ? T(java.lang.String).format(T(java.util.Locale).US,module.items[6].getStateDescription().getPattern(),T(java.lang.Float).parseFloat(module.items[6].getState())): 0}"></span>
+                                    <span th:text="${module.items[6].getMetadata().getSmartux()['config']['unit']}" class="d-none unit"></span>
                             </li>
                         </ul>
                     </div>

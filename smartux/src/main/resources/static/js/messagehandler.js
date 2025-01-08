@@ -4,9 +4,10 @@
  * */
 function connect() {
   var socket = new SockJS("/smartux");
-  stompClient = Stomp.over(socket);
-  stompClient.reconnect_delay = 5000;
-  stompClient.connect({}, onConnected, onError);
+  this.stompClient = Stomp.over(socket);
+  this.stompClient.reconnect_delay = 5000;
+  this.stompClient.connect({}, onConnected, onError);
+  this.stompClient.debug = () => {}
 }
 
 /**
@@ -15,13 +16,78 @@ function connect() {
  */
 function onConnected() {
   Object.entries(listOfTagsToSubscribe).forEach(([key, value]) => {
-    stompClient.subscribe("/ItemStateChangedEvent/" + value, callback);
+    stompClient.subscribe("/ItemStateChangedEvent/" + value, ItemStateChangedEventCallback);
+    stompClient.subscribe("/ItemStateUpdatedEvent/" + value, ItemStateUpdatedEventCallback);
   });
 }
 
-function onMessageReceived(event) {
-  console.log(event);
+function getLastPartOfString(input) {
+  if (typeof input !== "string") {
+    throw new Error("Eingabe muss ein String sein");
+  }
+
+  // String nach '/' splitten und letztes Element zurückgeben
+  const parts = input.split("/");
+  return parts[parts.length - 1];
 }
+
+ItemStateChangedEventCallback = function (message) {
+  // called when the client receives a STOMP message from the server
+  const topic = getLastPartOfString(message.headers.destination);
+  const payload = JSON.parse(message.body);
+  const date = new Date(Date.now());
+  const timestamp = date.toLocaleDateString('de-DE', { day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: false});
+
+  switch (topic) {
+    case "TKR_R_NTP_Datetime":
+      window["TKR_R_NTP_Datetime_Handle"](payload.value);
+      console.log("topic: " + topic + " value: " + payload.value + " timestamp: " + timestamp);
+      break;
+    default:
+      $("#" + topic).html(payload.value);
+      $("#" + topic).attr("data-timestamp", timestamp);
+      $("#" + topic).next(".unit").removeClass("d-none").addClass("d-inline"); 
+      console.log("topic: " + topic + " value: " + payload.value + " timestamp: " + timestamp);
+  }
+};
+
+
+ItemStateUpdatedEventCallback = function (message) {
+  // called when the client receives a STOMP message from the server
+  const topic = getLastPartOfString(message.headers.destination);
+  const payload = JSON.parse(message.body);
+  const date = new Date(Date.now());
+  const timestamp = date.toLocaleDateString('de-DE', { day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: false});
+
+  switch (topic) {
+    case "TKR_R_NTP_Datetime":
+      window["TKR_R_NTP_Datetime_Handle"](payload.value);
+      console.log("topic: " + topic + " value: " + payload.value + " timestamp: " + timestamp);
+      break;
+    default:
+      const value = JSON.parse(payload.value)
+      $("#" + topic).html(value.value);
+      $("#" + topic).attr("data-timestamp", timestamp);
+      $("#" + topic).next(".unit").css("display", "block");
+      console.log("topic: " + topic + " value: " + value.value + " timestamp: " + timestamp);
+  }
+}
+
+
+
+
 
 function onError(error) {
   connectingElement.textContent =

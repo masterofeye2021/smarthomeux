@@ -9,11 +9,10 @@ public class ItemStateChangedEvent extends ApplicationEvent {
     private String item;
     private LocalDateTime timestamp;
 
-    public ItemStateChangedEvent(Object source, String item, String value, LocalDateTime timestamp) {
+    public ItemStateChangedEvent(Object source, String item, String value) {
         super(source);
         this.item = item;
         this.value = value;
-        this.timestamp = timestamp;
     }
 
     public String getValue() {
@@ -22,10 +21,6 @@ public class ItemStateChangedEvent extends ApplicationEvent {
 
     public String getItem() {
         return item;
-    }
-
-    public LocalDateTime getEvtTimestamp() {
-        return timestamp;
     }
 }   
 

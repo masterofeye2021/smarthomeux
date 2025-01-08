@@ -55,6 +55,10 @@ public abstract class ModuleTemplate {
 
     protected ArrayList<Pair<String,Integer>> openhabItemList = new ArrayList<Pair<String,Integer>>();
 
+    protected boolean isItemInList(String item) {
+        return this.openhabItemList.stream().anyMatch(e -> e.getValue0().equals(item));
+    }
+
     protected int getAmountOfRegisteredItems() {
         return this.openhabItemList.size();
     }

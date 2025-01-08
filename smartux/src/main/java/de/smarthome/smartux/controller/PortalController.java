@@ -19,6 +19,7 @@ import de.smarthome.smartux.module.DoorAccessModule;
 import de.smarthome.smartux.module.DoorBellModule;
 import de.smarthome.smartux.module.EkeyModule;
 import de.smarthome.smartux.module.GarbageModule;
+import de.smarthome.smartux.module.PowerModule;
 import de.smarthome.smartux.module.SteinelPraesenzModule;
 import nz.net.ultraq.thymeleaf.layoutdialect.LayoutDialect;
 
@@ -60,6 +61,15 @@ public class PortalController {
 
         DoorAccessModule doorAccess = (DoorAccessModule) applicationContext.getBean(DoorAccessModule.class);
         doorAccess.init(model, "35");
+
+        PowerModule washmachine = (PowerModule) applicationContext.getBean("45",PowerModule.class);
+        washmachine.init(model, "45");
+
+        //PowerModule dryer = (PowerModule) applicationContext.getBean("90",PowerModule.class);
+        //dryer.init(model, "90");
+
+        PowerModule fridge = (PowerModule) applicationContext.getBean("91",PowerModule.class);
+        fridge.init(model, "91");
         
 
         ArrayList<OpenhabItemContainer> containerForPraesenzModuls = new ArrayList<>();

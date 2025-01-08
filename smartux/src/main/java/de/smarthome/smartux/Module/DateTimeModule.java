@@ -32,7 +32,7 @@ public class DateTimeModule extends ModuleTemplate {
 
     @EventListener
     public void handleCustomEvent(ItemStateUpdatedEvent event) {
-        if (openhabItemList.contains(event.getItem())) {
+        if (isItemInList(event.getItem())) {
             log.trace("ItemStateUpdatedEvent wurde von [" + this.name + "] mit dem Wert [" + event.getValue()
                     + "] empfangen");
             sender.convertAndSend("/ItemStateUpdatedEvent/" + event.getItem(), event.getValue());
@@ -41,7 +41,7 @@ public class DateTimeModule extends ModuleTemplate {
 
     @EventListener
     public void handleCustomEvent(ItemStateChangedEvent event) {
-        if (openhabItemList.contains(event.getItem())) {
+        if (isItemInList(event.getItem())) {
             log.trace("ItemStateChangedEvent wurde von [" + this.name + "] mit dem Wert [" + event.getValue()
                     + "] empfangen");
             

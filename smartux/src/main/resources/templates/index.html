@@ -32,6 +32,7 @@
         <div class="col-4 border border-black text-right d-flex align-items-center justify-content-center">
           EVENTLOOP
           <div th:replace="~{fragments/landingpage/doorview.html :: door}"></div>
+          <div th:replace="~{fragments/landingpage/powerview.html :: power}"></div>
         </div>
       </div>
 
@@ -49,37 +50,16 @@
     <div layout:fragment="pre-footer">
       <script th:replace="~{fragments/landingpage/timedateview.html :: pre-footer}"></script>
       <script th:replace="~{fragments/landingpage/doorview.html :: pre-footer}"></script>
-      <script th:inline="javascript">
-        /*<![CDATA[*/
-        function getLastPartOfString(input) {
-          if (typeof input !== "string") {
-            throw new Error("Eingabe muss ein String sein");
-          }
 
-          // String nach '/' splitten und letztes Element zurückgeben
-          const parts = input.split("/");
-          return parts[parts.length - 1];
-        }
-
-        callback = function (message) {
-          // called when the client receives a STOMP message from the server
-
-          var topic = message.headers.destination;
-          const payload = JSON.parse(message.body);
-          var value = payload.value;
-
-          console.log(getLastPartOfString(topic))
-
-          switch (getLastPartOfString(topic)) {
-            case "TKR_R_NTP_Datetime":
-              window["TKR_R_NTP_Datetime_Handle"](value);
-              break;
-          }
-        };
-        /*]]>*/
-      </script>
     </div>
     <div layout:fragment="post-footer">
+      <script th:inline="javascript">
+
+       
+
+
+        /*]]>*/
+      </script>
     </div>
   </footer>
 </body>

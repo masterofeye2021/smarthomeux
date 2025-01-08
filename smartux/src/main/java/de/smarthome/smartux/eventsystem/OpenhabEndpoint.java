@@ -53,7 +53,6 @@ public class OpenhabEndpoint extends Endpoint {
                         return;
 
                     Message m =decoder.decode(message);
-                    m.setTimestamp(LocalDateTime.now());
                     log.trace("Message Type: " + m.getType() + " topic: " + m.getTopic() + " payload: " + m.getPayload());
                     switch (m.getType()) {
                         case "ItemAddedEvent":
@@ -126,7 +125,7 @@ public class OpenhabEndpoint extends Endpoint {
         if(ohItemRegister.isItemRegistered(topic))
         {
 
-            eventPublisher.publishEvent(new ItemStateChangedEvent(this, topic,message.getPayload(),message.getTimestamp()));
+            eventPublisher.publishEvent(new ItemStateUpdatedEvent(this, topic,message.getPayload()));
         }
         else
         {
@@ -158,7 +157,7 @@ public class OpenhabEndpoint extends Endpoint {
         if(ohItemRegister.isItemRegistered(topic))
         {
 
-            eventPublisher.publishEvent(new ItemStateEvent(this, topic,message.getPayload(), message.getTimestamp()));
+            eventPublisher.publishEvent(new ItemStateEvent(this, topic,message.getPayload()));
         }
         else
         {
@@ -190,7 +189,7 @@ public class OpenhabEndpoint extends Endpoint {
         if(ohItemRegister.isItemRegistered(topic))
         {
 
-            eventPublisher.publishEvent(new ItemStateChangedEvent(this, topic,message.getPayload(),message.getTimestamp()));
+            eventPublisher.publishEvent(new ItemStateChangedEvent(this, topic,message.getPayload()));
         }
         else
         {

@@ -53,6 +53,7 @@ import jakarta.xml.bind.annotation.XmlType;
  *       <attribute name="device.name" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       <attribute name="device.specification" type="{}device.specification" />
  *       <attribute name="device.id" use="required" type="{http://www.w3.org/2001/XMLSchema}int" />
+ *       <attribute name="enable" use="required" type="{http://www.w3.org/2001/XMLSchema}boolean" />
  *     </restriction>
  *   </complexContent>
  * </complexType>
@@ -85,6 +86,8 @@ public class Device {
     protected DeviceSpecification deviceSpecification;
     @XmlAttribute(name = "device.id", required = true)
     protected int deviceId;
+    @XmlAttribute(name = "enable", required = true)
+    protected boolean enable;
 
     /**
      * Gets the value of the channel property.
@@ -280,6 +283,22 @@ public class Device {
      */
     public void setDeviceId(int value) {
         this.deviceId = value;
+    }
+
+    /**
+     * Ruft den Wert der enable-Eigenschaft ab.
+     * 
+     */
+    public boolean isEnable() {
+        return enable;
+    }
+
+    /**
+     * Legt den Wert der enable-Eigenschaft fest.
+     * 
+     */
+    public void setEnable(boolean value) {
+        this.enable = value;
     }
 
 

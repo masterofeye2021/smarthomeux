@@ -17,7 +17,7 @@ public class Message {
     private String topic;
     @SerializedName("payload")
     private String payload;
-    @JsonIgnore
-    private transient LocalDateTime timestamp;
+    //@JsonIgnore
+    //private transient LocalDateTime timestamp;
 
 }

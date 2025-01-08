@@ -61,6 +61,10 @@ public class DataLoader {
     }
 
     private void processDevice(Device device) {
+        if (device.isEnable() == false) {
+            log.info("Device with name [{}] is disabled", device.getDeviceName());
+            return;
+        }
         String name = formatDeviceName(device);
         ModuleTemplate module = createModule(device, name);
         if (module != null) {
@@ -94,10 +98,10 @@ public class DataLoader {
 
     private void registerChannels(Device device, ModuleTemplate module) {
         List<Device.Channel> channels = device.getChannel();
-        for (int i = 0; i <= 9; i++) {
+        for (int i = 0; i <= channels.size(); i++) {
             final int currentIndex = i;
             Optional<Device.Channel> channelOpt = channels.stream()
-                    .filter(channel -> channel.getChannelId() == currentIndex)
+                    .filter(channel -> channel.getChannelId() == currentIndex && channel.isEnable() == true)
                     .findFirst();
             channelOpt.ifPresent(channel -> module.addItem(channel.getLink(), device.getDeviceId(), channel.getChannelId()));
         }

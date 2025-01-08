@@ -108,7 +108,7 @@ public class GarbageModule extends ModuleTemplate {
         if (openhabItemList.contains(event.getItem())) {
             log.trace("ItemStateChangedEvent wurde von [GargabeModule] mit dem Wert [" + event.getValue()
                     + "] empfangen");
-            sender.convertAndSend("/ItemStateUpdatedEvent/" + event.getItem() , event.getValue());
+            sender.convertAndSend("/ItemStateChangedEvent/" + event.getItem() , event.getValue());
         }
     }
 }
