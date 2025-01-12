@@ -119,6 +119,7 @@
 						</xs:element>
 						<xs:element name="ekey"/>
 						<xs:element name="http"/>
+						<xs:element name="internal"/>
 					</xs:choice>
 				</xs:complexType>
 			</xs:element>

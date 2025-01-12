@@ -86,7 +86,14 @@ public class PortalController {
     public static OpenhabItem getItem(Map<String, Object> modelMap,Integer deviceID, Integer channelID)
     {
         Map<Integer,String> toSubcribe = (Map<Integer, String>) modelMap.get("toSubscribe");
-        String tag = toSubcribe.get(deviceID.hashCode() * channelID.hashCode());
+
+        Integer prime = 31;
+        Integer result = 1;
+
+        result = prime * result + ((deviceID == null) ? 0 : deviceID.hashCode());
+        result += prime * result + ((channelID == null) ? 0 : channelID.hashCode());
+
+        String tag = toSubcribe.get(result);
 
 
         ArrayList<OpenhabItem> list = (ArrayList<OpenhabItem>) modelMap.get(Integer.toString(deviceID));

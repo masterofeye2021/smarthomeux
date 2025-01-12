@@ -75,4 +75,16 @@ public class OpenhabItem {
     public int hashCode() {
         return (int) name.hashCode() * label.hashCode();
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null)
+            return false;
+        if (obj == this)
+            return true;
+        if (obj.getClass() != this.getClass())
+            return false;
+        OpenhabItem item = (OpenhabItem) obj;
+        return this.name.equals(item.getName());
+    }
 }

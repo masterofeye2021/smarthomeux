@@ -7,7 +7,7 @@ function connect() {
   this.stompClient = Stomp.over(socket);
   this.stompClient.reconnect_delay = 5000;
   this.stompClient.connect({}, onConnected, onError);
-  this.stompClient.debug = () => {}
+  //this.stompClient.debug = () => {}
 }
 
 /**
@@ -36,13 +36,15 @@ ItemStateChangedEventCallback = function (message) {
   const topic = getLastPartOfString(message.headers.destination);
   const payload = JSON.parse(message.body);
   const date = new Date(Date.now());
-  const timestamp = date.toLocaleDateString('de-DE', { day: "2-digit",
+  const timestamp = date.toLocaleDateString('de-DE', {
+    day: "2-digit",
     month: "2-digit",
     year: "numeric",
     hour: "2-digit",
     minute: "2-digit",
     second: "2-digit",
-    hour12: false});
+    hour12: false
+  });
 
   switch (topic) {
     case "TKR_R_NTP_Datetime":
@@ -50,10 +52,18 @@ ItemStateChangedEventCallback = function (message) {
       console.log("topic: " + topic + " value: " + payload.value + " timestamp: " + timestamp);
       break;
     default:
-      $("#" + topic).html(payload.value);
-      $("#" + topic).attr("data-timestamp", timestamp);
-      $("#" + topic).next(".unit").removeClass("d-none").addClass("d-inline"); 
-      console.log("topic: " + topic + " value: " + payload.value + " timestamp: " + timestamp);
+      try {
+        const value = JSON.parse(payload.value);
+        $("#" + topic).html(value.value);
+        $("#" + topic).attr("data-timestamp", timestamp);
+        $("#" + topic + "-timedate").html(timestamp);
+        console.log("topic: " + topic + " value: " + value.value + " timestamp: " + timestamp);
+      } catch (e) {
+        $("#" + topic).html(payload.value);
+        $("#" + topic).attr("data-timestamp", timestamp);
+        $("#" + topic + "-timedate").html(timestamp);
+        console.log("topic: " + topic + " value: " + payload.value + " timestamp: " + timestamp);
+      }
   }
 };
 
@@ -63,13 +73,15 @@ ItemStateUpdatedEventCallback = function (message) {
   const topic = getLastPartOfString(message.headers.destination);
   const payload = JSON.parse(message.body);
   const date = new Date(Date.now());
-  const timestamp = date.toLocaleDateString('de-DE', { day: "2-digit",
+  const timestamp = date.toLocaleDateString('de-DE', {
+    day: "2-digit",
     month: "2-digit",
     year: "numeric",
     hour: "2-digit",
     minute: "2-digit",
     second: "2-digit",
-    hour12: false});
+    hour12: false
+  });
 
   switch (topic) {
     case "TKR_R_NTP_Datetime":
@@ -77,11 +89,18 @@ ItemStateUpdatedEventCallback = function (message) {
       console.log("topic: " + topic + " value: " + payload.value + " timestamp: " + timestamp);
       break;
     default:
-      const value = JSON.parse(payload.value)
-      $("#" + topic).html(value.value);
-      $("#" + topic).attr("data-timestamp", timestamp);
-      $("#" + topic).next(".unit").css("display", "block");
-      console.log("topic: " + topic + " value: " + value.value + " timestamp: " + timestamp);
+      try {
+        const value = JSON.parse(payload.value);
+        $("#" + topic).html(value.value);
+        $("#" + topic).attr("data-timestamp", timestamp);
+        $("#" + topic + "-timedate").html(timestamp);
+        console.log("topic: " + topic + " value: " + value.value + " timestamp: " + timestamp);
+      } catch (e) {
+        $("#" + topic).html(payload.value);
+        $("#" + topic).attr("data-timestamp", timestamp);
+        $("#" + topic + "-timedate").html(timestamp);
+        console.log("topic: " + topic + " value: " + payload.value + " timestamp: " + timestamp);
+      }
   }
 }
 

@@ -53,7 +53,7 @@ public abstract class ModuleTemplate {
         this.sender = template;
     }
 
-    protected ArrayList<Pair<String,Integer>> openhabItemList = new ArrayList<Pair<String,Integer>>();
+    protected ArrayList<Pair<String, Integer>> openhabItemList = new ArrayList<Pair<String, Integer>>();
 
     protected boolean isItemInList(String item) {
         return this.openhabItemList.stream().anyMatch(e -> e.getValue0().equals(item));
@@ -65,7 +65,14 @@ public abstract class ModuleTemplate {
 
     public void addItem(String item, Integer deviceID, Integer channelID) {
         if (this.openhabItemList.stream().noneMatch(e -> e.getValue0().equals(item)))
-            openhabItemList.add(Pair.with(item, channelID.hashCode() * deviceID.hashCode()));
+        {
+            Integer prime = 31;
+            Integer result = 1;
+
+            result = prime * result + ((deviceID == null) ? 0 : deviceID.hashCode());
+            result += prime * result + ((channelID == null) ? 0 : channelID.hashCode());
+            openhabItemList.add(Pair.with(item, result));
+        }
     }
 
     protected void removeItem(String item) {
@@ -73,36 +80,36 @@ public abstract class ModuleTemplate {
             openhabItemList.removeIf(e -> e.getValue0().equals(item));
     }
 
-    public OpenhabItemContainer init(Model model,String modelAttributeName, boolean registerItemsInModel) {
+    public OpenhabItemContainer init(Model model, String modelAttributeName, boolean registerItemsInModel) {
 
         OpenhabItemContainer container = new OpenhabItemContainer();
         container.setName(modelAttributeName);
 
-        for (Pair<String,Integer> tag : this.openhabItemList) {
+        for (Pair<String, Integer> tag : this.openhabItemList) {
             /*
              * Items mit Init Values versorgen
              */
             OpenhabItem item = this.openhabRestService.getItemDetails(tag.getValue0()).block();
-            
+
             container.addItems(item);
             container.setArea(this.area);
 
-            ((HashMap<Integer,String>)model.getAttribute("toSubscribe")).put(tag.getValue1(), tag.getValue0());
-            
+            /*
+             * Sind alle Items hinzugefügt kann die Registry aufgerufen werden
+             */
+
+            this.register(item);
+
+            ((HashMap<Integer, String>) model.getAttribute("toSubscribe")).put(tag.getValue1(), tag.getValue0());
+
         }
 
         /**
          * Alle Attribute dem Model hinzufügen
          */
 
-        if(registerItemsInModel)
+        if (registerItemsInModel)
             model.addAttribute(container.getName(), container.getItems());
-
-        /*
-         * Sind alle Items hinzugefügt kann die Registry aufgerufen werden
-         */
-
-        this.register();
 
         int end = this.getAmountOfRegisteredItems();
         log.debug(end + " new Items registered.");
@@ -111,18 +118,16 @@ public abstract class ModuleTemplate {
 
     }
 
-    public OpenhabItemContainer init(Model model,String modelAttributeName) {
-        return init(model,modelAttributeName,true);
+    public OpenhabItemContainer init(Model model, String modelAttributeName) {
+        return init(model, modelAttributeName, true);
     }
-
-
 
     public abstract void deinit();
 
-    protected void register() {
-        for (Pair<String,Integer> tag : openhabItemList) {
-            openhabItemRegister.register(tag.getValue0());
-        }
+    protected void register(OpenhabItem item) {
+        if (item == null)
+            return;
+        this.openhabItemRegister.register(item);
     }
 
 }

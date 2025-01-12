@@ -49,6 +49,7 @@ import jakarta.xml.bind.annotation.XmlType;
  *                   </element>
  *                   <element name="ekey" type="{http://www.w3.org/2001/XMLSchema}anyType"/>
  *                   <element name="http" type="{http://www.w3.org/2001/XMLSchema}anyType"/>
+ *                   <element name="internal" type="{http://www.w3.org/2001/XMLSchema}anyType"/>
  *                 </choice>
  *               </restriction>
  *             </complexContent>
@@ -543,6 +544,7 @@ public class Channel {
      *         </element>
      *         <element name="ekey" type="{http://www.w3.org/2001/XMLSchema}anyType"/>
      *         <element name="http" type="{http://www.w3.org/2001/XMLSchema}anyType"/>
+     *         <element name="internal" type="{http://www.w3.org/2001/XMLSchema}anyType"/>
      *       </choice>
      *     </restriction>
      *   </complexContent>
@@ -559,7 +561,8 @@ public class Channel {
         "ical",
         "ntp",
         "ekey",
-        "http"
+        "http",
+        "internal"
     })
     public static class Connection {
 
@@ -570,6 +573,7 @@ public class Channel {
         protected Channel.Connection.Ntp ntp;
         protected Object ekey;
         protected Object http;
+        protected Object internal;
 
         /**
          * Ruft den Wert der knx-Eigenschaft ab.
@@ -737,6 +741,30 @@ public class Channel {
          */
         public void setHttp(Object value) {
             this.http = value;
+        }
+
+        /**
+         * Ruft den Wert der internal-Eigenschaft ab.
+         * 
+         * @return
+         *     possible object is
+         *     {@link Object }
+         *     
+         */
+        public Object getInternal() {
+            return internal;
+        }
+
+        /**
+         * Legt den Wert der internal-Eigenschaft fest.
+         * 
+         * @param value
+         *     allowed object is
+         *     {@link Object }
+         *     
+         */
+        public void setInternal(Object value) {
+            this.internal = value;
         }
 
 

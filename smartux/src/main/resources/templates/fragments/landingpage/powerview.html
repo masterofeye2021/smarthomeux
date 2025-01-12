@@ -8,16 +8,27 @@
      *                                                     *
      ******************************************************* -->
     <div th:fragment="power" class="text-center d-flex flex-column" style="height: 100%">
-        <div class="card" style="width: 18rem;">
-            <div class="card-header">
-                Kühlschrank
-            </div>
-            <img src="..." class="card-img-top" alt="...">
+        <div class="card" style="width: 18rem">
+            <div class="card-header">Waschmaschine</div>
             <ul class="list-group list-group-flush">
-
-                <li class="list-group-item" th:text="${T(de.smarthome.smartux.controller.PortalController).getItem(ModelMap,91,7).getState()}">An item</li>
-                <li class="list-group-item" th:text="${T(de.smarthome.smartux.controller.PortalController).getItem(ModelMap,91,4).getState()}">A second item</li>
-                <li class="list-group-item">A third item</li>
+                <li class="list-group-item">
+                    <span><i th:class="${'fa-sharp-duotone fa-light ' + T(de.smarthome.smartux.controller.PortalController).getItem(ModelMap,45,7).getCategory() + ' fa-xl'}"
+                            style="--fa-secondary-color: #387bf0">
+                        </i></span><span th:id="${T(de.smarthome.smartux.controller.PortalController).getItem(ModelMap,45,7).getName()}"
+                        th:text="${T(de.smarthome.smartux.controller.PortalController).getItem(ModelMap,45,7).getState() != 'NULL' ? T(java.lang.String).format(T(java.util.Locale).US,T(de.smarthome.smartux.controller.PortalController).getItem(ModelMap,45,7).getStateDescription().getPattern(),T(java.lang.Float).parseFloat(T(de.smarthome.smartux.controller.PortalController).getItem(ModelMap,45,7).getState())): 0}"></span>
+                </li>
+                <li class="list-group-item">
+                <span><i th:class="${'fa-sharp-duotone fa-light ' + T(de.smarthome.smartux.controller.PortalController).getItem(ModelMap,45,4).getCategory() + ' fa-xl'}"
+                    style="--fa-secondary-color: #387bf0">
+                </i></span><span th:id="${T(de.smarthome.smartux.controller.PortalController).getItem(ModelMap,45,4).getName()}"
+                th:text="${T(de.smarthome.smartux.controller.PortalController).getItem(ModelMap,45,4).getState() != 'NULL' ? T(java.lang.String).format(T(java.util.Locale).US,T(de.smarthome.smartux.controller.PortalController).getItem(ModelMap,45,4).getStateDescription().getPattern(),T(java.lang.Float).parseFloat(T(de.smarthome.smartux.controller.PortalController).getItem(ModelMap,45,4).getState())): 0}"></span>
+                </li>
+                <li class="list-group-item">
+                    <span><i th:class="${'fa-sharp-duotone fa-light ' + T(de.smarthome.smartux.controller.PortalController).getItem(ModelMap,45,5).getCategory() + ' fa-xl'}"
+                        style="--fa-secondary-color: #387bf0">
+                    </i></span><span th:id="${T(de.smarthome.smartux.controller.PortalController).getItem(ModelMap,45,5).getName()}"
+                    th:text="${T(de.smarthome.smartux.controller.PortalController).getItem(ModelMap,45,5).getState() != 'NULL' ? T(java.lang.String).format(T(java.util.Locale).US,T(de.smarthome.smartux.controller.PortalController).getItem(ModelMap,45,5).getStateDescription().getPattern(),T(java.lang.Float).parseFloat(T(de.smarthome.smartux.controller.PortalController).getItem(ModelMap,45,5).getState())): 0}"></span>
+                </li>
             </ul>
         </div>
     </div>
@@ -27,9 +38,6 @@
      * Javascript Code für die Manipulierung der Daten     *
      *                                                     *
      ******************************************************* -->
-<script th:fragment="pre-footer"  >
-    
-
-</script>
+<script th:fragment="pre-footer"></script>
 
 </html>

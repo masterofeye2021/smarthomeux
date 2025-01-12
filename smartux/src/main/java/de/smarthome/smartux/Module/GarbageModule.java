@@ -46,6 +46,12 @@ public class GarbageModule extends ModuleTemplate {
             OpenhabItem item = this.openhabRestService.getItemDetails(tag.getValue0()).block();
             item.setState(String.valueOf(remainingDays));
 
+            /*
+            * Sind alle Items hinzugefügt kann die Registry aufgerufen werden
+            */
+
+            this.register(item);
+
             container.addItems(item);
 
         }
@@ -61,11 +67,7 @@ public class GarbageModule extends ModuleTemplate {
 
         ((Map<Integer,String>) model.getAttribute("toSubscribe")).putAll(this.openhabItemList.stream().collect(Collectors.toMap(Pair::getValue1, Pair::getValue0)));
 
-        /*
-         * Sind alle Items hinzugefügt kann die Registry aufgerufen werden
-         */
 
-        this.register();
         return container;
     }
 
