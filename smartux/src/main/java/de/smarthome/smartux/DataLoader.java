@@ -111,7 +111,7 @@ public class DataLoader {
 
     private void registerChannels(Device device, ModuleTemplate module) {
         List<Device.Channel> channels = device.getChannel();
-        for (int i = 0; i <= channels.size(); i++) {
+        for (int i = 1; i <= channels.size(); i++) {
             final int currentIndex = i;
             Optional<Device.Channel> channelOpt = channels.stream()
                     .filter(channel -> channel.getChannelId() == currentIndex && channel.isEnable() == true)

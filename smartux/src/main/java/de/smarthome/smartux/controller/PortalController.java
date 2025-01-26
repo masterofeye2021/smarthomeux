@@ -1,7 +1,6 @@
 package de.smarthome.smartux.controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import de.smarthome.smartux.OpenhabItemRegister;
-import de.smarthome.smartux.OpenhabRestService;
 import de.smarthome.smartux.helper.OpenhabItemService;
-import de.smarthome.smartux.mainDataModel.OpenhabItem;
 import de.smarthome.smartux.mainDataModel.OpenhabItemContainer;
 import de.smarthome.smartux.module.DateTimeModule;
 import de.smarthome.smartux.module.DoorAccessModule;
@@ -44,41 +40,37 @@ public class PortalController {
     public String getIndex(Model model) {
 
         GarbageModule gb = (GarbageModule) applicationContext.getBean(GarbageModule.class);
-        
+        openhabItemService.updateOpenhabItem(gb);
         gb.addItemsToModel(model);
+
+        DateTimeModule tm = (DateTimeModule) applicationContext.getBean(DateTimeModule.class);
+        openhabItemService.updateOpenhabItem(tm);
+
+        DoorBellModule doorbell = (DoorBellModule) applicationContext.getBean(DoorBellModule.class);
+        openhabItemService.updateOpenhabItem(doorbell);
+
+        EkeyModule ekey = (EkeyModule) applicationContext.getBean(EkeyModule.class);
+        openhabItemService.updateOpenhabItem(ekey);
+
+        DoorAccessModule doorAccess = (DoorAccessModule) applicationContext.getBean(DoorAccessModule.class);
+        openhabItemService.updateOpenhabItem(doorAccess);
+
+        PowerModule washmachine = (PowerModule) applicationContext.getBean("45",PowerModule.class);
+        openhabItemService.updateOpenhabItem(washmachine);
+
+        PowerModule dryer = (PowerModule) applicationContext.getBean("90",PowerModule.class);
+        openhabItemService.updateOpenhabItem(dryer);
+
+        PowerModule fridge = (PowerModule) applicationContext.getBean("91",PowerModule.class);
+        openhabItemService.updateOpenhabItem(fridge);
+
+        Map<String,SteinelPraesenzModule> listOfPraesenzModule = applicationContext.getBeansOfType(SteinelPraesenzModule.class);
+        listOfPraesenzModule.forEach((name, bean) -> {
+            openhabItemService.updateOpenhabItem(bean);
+        });
 
         model.addAttribute("service", openhabItemService);
 
-        /*DateTimeModule tm = (DateTimeModule) applicationContext.getBean(DateTimeModule.class);
-        tm.init(model, "18");
-
-        DoorBellModule doorbell = (DoorBellModule) applicationContext.getBean(DoorBellModule.class);
-        doorbell.init(model, "201");
-
-        EkeyModule ekey = (EkeyModule) applicationContext.getBean(EkeyModule.class);
-        ekey.init(model, "200");
-
-        DoorAccessModule doorAccess = (DoorAccessModule) applicationContext.getBean(DoorAccessModule.class);
-        doorAccess.init(model, "35");
-
-        PowerModule washmachine = (PowerModule) applicationContext.getBean("45",PowerModule.class);
-        washmachine.init(model, "45");
-
-        //PowerModule dryer = (PowerModule) applicationContext.getBean("90",PowerModule.class);
-        //dryer.init(model, "90");
-
-        PowerModule fridge = (PowerModule) applicationContext.getBean("91",PowerModule.class);
-        fridge.init(model, "91");
-        
-
-        ArrayList<OpenhabItemContainer> containerForPraesenzModuls = new ArrayList<>();
-        Map<String,SteinelPraesenzModule> listOfPraesenzModule = applicationContext.getBeansOfType(SteinelPraesenzModule.class);
-        listOfPraesenzModule.forEach((name, bean) -> {
-            containerForPraesenzModuls.add(bean.init(model,name,false));
-        });
-        model.addAttribute("SteinelPraesenzModuleData", containerForPraesenzModuls);
-        model.addAttribute("ModelMap", model.asMap());
-        */
         return "index.html";
     }
 

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import de.smarthome.smartux.OpenhabRestService;
 import de.smarthome.smartux.mainDataModel.OpenhabItem;
+import de.smarthome.smartux.module.ModuleTemplate;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
@@ -87,6 +88,23 @@ public class OpenhabItemService {
             int key = generateKey(deviceID, channelID);
             OpenhabItem ohItem = itemCache.get(key);
             itemCache.put(key, fetchItemDetails(ohItem.getName()));
+            return true;
+        } catch (Exception e) {
+            log.error("Error while updating item", e);
+            return false;
+        }
+    }
+
+    public boolean updateOpenhabItem(ModuleTemplate module) {
+        try {
+            for (int channelID = 1; channelID <= module.getAmountOfChannels(); channelID++) {
+                int key = generateKey(module.getDeviceID(), channelID);
+                OpenhabItem ohItem = itemCache.get(key);
+                if (ohItem == null) {
+                  throw new RuntimeException("Item not found");
+                }
+                itemCache.put(key, fetchItemDetails(ohItem.getName()));
+            }
             return true;
         } catch (Exception e) {
             log.error("Error while updating item", e);

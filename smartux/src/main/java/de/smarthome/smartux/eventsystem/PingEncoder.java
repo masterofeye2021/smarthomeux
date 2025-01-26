@@ -2,7 +2,6 @@ package de.smarthome.smartux.eventSystem;
 
 import com.google.gson.Gson;
 
-import de.Message;
 import de.Ping;
 import jakarta.websocket.EncodeException;
 import jakarta.websocket.Encoder;
