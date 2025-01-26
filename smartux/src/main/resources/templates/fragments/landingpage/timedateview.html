@@ -9,9 +9,9 @@
      ******************************************************* -->
   <div th:fragment="timedate" class="text-center d-flex flex-column" style="height: 100%">
     <div id="timemodule_date" class="row fs-3 flex-grow-1 align-items-center justify-content-center text-secondary"
-      th:text="${T(de.smarthome.smartux.module.DateTimeModule).extractDate(T(de.smarthome.smartux.controller.PortalController).getItem(ModelMap,18,1).getState())}"></div>
+      th:text="${T(de.smarthome.smartux.module.DateTimeModule).extractDate(service.item(18, 1).getState())}"></div>
     <div id="timemodule_time" class="row fs-1 flex-grow-1 align-items-center justify-content-center fw-bold"
-      th:text="${T(de.smarthome.smartux.module.DateTimeModule).extractTime(T(de.smarthome.smartux.controller.PortalController).getItem(ModelMap,18,1).getState())}"></div>
+      th:text="${T(de.smarthome.smartux.module.DateTimeModule).extractTime(service.item(18, 1).getState())}"></div>
   </div>
 </body>
 <!-- *******************************************************

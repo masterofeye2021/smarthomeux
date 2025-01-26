@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Component;
 
+import de.smarthome.smartux.helper.OpenhabItemService;
 import de.smarthome.smartux.module.DateTimeModule;
 import de.smarthome.smartux.module.DoorAccessModule;
 import de.smarthome.smartux.module.DoorBellModule;
@@ -32,21 +33,30 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class DataLoader {
 
-    @Autowired
-    private OpenhabRestService openhabRestService;
+    private final OpenhabItemService openhabItemService;
 
-    @Autowired
-    private OpenhabItemRegister openhabItemRegister;
+    private final DynamicBeanRegistrar beanRegistrar;
 
-    @Autowired
-    private DynamicBeanRegistrar beanRegistrar;
+    private final SimpMessagingTemplate template;
 
-    @Autowired
-    private SimpMessagingTemplate template;
+    public DataLoader(OpenhabItemService openhabItemService, DynamicBeanRegistrar beanRegistrar, SimpMessagingTemplate template ) {
+        this.openhabItemService = openhabItemService;
+        this.beanRegistrar = beanRegistrar;
+        this.template = template;
+    }
 
     @PostConstruct
     private void loader() {
-        File xmlFile = new File("C:\\Projekte\\xml2OH\\SmartHomeConfiguration.xml");
+        boolean isWindows = System.getProperty("os.name").startsWith("Windows");
+        File xmlFile = null;
+        if (isWindows) {
+            xmlFile = new File("C:\\Projekte\\xml2OH\\SmartHomeConfiguration.xml");
+            
+        } else {
+            xmlFile = new File("/opt/smartux/SmartHomeConfiguration.xml");
+        }
+
+         
 
         try {
             JAXBContext jaxbContext = JAXBContext.newInstance(Openhab.class);
@@ -54,6 +64,9 @@ public class DataLoader {
             Openhab openhab = (Openhab) jaxbUnmarshaller.unmarshal(xmlFile);
 
             openhab.getDevices().getDevice().forEach(this::processDevice);
+
+
+            
 
         } catch (JAXBException e) {
             log.error("Error while loading XML file", e);
@@ -83,15 +96,15 @@ public class DataLoader {
 
     private ModuleTemplate createModule(Device device, String name) {
         return switch (device.getDeviceSpecification()) {
-            case DeviceSpecification.NTP_BINDING -> new DateTimeModule(openhabRestService, openhabItemRegister, template);
-            case DeviceSpecification.ICAL_BINDING -> new GarbageModule(openhabRestService, openhabItemRegister, template);
-            case DeviceSpecification.ROLLADEN_MDTKNX -> new ShutterModule(openhabRestService, openhabItemRegister, template);
-            case DeviceSpecification.STEINEL_TRUE_PRÄSENZ -> new SteinelPraesenzModule(openhabRestService, openhabItemRegister, template);
-            case DeviceSpecification.LIGHT_KN_XFULL -> new LightFullModule(openhabRestService, openhabItemRegister, template);
-            case DeviceSpecification.POWER_KNX -> new PowerModule(openhabRestService, openhabItemRegister, template);
-            case DeviceSpecification.DOOR_EKEY -> new EkeyModule(openhabRestService, openhabItemRegister, template);
-            case DeviceSpecification.DOOR_BELL_HTTP -> new DoorBellModule(openhabRestService, openhabItemRegister, template); //@TODO HTTP Ist hier nicht die richtige variante
-            case DeviceSpecification.DOOR_ACCESS_KNX -> new DoorAccessModule(openhabRestService, openhabItemRegister, template);
+            case DeviceSpecification.NTP_BINDING -> new DateTimeModule(device.getDeviceId(), device.getChannel().size(), openhabItemService, template);
+            case DeviceSpecification.ICAL_BINDING -> new GarbageModule(device.getDeviceId(), device.getChannel().size(), openhabItemService, template);
+            case DeviceSpecification.ROLLADEN_MDTKNX -> new ShutterModule(device.getDeviceId(), device.getChannel().size(), openhabItemService, template);
+            case DeviceSpecification.STEINEL_TRUE_PRÄSENZ -> new SteinelPraesenzModule(device.getDeviceId(), device.getChannel().size(), openhabItemService, template);
+            case DeviceSpecification.LIGHT_KN_XFULL -> new LightFullModule(device.getDeviceId(), device.getChannel().size(), openhabItemService, template);
+            case DeviceSpecification.POWER_KNX -> new PowerModule(device.getDeviceId(), device.getChannel().size(), openhabItemService, template);
+            case DeviceSpecification.DOOR_EKEY -> new EkeyModule(device.getDeviceId(), device.getChannel().size(), openhabItemService, template);
+            case DeviceSpecification.DOOR_BELL_HTTP -> new DoorBellModule(device.getDeviceId(), device.getChannel().size(), openhabItemService, template); //@TODO HTTP Ist hier nicht die richtige variante
+            case DeviceSpecification.DOOR_ACCESS_KNX -> new DoorAccessModule(device.getDeviceId(), device.getChannel().size(), openhabItemService, template);
             default -> null;
         };
     }

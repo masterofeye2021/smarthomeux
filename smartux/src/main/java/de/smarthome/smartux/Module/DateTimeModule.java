@@ -8,10 +8,9 @@ import java.util.Locale;
 import org.springframework.context.event.EventListener;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 
-import de.smarthome.smartux.OpenhabItemRegister;
-import de.smarthome.smartux.OpenhabRestService;
-import de.smarthome.smartux.eventsystem.ItemStateChangedEvent;
-import de.smarthome.smartux.eventsystem.ItemStateUpdatedEvent;
+import de.smarthome.smartux.eventSystem.eventTypes.ItemStateChangedEvent;
+import de.smarthome.smartux.eventSystem.eventTypes.ItemStateUpdatedEvent;
+import de.smarthome.smartux.helper.OpenhabItemService;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
@@ -19,9 +18,8 @@ import lombok.extern.slf4j.Slf4j;
 @Data
 public class DateTimeModule extends ModuleTemplate {
 
-    public DateTimeModule(OpenhabRestService openhabRestService, OpenhabItemRegister openhabItemRegister,
-            SimpMessagingTemplate template) {
-        super(openhabRestService, openhabItemRegister, template);
+    public DateTimeModule(int deviceID, int amountOfChannels, OpenhabItemService service, SimpMessagingTemplate template) {
+        super(deviceID, amountOfChannels, service, template);
     }
 
     @Override
@@ -32,27 +30,23 @@ public class DateTimeModule extends ModuleTemplate {
 
     @EventListener
     public void handleCustomEvent(ItemStateUpdatedEvent event) {
-        if (isItemInList(event.getItem())) {
-            log.trace("ItemStateUpdatedEvent wurde von [" + this.name + "] mit dem Wert [" + event.getValue()
-                    + "] empfangen");
+        if (openhabItemService.isItemInCache(event.getItem())) {
+            log.trace("ItemStateUpdatedEvent wurde von [" + this.name + "] mit dem Wert [" + event.getValue() + "] empfangen");
             sender.convertAndSend("/ItemStateUpdatedEvent/" + event.getItem(), event.getValue());
         }
     }
 
     @EventListener
     public void handleCustomEvent(ItemStateChangedEvent event) {
-        if (isItemInList(event.getItem())) {
-            log.trace("ItemStateChangedEvent wurde von [" + this.name + "] mit dem Wert [" + event.getValue()
-                    + "] empfangen");
-            
+        if (openhabItemService.isItemInCache(event.getItem())) {
+            log.trace("ItemStateChangedEvent wurde von [" + this.name + "] mit dem Wert [" + event.getValue() + "] empfangen");
             sender.convertAndSend("/ItemStateChangedEvent/" + event.getItem(), event.getValue());
         }
     }
 
-    
     private static final DateTimeFormatter CUSTOM_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
     private static final DateTimeFormatter DATEFORMAT = DateTimeFormatter.ofPattern("EEEE, dd.MM.yyyy", Locale.GERMAN);
-    private static final DateTimeFormatter TIMEFORMAT = DateTimeFormatter.ofPattern("HH:mm",Locale.GERMAN);
+    private static final DateTimeFormatter TIMEFORMAT = DateTimeFormatter.ofPattern("HH:mm", Locale.GERMAN);
 
     public static String extractDate(String dateTimeString) {
         try {

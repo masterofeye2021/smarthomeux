@@ -1,4 +1,4 @@
-package de.smarthome.smartux.eventsystem;
+package de.smarthome.smartux.eventSystem;
 
 import com.google.gson.Gson;
 

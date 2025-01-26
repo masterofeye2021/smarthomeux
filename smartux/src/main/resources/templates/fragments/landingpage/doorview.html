@@ -15,8 +15,8 @@
             <img src="..." class="card-img-top" alt="...">
             <ul class="list-group list-group-flush">
 
-                <li class="list-group-item" th:id="${T(de.smarthome.smartux.controller.PortalController).getItem(ModelMap,200,1).getName()}" th:text="${T(de.smarthome.smartux.controller.PortalController).getItem(ModelMap,200,1).getMetadata().getSmartux()['config'][T(de.smarthome.smartux.controller.PortalController).getItem(ModelMap,200,1).getState()]}">An item</li>
-                <li class="list-group-item" th:id="${T(de.smarthome.smartux.controller.PortalController).getItem(ModelMap,201,1).getName()}" th:text="${T(de.smarthome.smartux.controller.PortalController).getItem(ModelMap,201,1).getState()}">A second item</li>
+                <li class="list-group-item" th:id="${service.item(200, 1).getName()}" th:text="${service.item(200, 1).getMetadata().getSmartux()['config'][service.item(200, 1).getState()]}">An item</li>
+                <li class="list-group-item" th:id="${service.item(201, 1).getName()}" th:text="${service.item(201, 1).getState()}">A second item</li>
                 <li class="list-group-item">A third item</li>
             </ul>
         </div>

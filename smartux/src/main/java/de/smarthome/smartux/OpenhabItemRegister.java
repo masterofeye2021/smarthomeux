@@ -1,6 +1,7 @@
 package de.smarthome.smartux;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 import org.springframework.stereotype.Component;
 
@@ -29,9 +30,9 @@ public class OpenhabItemRegister {
         return false;
     }
 
-    public OpenhabItem  getItem(String itemName)
+    public Optional<OpenhabItem> getItem(String itemName)
     {
-        return registerOfItems.stream().filter(i-> i.getName().equals(itemName)).findFirst().get();
+        return registerOfItems.stream().filter(i-> i.getName().equals(itemName)).findFirst();
     }
 
 

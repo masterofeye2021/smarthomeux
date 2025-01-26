@@ -50,6 +50,7 @@ import jakarta.xml.bind.annotation.XmlType;
  *                   <element name="ekey" type="{http://www.w3.org/2001/XMLSchema}anyType"/>
  *                   <element name="http" type="{http://www.w3.org/2001/XMLSchema}anyType"/>
  *                   <element name="internal" type="{http://www.w3.org/2001/XMLSchema}anyType"/>
+ *                   <element ref="{}alexa.communication"/>
  *                 </choice>
  *               </restriction>
  *             </complexContent>
@@ -95,6 +96,15 @@ import jakarta.xml.bind.annotation.XmlType;
  *             </complexContent>
  *           </complexType>
  *         </element>
+ *         <element name="mapref" minOccurs="0">
+ *           <complexType>
+ *             <complexContent>
+ *               <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *                 <attribute name="refid2" type="{http://www.w3.org/2001/XMLSchema}IDREF" />
+ *               </restriction>
+ *             </complexContent>
+ *           </complexType>
+ *         </element>
  *       </all>
  *       <attribute name="format" use="required" type="{}format" />
  *       <attribute name="unit" use="required" type="{}unit" />
@@ -136,6 +146,7 @@ public class Channel {
     protected Channel.Groups groups;
     protected Alexa alexa;
     protected Channel.Meta meta;
+    protected Channel.Mapref mapref;
     @XmlAttribute(name = "format", required = true)
     protected String format;
     @XmlAttribute(name = "unit", required = true)
@@ -277,6 +288,30 @@ public class Channel {
      */
     public void setMeta(Channel.Meta value) {
         this.meta = value;
+    }
+
+    /**
+     * Ruft den Wert der mapref-Eigenschaft ab.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Channel.Mapref }
+     *     
+     */
+    public Channel.Mapref getMapref() {
+        return mapref;
+    }
+
+    /**
+     * Legt den Wert der mapref-Eigenschaft fest.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Channel.Mapref }
+     *     
+     */
+    public void setMapref(Channel.Mapref value) {
+        this.mapref = value;
     }
 
     /**
@@ -545,6 +580,7 @@ public class Channel {
      *         <element name="ekey" type="{http://www.w3.org/2001/XMLSchema}anyType"/>
      *         <element name="http" type="{http://www.w3.org/2001/XMLSchema}anyType"/>
      *         <element name="internal" type="{http://www.w3.org/2001/XMLSchema}anyType"/>
+     *         <element ref="{}alexa.communication"/>
      *       </choice>
      *     </restriction>
      *   </complexContent>
@@ -562,7 +598,8 @@ public class Channel {
         "ntp",
         "ekey",
         "http",
-        "internal"
+        "internal",
+        "alexaCommunication"
     })
     public static class Connection {
 
@@ -574,6 +611,8 @@ public class Channel {
         protected Object ekey;
         protected Object http;
         protected Object internal;
+        @XmlElement(name = "alexa.communication")
+        protected AlexaCommunication alexaCommunication;
 
         /**
          * Ruft den Wert der knx-Eigenschaft ab.
@@ -767,6 +806,30 @@ public class Channel {
             this.internal = value;
         }
 
+        /**
+         * Ruft den Wert der alexaCommunication-Eigenschaft ab.
+         * 
+         * @return
+         *     possible object is
+         *     {@link AlexaCommunication }
+         *     
+         */
+        public AlexaCommunication getAlexaCommunication() {
+            return alexaCommunication;
+        }
+
+        /**
+         * Legt den Wert der alexaCommunication-Eigenschaft fest.
+         * 
+         * @param value
+         *     allowed object is
+         *     {@link AlexaCommunication }
+         *     
+         */
+        public void setAlexaCommunication(AlexaCommunication value) {
+            this.alexaCommunication = value;
+        }
+
 
         /**
          * <p>Java-Klasse für anonymous complex type.</p>
@@ -913,6 +976,59 @@ public class Channel {
                 this.refid = value;
             }
 
+        }
+
+    }
+
+
+    /**
+     * <p>Java-Klasse für anonymous complex type.</p>
+     * 
+     * <p>Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.</p>
+     * 
+     * <pre>{@code
+     * <complexType>
+     *   <complexContent>
+     *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+     *       <attribute name="refid2" type="{http://www.w3.org/2001/XMLSchema}IDREF" />
+     *     </restriction>
+     *   </complexContent>
+     * </complexType>
+     * }</pre>
+     * 
+     * 
+     */
+    @XmlAccessorType(XmlAccessType.FIELD)
+    @XmlType(name = "")
+    public static class Mapref {
+
+        @XmlAttribute(name = "refid2")
+        @XmlIDREF
+        @XmlSchemaType(name = "IDREF")
+        protected Object refid2;
+
+        /**
+         * Ruft den Wert der refid2-Eigenschaft ab.
+         * 
+         * @return
+         *     possible object is
+         *     {@link Object }
+         *     
+         */
+        public Object getRefid2() {
+            return refid2;
+        }
+
+        /**
+         * Legt den Wert der refid2-Eigenschaft fest.
+         * 
+         * @param value
+         *     allowed object is
+         *     {@link Object }
+         *     
+         */
+        public void setRefid2(Object value) {
+            this.refid2 = value;
         }
 
     }

@@ -12,22 +12,22 @@
             <div class="card-header">Waschmaschine</div>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">
-                    <span><i th:class="${'fa-sharp-duotone fa-light ' + T(de.smarthome.smartux.controller.PortalController).getItem(ModelMap,45,7).getCategory() + ' fa-xl'}"
+                    <span><i th:class="${'fa-sharp-duotone fa-light ' + service.item(45, 7).getCategory() + ' fa-xl'}"
                             style="--fa-secondary-color: #387bf0">
-                        </i></span><span th:id="${T(de.smarthome.smartux.controller.PortalController).getItem(ModelMap,45,7).getName()}"
-                        th:text="${T(de.smarthome.smartux.controller.PortalController).getItem(ModelMap,45,7).getState() != 'NULL' ? T(java.lang.String).format(T(java.util.Locale).US,T(de.smarthome.smartux.controller.PortalController).getItem(ModelMap,45,7).getStateDescription().getPattern(),T(java.lang.Float).parseFloat(T(de.smarthome.smartux.controller.PortalController).getItem(ModelMap,45,7).getState())): 0}"></span>
+                        </i></span><span th:id="${service.item(45, 7).getName()}"
+                        th:text="${service.item(45, 7).getState() != 'NULL' ? T(java.lang.String).format(T(java.util.Locale).US, service.item(45, 7).getStateDescription().getPattern(), T(java.lang.Float).parseFloat(service.item(45, 7).getState())): 0}"></span>
                 </li>
                 <li class="list-group-item">
-                <span><i th:class="${'fa-sharp-duotone fa-light ' + T(de.smarthome.smartux.controller.PortalController).getItem(ModelMap,45,4).getCategory() + ' fa-xl'}"
+                <span><i th:class="${'fa-sharp-duotone fa-light ' + service.item(45, 4).getCategory() + ' fa-xl'}"
                     style="--fa-secondary-color: #387bf0">
-                </i></span><span th:id="${T(de.smarthome.smartux.controller.PortalController).getItem(ModelMap,45,4).getName()}"
-                th:text="${T(de.smarthome.smartux.controller.PortalController).getItem(ModelMap,45,4).getState() != 'NULL' ? T(java.lang.String).format(T(java.util.Locale).US,T(de.smarthome.smartux.controller.PortalController).getItem(ModelMap,45,4).getStateDescription().getPattern(),T(java.lang.Float).parseFloat(T(de.smarthome.smartux.controller.PortalController).getItem(ModelMap,45,4).getState())): 0}"></span>
+                </i></span><span th:id="${service.item(45, 4).getName()}"
+                th:text="${service.item(45, 4).getState() != 'NULL' ? T(java.lang.String).format(T(java.util.Locale).US, service.item(45, 4).getStateDescription().getPattern(), T(java.lang.Float).parseFloat(service.item(45, 4).getState())): 0}"></span>
                 </li>
                 <li class="list-group-item">
-                    <span><i th:class="${'fa-sharp-duotone fa-light ' + T(de.smarthome.smartux.controller.PortalController).getItem(ModelMap,45,5).getCategory() + ' fa-xl'}"
+                    <span><i th:class="${'fa-sharp-duotone fa-light ' + service.item(45, 5).getCategory() + ' fa-xl'}"
                         style="--fa-secondary-color: #387bf0">
-                    </i></span><span th:id="${T(de.smarthome.smartux.controller.PortalController).getItem(ModelMap,45,5).getName()}"
-                    th:text="${T(de.smarthome.smartux.controller.PortalController).getItem(ModelMap,45,5).getState() != 'NULL' ? T(java.lang.String).format(T(java.util.Locale).US,T(de.smarthome.smartux.controller.PortalController).getItem(ModelMap,45,5).getStateDescription().getPattern(),T(java.lang.Float).parseFloat(T(de.smarthome.smartux.controller.PortalController).getItem(ModelMap,45,5).getState())): 0}"></span>
+                    </i></span><span th:id="${service.item(45, 5).getName()}"
+                    th:text="${service.item(45, 5).getState() != 'NULL' ? T(java.lang.String).format(T(java.util.Locale).US, service.item(45, 5).getStateDescription().getPattern(), T(java.lang.Float).parseFloat(service.item(45, 5).getState())): 0}"></span>
                 </li>
             </ul>
         </div>

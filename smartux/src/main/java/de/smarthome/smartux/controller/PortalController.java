@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import de.smarthome.smartux.OpenhabItemRegister;
 import de.smarthome.smartux.OpenhabRestService;
+import de.smarthome.smartux.helper.OpenhabItemService;
 import de.smarthome.smartux.mainDataModel.OpenhabItem;
 import de.smarthome.smartux.mainDataModel.OpenhabItemContainer;
 import de.smarthome.smartux.module.DateTimeModule;
@@ -26,11 +27,7 @@ import nz.net.ultraq.thymeleaf.layoutdialect.LayoutDialect;
 @Controller
 public class PortalController {
 
-    @Autowired
-    OpenhabItemRegister openhabItemRegister;
-    
-    @Autowired
-    OpenhabRestService openhabRestService;
+    private final OpenhabItemService openhabItemService;
 
     
     @Autowired
@@ -38,19 +35,21 @@ public class PortalController {
 
     private final ApplicationContext applicationContext;
 
-    public PortalController(ApplicationContext applicationContext) {
+    public PortalController(OpenhabItemService openhabItemService, ApplicationContext applicationContext) {
         this.applicationContext = applicationContext;
+        this.openhabItemService = openhabItemService;
     }
 
     @GetMapping("/index")
     public String getIndex(Model model) {
-        Map<Integer,String> toSubcribe = new HashMap<>();
-        model.addAttribute("toSubscribe", toSubcribe);
+
         GarbageModule gb = (GarbageModule) applicationContext.getBean(GarbageModule.class);
         
-        gb.init(model, "14");
+        gb.addItemsToModel(model);
 
-        DateTimeModule tm = (DateTimeModule) applicationContext.getBean(DateTimeModule.class);
+        model.addAttribute("service", openhabItemService);
+
+        /*DateTimeModule tm = (DateTimeModule) applicationContext.getBean(DateTimeModule.class);
         tm.init(model, "18");
 
         DoorBellModule doorbell = (DoorBellModule) applicationContext.getBean(DoorBellModule.class);
@@ -79,26 +78,11 @@ public class PortalController {
         });
         model.addAttribute("SteinelPraesenzModuleData", containerForPraesenzModuls);
         model.addAttribute("ModelMap", model.asMap());
-        
+        */
         return "index.html";
     }
 
-    public static OpenhabItem getItem(Map<String, Object> modelMap,Integer deviceID, Integer channelID)
-    {
-        Map<Integer,String> toSubcribe = (Map<Integer, String>) modelMap.get("toSubscribe");
 
-        Integer prime = 31;
-        Integer result = 1;
-
-        result = prime * result + ((deviceID == null) ? 0 : deviceID.hashCode());
-        result += prime * result + ((channelID == null) ? 0 : channelID.hashCode());
-
-        String tag = toSubcribe.get(result);
-
-
-        ArrayList<OpenhabItem> list = (ArrayList<OpenhabItem>) modelMap.get(Integer.toString(deviceID));
-        return list.stream().filter(e -> e.getName().equals(tag)).findFirst().orElseThrow();     
-    }
 
 
 

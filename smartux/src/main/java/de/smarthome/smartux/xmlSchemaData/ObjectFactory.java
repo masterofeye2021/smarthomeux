@@ -86,6 +86,26 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link Openhab }
+     * 
+     * @return
+     *     the new instance of {@link Openhab }
+     */
+    public Openhab createOpenhab() {
+        return new Openhab();
+    }
+
+    /**
+     * Create an instance of {@link AlexaConfiguration }
+     * 
+     * @return
+     *     the new instance of {@link AlexaConfiguration }
+     */
+    public AlexaConfiguration createAlexaConfiguration() {
+        return new AlexaConfiguration();
+    }
+
+    /**
      * Create an instance of {@link de.smarthome.smartux.xmlSchemaData.Group }
      * 
      * @return
@@ -186,16 +206,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Openhab }
-     * 
-     * @return
-     *     the new instance of {@link Openhab }
-     */
-    public Openhab createOpenhab() {
-        return new Openhab();
-    }
-
-    /**
      * Create an instance of {@link KnxConfiguration.Bridge }
      * 
      * @return
@@ -256,6 +266,36 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link Openhab.Definition }
+     * 
+     * @return
+     *     the new instance of {@link Openhab.Definition }
+     */
+    public Openhab.Definition createOpenhabDefinition() {
+        return new Openhab.Definition();
+    }
+
+    /**
+     * Create an instance of {@link AlexaConfiguration.Bridge }
+     * 
+     * @return
+     *     the new instance of {@link AlexaConfiguration.Bridge }
+     */
+    public AlexaConfiguration.Bridge createAlexaConfigurationBridge() {
+        return new AlexaConfiguration.Bridge();
+    }
+
+    /**
+     * Create an instance of {@link AlexaConfiguration.Thing }
+     * 
+     * @return
+     *     the new instance of {@link AlexaConfiguration.Thing }
+     */
+    public AlexaConfiguration.Thing createAlexaConfigurationThing() {
+        return new AlexaConfiguration.Thing();
+    }
+
+    /**
      * Create an instance of {@link Ical }
      * 
      * @return
@@ -263,6 +303,46 @@ public class ObjectFactory {
      */
     public Ical createIcal() {
         return new Ical();
+    }
+
+    /**
+     * Create an instance of {@link AreaMap }
+     * 
+     * @return
+     *     the new instance of {@link AreaMap }
+     */
+    public AreaMap createAreaMap() {
+        return new AreaMap();
+    }
+
+    /**
+     * Create an instance of {@link Param }
+     * 
+     * @return
+     *     the new instance of {@link Param }
+     */
+    public Param createParam() {
+        return new Param();
+    }
+
+    /**
+     * Create an instance of {@link IdmMap }
+     * 
+     * @return
+     *     the new instance of {@link IdmMap }
+     */
+    public IdmMap createIdmMap() {
+        return new IdmMap();
+    }
+
+    /**
+     * Create an instance of {@link AlexaCommunication }
+     * 
+     * @return
+     *     the new instance of {@link AlexaCommunication }
+     */
+    public AlexaCommunication createAlexaCommunication() {
+        return new AlexaCommunication();
     }
 
     /**
@@ -333,6 +413,16 @@ public class ObjectFactory {
      */
     public KnxAddress.ListeningGa createKnxAddressListeningGa() {
         return new KnxAddress.ListeningGa();
+    }
+
+    /**
+     * Create an instance of {@link de.smarthome.smartux.xmlSchemaData.Channel.Mapref }
+     * 
+     * @return
+     *     the new instance of {@link de.smarthome.smartux.xmlSchemaData.Channel.Mapref }
+     */
+    public de.smarthome.smartux.xmlSchemaData.Channel.Mapref createChannelMapref() {
+        return new de.smarthome.smartux.xmlSchemaData.Channel.Mapref();
     }
 
     /**

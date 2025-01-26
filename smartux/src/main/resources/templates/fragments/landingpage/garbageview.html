@@ -12,8 +12,7 @@
                   --fa-secondary-color: #2ed822;
                   --fa-secondary-opacity: 1;
                 "></i>&nbsp;
-                
-            <span th:text="${T(de.smarthome.smartux.controller.PortalController).getItem(ModelMap,14,1).getState()}">Hello, world!</span>
+            <span th:id="${service.item(14, 1).getName()}" th:text="${service.item(14, 1).getState()}">Hello, world!</span>
             Tage
           </h1>
         </div>
@@ -28,7 +27,7 @@
                   --fa-secondary-color: #ffee38;
                   --fa-secondary-opacity: 1;
                 "></i>&nbsp;
-            <span th:text="${T(de.smarthome.smartux.controller.PortalController).getItem(ModelMap,14,3).getState()}">Hello, world!</span>
+            <span th:id="${service.item(14, 3).getName()}" th:text="${service.item(14, 3).getState()}">Hello, world!</span>
             Tage
           </h1>
         </div>
@@ -43,7 +42,7 @@
                   --fa-secondary-color: #000000;
                   --fa-secondary-opacity: 1;
                 "></i>&nbsp;
-            <span th:text="${T(de.smarthome.smartux.controller.PortalController).getItem(ModelMap,14,2).getState()}">Hello, world!</span>
+            <span th:id="${service.item(14, 2).getName()}" th:text="${service.item(14, 2).getState()}">Hello, world!</span>
             Tage
           </h1>
         </div>
@@ -58,7 +57,7 @@
                   --fa-secondary-color: #0614d0;
                   --fa-secondary-opacity: 1;
                 "></i>&nbsp;
-            <span th:text="${T(de.smarthome.smartux.controller.PortalController).getItem(ModelMap,14,4).getState()}">Hello, world!</span>
+            <span th:id="${service.item(14, 4).getName()}" th:text="${service.item(14, 4).getState()}">Hello, world!</span>
             Tage
           </h1>
         </div>

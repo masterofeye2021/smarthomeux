@@ -32,6 +32,9 @@ import jakarta.xml.bind.annotation.XmlType;
  *     <enumeration value="HTTP"/>
  *     <enumeration value="DoorAccessKNX"/>
  *     <enumeration value="DoorBellHTTP"/>
+ *     <enumeration value="TimeKNX"/>
+ *     <enumeration value="IDMKNX"/>
+ *     <enumeration value="Alexa"/>
  *   </restriction>
  * </simpleType>
  * }</pre>
@@ -65,7 +68,12 @@ public enum DeviceSpecification {
     @XmlEnumValue("DoorAccessKNX")
     DOOR_ACCESS_KNX("DoorAccessKNX"),
     @XmlEnumValue("DoorBellHTTP")
-    DOOR_BELL_HTTP("DoorBellHTTP");
+    DOOR_BELL_HTTP("DoorBellHTTP"),
+    @XmlEnumValue("TimeKNX")
+    TIME_KNX("TimeKNX"),
+    IDMKNX("IDMKNX"),
+    @XmlEnumValue("Alexa")
+    ALEXA("Alexa");
     private final String value;
 
     DeviceSpecification(String v) {

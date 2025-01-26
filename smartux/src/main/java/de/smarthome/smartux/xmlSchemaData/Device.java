@@ -51,7 +51,12 @@ import jakarta.xml.bind.annotation.XmlType;
  *       <attribute name="device.comm.type" type="{}comm" default="KNX" />
  *       <attribute name="device.label" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       <attribute name="device.name" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       <attribute name="device.specification" type="{}device.specification" />
+ *       <attribute name="device.specification">
+ *         <simpleType>
+ *           <restriction base="{}device.specification">
+ *           </restriction>
+ *         </simpleType>
+ *       </attribute>
  *       <attribute name="device.id" use="required" type="{http://www.w3.org/2001/XMLSchema}int" />
  *       <attribute name="enable" use="required" type="{http://www.w3.org/2001/XMLSchema}boolean" />
  *     </restriction>

@@ -7,6 +7,8 @@
 
 package de.smarthome.smartux.xmlSchemaData;
 
+import java.util.ArrayList;
+import java.util.List;
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlElement;
@@ -31,6 +33,19 @@ import jakarta.xml.bind.annotation.XmlType;
  *         <element ref="{}ntp.configuration"/>
  *         <element ref="{}ekey.configuration"/>
  *         <element ref="{}door.configuration"/>
+ *         <element name="definition">
+ *           <complexType>
+ *             <complexContent>
+ *               <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *                 <sequence>
+ *                   <element ref="{}area.map"/>
+ *                   <element ref="{}idm.map" maxOccurs="unbounded"/>
+ *                 </sequence>
+ *               </restriction>
+ *             </complexContent>
+ *           </complexType>
+ *         </element>
+ *         <element ref="{}alexa.configuration"/>
  *       </all>
  *     </restriction>
  *   </complexContent>
@@ -60,6 +75,10 @@ public class Openhab {
     protected EkeyConfiguration ekeyConfiguration;
     @XmlElement(name = "door.configuration", required = true)
     protected DoorConfiguration doorConfiguration;
+    @XmlElement(required = true)
+    protected Openhab.Definition definition;
+    @XmlElement(name = "alexa.configuration", required = true)
+    protected AlexaConfiguration alexaConfiguration;
 
     /**
      * Ruft den Wert der devices-Eigenschaft ab.
@@ -227,6 +246,145 @@ public class Openhab {
      */
     public void setDoorConfiguration(DoorConfiguration value) {
         this.doorConfiguration = value;
+    }
+
+    /**
+     * Ruft den Wert der definition-Eigenschaft ab.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Openhab.Definition }
+     *     
+     */
+    public Openhab.Definition getDefinition() {
+        return definition;
+    }
+
+    /**
+     * Legt den Wert der definition-Eigenschaft fest.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Openhab.Definition }
+     *     
+     */
+    public void setDefinition(Openhab.Definition value) {
+        this.definition = value;
+    }
+
+    /**
+     * Ruft den Wert der alexaConfiguration-Eigenschaft ab.
+     * 
+     * @return
+     *     possible object is
+     *     {@link AlexaConfiguration }
+     *     
+     */
+    public AlexaConfiguration getAlexaConfiguration() {
+        return alexaConfiguration;
+    }
+
+    /**
+     * Legt den Wert der alexaConfiguration-Eigenschaft fest.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link AlexaConfiguration }
+     *     
+     */
+    public void setAlexaConfiguration(AlexaConfiguration value) {
+        this.alexaConfiguration = value;
+    }
+
+
+    /**
+     * <p>Java-Klasse für anonymous complex type.</p>
+     * 
+     * <p>Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.</p>
+     * 
+     * <pre>{@code
+     * <complexType>
+     *   <complexContent>
+     *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+     *       <sequence>
+     *         <element ref="{}area.map"/>
+     *         <element ref="{}idm.map" maxOccurs="unbounded"/>
+     *       </sequence>
+     *     </restriction>
+     *   </complexContent>
+     * </complexType>
+     * }</pre>
+     * 
+     * 
+     */
+    @XmlAccessorType(XmlAccessType.FIELD)
+    @XmlType(name = "", propOrder = {
+        "areaMap",
+        "idmMap"
+    })
+    public static class Definition {
+
+        @XmlElement(name = "area.map", required = true)
+        protected AreaMap areaMap;
+        @XmlElement(name = "idm.map", required = true)
+        protected List<IdmMap> idmMap;
+
+        /**
+         * Ruft den Wert der areaMap-Eigenschaft ab.
+         * 
+         * @return
+         *     possible object is
+         *     {@link AreaMap }
+         *     
+         */
+        public AreaMap getAreaMap() {
+            return areaMap;
+        }
+
+        /**
+         * Legt den Wert der areaMap-Eigenschaft fest.
+         * 
+         * @param value
+         *     allowed object is
+         *     {@link AreaMap }
+         *     
+         */
+        public void setAreaMap(AreaMap value) {
+            this.areaMap = value;
+        }
+
+        /**
+         * Gets the value of the idmMap property.
+         * 
+         * <p>This accessor method returns a reference to the live list,
+         * not a snapshot. Therefore any modification you make to the
+         * returned list will be present inside the JAXB object.
+         * This is why there is not a <CODE>set</CODE> method for the idmMap property.</p>
+         * 
+         * <p>
+         * For example, to add a new item, do as follows:
+         * </p>
+         * <pre>
+         * getIdmMap().add(newItem);
+         * </pre>
+         * 
+         * 
+         * <p>
+         * Objects of the following type(s) are allowed in the list
+         * {@link IdmMap }
+         * </p>
+         * 
+         * 
+         * @return
+         *     The value of the idmMap property.
+         */
+        public List<IdmMap> getIdmMap() {
+            if (idmMap == null) {
+                idmMap = new ArrayList<>();
+            }
+            return this.idmMap;
+        }
+
     }
 
 }
