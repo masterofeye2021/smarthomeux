@@ -22,7 +22,14 @@
         <div class="col-8 border border-black text-center d-flex flex-column">
           <!-- ROOM and ENERGY spanning full height -->
           <div class="row flex-grow-1 align-items-center justify-content-center border">
-            <!--<div th:replace="~{fragments/landingpage/roomview.html :: room}"></div>-->
+            <div class="row row-cols-1 row-cols-md-3 g-2">
+              <div class="col">
+                <div th:replace="~{fragments/landingpage/roomview.html :: room (13)}"></div>
+              </div>
+              <div class="col">
+                <div th:replace="~{fragments/landingpage/roomview.html :: room (15)}"></div>
+              </div>
+            </div>
           </div>
           <div class="row flex-grow-2 align-items-center justify-content-center border" style="height: 100px">
             <div class="col">ENERGY</div>
@@ -54,7 +61,7 @@
     <div layout:fragment="post-footer">
       <script th:inline="javascript">
 
-       
+
 
 
         /*]]>*/

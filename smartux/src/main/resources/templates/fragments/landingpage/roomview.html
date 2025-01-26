@@ -2,83 +2,74 @@
 
 <body>
     <!--ROOM MODULE-->
-    <div th:fragment="room">
+    <div th:fragment="room (deviceId)">
         <!--SENSOR-->
-        <div class="row row-cols-1 row-cols-md-3 g-2">
-            <div th:each="module: ${SteinelPraesenzModuleData}">
-                <div class="col">
-                    <div class="card text-center mt-2" style="width: 25rem">
-                        <div class="card-header"><img th:src="@{/img/bathtub.png}" width="20%">Badezimmer</div>
-                        <div class="card-body m-0 p-1">
-                            <div class="row">
-                                <div class="col pe-0 ps-2 pb-2">
-                                    <div class="row rounded border border-2 border-light-subtle m-1"
-                                        style="height: 100%; min-height: 100%;">
-                                        <div class="col">
-                                            <div class="row d-flex align-items-center justify-content-center "
-                                                style="height:calc(100% - 20px);">
-                                                <div class="col-3 pl-0 pr-0 mt-2 h3"><i
-                                                        th:class="${'fa-sharp-duotone fa-light ' + module.items[2].getCategory() + ' fa-xl'}"
-                                                        style="--fa-secondary-color: #387bf0">
-                                                    </i>
-                                                </div>
-                                                <div class="col-9 p-0 m-0 h1"><span th:id="${module.items[2].getName()}"
-                                                        th:attr="data-timestamp=${#dates.format(#dates.createNow(), 'dd.MMM.yyyy, HH:mm:ss')}"
-                                                        th:text="${module.items[2].getState() != 'NULL' ? T(java.lang.String).format(T(java.util.Locale).US,module.items[2].getStateDescription().getPattern(),T(java.lang.Float).parseFloat(module.items[2].getState())): 0}"></span>
-                                                </div>
-                                            </div>
-                                            <div th:id="${module.items[2].getName() + '-timedate'}"
-                                                th:text="${#dates.format(#dates.createNow(), 'dd.MMM.yyyy, HH:mm:ss')}"
-                                                class=" row text-center d-block text-secondary fst-italic fw-lighter">
-                                                01.01.2021 19:20:00</div>
-                                        </div>
+        <div class="card text-center mt-2" style="width: 25rem">
+            <div class="card-header"><img th:src="@{/img/bathtub.png}" width="20%">Badezimmer</div>
+            <div class="card-body m-0 p-1">
+                <div class="row">
+                    <div class="col pe-0 ps-2 pb-2">
+                        <div class="row rounded border border-2 border-light-subtle m-1"
+                            style="height: 100%; min-height: 100%;">
+                            <div class="col">
+                                <div class="row d-flex align-items-center justify-content-center "
+                                    style="height:calc(100% - 20px);">
+                                    <div class="col-3 pl-0 pr-0 mt-2 h3"><i
+                                            th:class="${'fa-sharp-duotone fa-light ' + service.item(deviceId, 3).getCategory() + ' fa-xl'}"
+                                            style="--fa-secondary-color: #387bf0">
+                                        </i>
+                                    </div>
+                                    <div class="col-9 p-0 m-0 h1"><span th:id="${service.item(deviceId, 3).getName()}"
+                                            th:attr="data-timestamp=${#dates.format(#dates.createNow(), 'dd.MMM.yyyy, HH:mm:ss')}"
+                                            th:text="${service.item(deviceId, 3).getState() != 'NULL' ? T(java.lang.String).format(T(java.util.Locale).US,service.item(deviceId, 3).getStateDescription().getPattern(),T(java.lang.Float).parseFloat(service.item(deviceId, 3).getState())): 0}"></span>
                                     </div>
                                 </div>
-                                <div class="col ps-0 pe-2">
-                                    <div class="row rounded border border-2 border-light-subtle m-1 ">
-                                        <div class="col">
-                                            <div class="row">
-                                                <div class="col-3 pl-0 pe-0 mt-2 h5">
-                                                    <i th:class="${'fa-sharp-duotone fa-light ' + module.items[3].getCategory() + ' fa-xl'}"
-                                                        style="--fa-secondary-color: red"></i>
-                                                </div>
-                                                <div class="col-9 h5 d-flex align-items-center justify-content-center">
-                                                    <span class="p-0" th:id="${module.items[3].getName()}"
-                                                        th:attr="data-timestamp=${#dates.format(#dates.createNow(), 'dd.MMM.yyyy, HH:mm:ss')}"
-                                                        th:text="${module.items[3].getState() != 'NULL' ? T(java.lang.String).format(T(java.util.Locale).US,module.items[3].getStateDescription().getPattern(),T(java.lang.Float).parseFloat(module.items[3].getState())): 0}"></span>
-                                                </div>
-                                            </div>
-                                            <div th:id="${module.items[3].getName() + '-timedate'}"
-                                                th:text="${#dates.format(#dates.createNow(), 'dd.MMM.yyyy, HH:mm:ss')}"
-                                                class=" row text-center d-block text-secondary fst-italic fw-lighter">
-                                                01.01.2021 19:20:00</div>
-                                        </div>
-                                    </div>
-                                    <div class="row rounded border border-2 border-light-subtle m-1">
-                                        <div class="col">
-                                            <div class="row">
-                                                <div class="col-3 pl-0 pe-0 mt-2 h5"><i
-                                                        th:class="${'fa-sharp-duotone fa-light ' + module.items[6].getCategory() + ' fa-xl'}"
-                                                        style="--fa-secondary-color: red"></i>
-                                                </div>
-                                                <div class="col-9 h5 d-flex align-items-center justify-content-center">
-                                                    <span th:id="${module.items[6].getName()}"
-                                                        th:attr="data-timestamp=${#dates.format(#dates.createNow(), 'dd.MMM.yyyy, HH:mm:ss')}"
-                                                        th:text="${module.items[6].getState() != 'NULL' ? T(java.lang.String).format(T(java.util.Locale).US,module.items[6].getStateDescription().getPattern(),T(java.lang.Float).parseFloat(module.items[6].getState())): 0}"></span>
-                                                </div>
-                                            </div>
-                                            <div th:id="${module.items[6].getName() + '-timedate'}"
-                                                th:text="${#dates.format(#dates.createNow(), 'dd.MMM.yyyy, HH:mm:ss')}"
-                                                class="row text-center d-block text-secondary fst-italic fw-lighter">
-                                                01.01.2021 19:20:00</div>
-                                        </div>
-                                    </div>
-                                </div>
-
+                                <div th:id="${service.item(deviceId, 3).getName() + '-timedate'}"
+                                    th:text="${#dates.format(#dates.createNow(), 'dd.MMM.yyyy, HH:mm:ss')}"
+                                    class=" row text-center d-block text-secondary fst-italic fw-lighter">
+                                    01.01.2021 19:20:00</div>
                             </div>
-
                         </div>
-
+                    </div>
+                    <div class="col ps-0 pe-2">
+                        <div class="row rounded border border-2 border-light-subtle m-1 ">
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col-3 pl-0 pe-0 mt-2 h5">
+                                        <i th:class="${'fa-sharp-duotone fa-light ' + service.item(deviceId, 4).getCategory() + ' fa-xl'}"
+                                            style="--fa-secondary-color: red"></i>
+                                    </div>
+                                    <div class="col-9 h5 d-flex align-items-center justify-content-center">
+                                        <span class="p-0" th:id="${service.item(deviceId, 4).getName()}"
+                                            th:attr="data-timestamp=${#dates.format(#dates.createNow(), 'dd.MMM.yyyy, HH:mm:ss')}"
+                                            th:text="${service.item(deviceId, 4).getState() != 'NULL' ? T(java.lang.String).format(T(java.util.Locale).US,service.item(deviceId, 4).getStateDescription().getPattern(),T(java.lang.Float).parseFloat(service.item(deviceId, 4).getState())): 0}"></span>
+                                    </div>
+                                </div>
+                                <div th:id="${service.item(deviceId, 4).getName() + '-timedate'}"
+                                    th:text="${#dates.format(#dates.createNow(), 'dd.MMM.yyyy, HH:mm:ss')}"
+                                    class=" row text-center d-block text-secondary fst-italic fw-lighter">
+                                    01.01.2021 19:20:00</div>
+                            </div>
+                        </div>
+                        <div class="row rounded border border-2 border-light-subtle m-1">
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col-3 pl-0 pe-0 mt-2 h5"><i
+                                            th:class="${'fa-sharp-duotone fa-light ' + service.item(deviceId, 7).getCategory() + ' fa-xl'}"
+                                            style="--fa-secondary-color: red"></i>
+                                    </div>
+                                    <div class="col-9 h5 d-flex align-items-center justify-content-center">
+                                        <span th:id="${service.item(deviceId, 7).getName()}"
+                                            th:attr="data-timestamp=${#dates.format(#dates.createNow(), 'dd.MMM.yyyy, HH:mm:ss')}"
+                                            th:text="${service.item(deviceId, 7).getState() != 'NULL' ? T(java.lang.String).format(T(java.util.Locale).US,service.item(deviceId, 7).getStateDescription().getPattern(),T(java.lang.Float).parseFloat(service.item(deviceId, 7).getState())): 0}"></span>
+                                    </div>
+                                </div>
+                                <div th:id="${service.item(deviceId, 7).getName() + '-timedate'}"
+                                    th:text="${#dates.format(#dates.createNow(), 'dd.MMM.yyyy, HH:mm:ss')}"
+                                    class="row text-center d-block text-secondary fst-italic fw-lighter">
+                                    01.01.2021 19:20:00</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
